@@ -15,5 +15,10 @@ namespace KapiNadeApp.Controllers
         {
             return View();
         }
+
+        public ActionResult MainHome()
+        {
+            return View();
+        }
     }
 }
