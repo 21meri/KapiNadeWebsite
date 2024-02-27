@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="c6c4b1e91a8344189485e17a483521e6" Name="Diagram1">
+        <EntityTypeShape EntityType="KapiNadeDBModel.BloodBankTable" Width="1.5" PointX="3" PointY="8.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="KapiNadeDBModel.BloodGroupsTable" Width="1.5" PointX="5.75" PointY="4" IsExpanded="true" />
+        <EntityTypeShape EntityType="KapiNadeDBModel.BloodStockTable" Width="1.5" PointX="5.25" PointY="8.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="KapiNadeDBModel.CityTable" Width="1.5" PointX="0.75" PointY="10.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="KapiNadeDBModel.DonorTable" Width="1.5" PointX="8" PointY="9.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="KapiNadeDBModel.GenderTable" Width="1.5" PointX="5.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="KapiNadeDBModel.HospitalTable" Width="1.5" PointX="3" PointY="15.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="KapiNadeDBModel.RequestTable" Width="1.5" PointX="5.25" PointY="12.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="KapiNadeDBModel.RequestTypeTable" Width="1.5" PointX="3" PointY="12.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="KapiNadeDBModel.SeekerTable" Width="1.5" PointX="8" PointY="4.25" IsExpanded="true" />
+        <AssociationConnector Association="KapiNadeDBModel.FK_BloodBankTable_CityTable" ManuallyRouted="false" />
+        <AssociationConnector Association="KapiNadeDBModel.FK_BloodStockTable_BloodBankTable" ManuallyRouted="false" />
+        <AssociationConnector Association="KapiNadeDBModel.FK_RequestTable_BloodBankTable" ManuallyRouted="false" />
+        <AssociationConnector Association="KapiNadeDBModel.FK_BloodStockTable_BloodGroupsTable" ManuallyRouted="false" />
+        <AssociationConnector Association="KapiNadeDBModel.FK_DonorTable_BloodGroupsTable" ManuallyRouted="false" />
+        <AssociationConnector Association="KapiNadeDBModel.FK_SeekerTable_BloodGroupsTable" ManuallyRouted="false" />
+        <AssociationConnector Association="KapiNadeDBModel.FK_DonorTable_CityTable" ManuallyRouted="false" />
+        <AssociationConnector Association="KapiNadeDBModel.FK_HospitalTable_CityTable" ManuallyRouted="false" />
+        <AssociationConnector Association="KapiNadeDBModel.FK_SeekerTable_CityTable" ManuallyRouted="false" />
+        <AssociationConnector Association="KapiNadeDBModel.FK_RequestTable_DonorTable" ManuallyRouted="false" />
+        <AssociationConnector Association="KapiNadeDBModel.FK_SeekerTable_GenderTable" ManuallyRouted="false" />
+        <AssociationConnector Association="KapiNadeDBModel.FK_RequestTable_HospitalTable" ManuallyRouted="false" />
+        <AssociationConnector Association="KapiNadeDBModel.FK_RequestTable_RequestTypeTable" ManuallyRouted="false" />
+        <AssociationConnector Association="KapiNadeDBModel.FK_RequestTable_SeekerTable" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
