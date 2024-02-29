@@ -654,6 +654,48 @@ span.label {
   background: #FE3C47;
   color: #FFFFFF;
 }
+
+.btn-theme {
+    border: 0px;
+    background: #EF3D32;
+    color: #FFFFFF;
+    display: inline-block;
+    line-height: 32px;
+    font-size: 18px;
+    font-weight: 600;
+    padding: 16px 36px;
+    position: relative;
+    text-transform: uppercase;
+    -webkit-transition: 'all' '0.5s' ease-out;
+    -moz-transition: 'all' '0.5s' ease-out;
+    -o-transition: 'all' '0.5s' ease-out;
+    transition: 'all' '0.5s' ease-out;
+    margin-bottom: 0;
+    letter-spacing: 0em;
+    overflow: hidden;
+    -webkit-border-radius: 0px;
+    -moz-border-radius: 0px;
+    border-radius: 0px;
+    -webkit-background-clip: padding-box;
+    -moz-background-clip: padding;
+    background-clip: padding-box;
+}
+
+    .btn-theme:hover {
+        color: #FFFFFF;
+        background-color: #4E4E4E;
+    }
+/*End BTN Style*/
+.btn-theme-invert {
+    color: #FFFFFF;
+    background-color: #4E4E4E;
+}
+
+    .btn-theme-invert:hover {
+        background: #1b1b1b;
+        color: #FFFFFF;
+    }
+
 .btn-custom {
   text-transform: uppercase;
   text-align: center;
@@ -2192,14 +2234,15 @@ header.one-page .navbar-nav > li > a span {
 .section-contact-block .content-block {
   padding: 0 48px 0 0;
 }
-.section-contact-block .contact-title {
+ .contact-title {
   font-size: 24px;
   border-bottom: 3px solid #eeeeee;
   color: #5c5c5c;
   padding-bottom: 15px;
   position: relative;
+   margin-bottom: 32px;
 }
-.section-contact-block .contact-title:after {
+ .contact-title:after {
   bottom: -3px;
   content: "";
   height: 3px;
