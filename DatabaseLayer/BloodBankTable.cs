@@ -27,11 +27,13 @@ namespace DatabaseLayer
         public string ContactNumber { get; set; }
         public string Email { get; set; }
         public int CityID { get; set; }
+        public int UserID { get; set; }
     
         public virtual CityTable CityTable { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<BloodStockTable> BloodStockTables { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<RequestTable> RequestTables { get; set; }
+        public virtual UserTable UserTable { get; set; }
     }
 }

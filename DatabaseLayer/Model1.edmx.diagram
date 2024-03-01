@@ -4,7 +4,7 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="c6c4b1e91a8344189485e17a483521e6" Name="Diagram1">
+      <Diagram DiagramId="c6c4b1e91a8344189485e17a483521e6" Name="Diagram1" ZoomLevel="53">
         <EntityTypeShape EntityType="KapiNadeDBModel.BloodBankTable" Width="1.5" PointX="3" PointY="8.125" IsExpanded="true" />
         <EntityTypeShape EntityType="KapiNadeDBModel.BloodGroupsTable" Width="1.5" PointX="5.75" PointY="4" IsExpanded="true" />
         <EntityTypeShape EntityType="KapiNadeDBModel.BloodStockTable" Width="1.5" PointX="5.25" PointY="8.25" IsExpanded="true" />
@@ -29,6 +29,15 @@
         <AssociationConnector Association="KapiNadeDBModel.FK_RequestTable_HospitalTable" ManuallyRouted="false" />
         <AssociationConnector Association="KapiNadeDBModel.FK_RequestTable_RequestTypeTable" ManuallyRouted="false" />
         <AssociationConnector Association="KapiNadeDBModel.FK_RequestTable_SeekerTable" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="KapiNadeDBModel.AccountStatusTable" Width="1.5" PointX="10.75" PointY="5.875" />
+        <EntityTypeShape EntityType="KapiNadeDBModel.UserTable" Width="1.5" PointX="13" PointY="1" />
+        <EntityTypeShape EntityType="KapiNadeDBModel.UserTypeTable" Width="1.5" PointX="10.75" PointY="1.875" />
+        <AssociationConnector Association="KapiNadeDBModel.FK_UserTable_AccountStatusTable" />
+        <AssociationConnector Association="KapiNadeDBModel.FK_BloodBankTable_UserTable" />
+        <AssociationConnector Association="KapiNadeDBModel.FK_DonorTable_UserTable" />
+        <AssociationConnector Association="KapiNadeDBModel.FK_HospitalTable_UserTable" />
+        <AssociationConnector Association="KapiNadeDBModel.FK_SeekerTable_UserTable" />
+        <AssociationConnector Association="KapiNadeDBModel.FK_UserTable_UserTypeTable" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
