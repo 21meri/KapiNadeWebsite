@@ -6,6 +6,7 @@ using System.Web;
 using System.Web.Mvc;
 using System.Data.Entity;
 using System.Net;
+using KapiNadeApp.Models;
 
 namespace KapiNadeApp.Controllers
 {
@@ -15,27 +16,38 @@ namespace KapiNadeApp.Controllers
         public ActionResult AllRequestType()
         {
             var requesttypes = DB.RequestTypeTables.ToList();
-            return View(requesttypes);
+            var listrequesttypes = new List<RequestTypeMV>();
+            foreach (var requesttype in requesttypes)
+            {
+                var addrequesttype = new RequestTypeMV();
+                addrequesttype.RequestTypeID = requesttype.RequestTypeID;
+                addrequesttype.RequestType = requesttype.RequestType;
+                listrequesttypes.Add(addrequesttype);
+            }
+            return View(listrequesttypes);
         }
 
         public ActionResult Create()
         {
-            var requesttype = new RequestTypeTable();
+            var requesttype = new RequestTypeMV();
             return View(requesttype);
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(RequestTypeTable requestTypeTable)
+        public ActionResult Create(RequestTypeMV requestTypeMV)
         {
             if (ModelState.IsValid)
             {
+                var requestTypeTable = new RequestTypeTable();
+                requestTypeTable.RequestTypeID = requestTypeMV.RequestTypeID;
+                requestTypeTable.RequestType = requestTypeMV.RequestType;
                 DB.RequestTypeTables.Add(requestTypeTable);
                 DB.SaveChanges();
 
                 return RedirectToAction("AllRequestType");
             }
-            return View(requestTypeTable);
+            return View(requestTypeMV);
         }
 
         public ActionResult Edit(int? id)
@@ -45,19 +57,26 @@ namespace KapiNadeApp.Controllers
             {
                 return HttpNotFound();
             }
-            return View(requesttype);
+            var requesttypemv = new RequestTypeMV();
+            requesttypemv.RequestTypeID = requesttype.RequestTypeID;
+            requesttypemv.RequestType = requesttype.RequestType;
+            return View(requesttypemv);
         }
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(RequestTypeTable requestTypeTable)
+        public ActionResult Edit(RequestTypeMV requestTypeMV)
         {
             if (ModelState.IsValid)
             {
+                var requestTypeTable = new RequestTypeTable();
+                requestTypeTable.RequestTypeID = requestTypeMV.RequestTypeID;
+                requestTypeTable.RequestType = requestTypeMV.RequestType;
+
                 DB.Entry(requestTypeTable).State = EntityState.Modified;
                 DB.SaveChanges();
                 return RedirectToAction("AllRequestType");
             }
-            return View(requestTypeTable);
+            return View(requestTypeMV);
         }
 
         public ActionResult Delete(int? id)
@@ -71,7 +90,10 @@ namespace KapiNadeApp.Controllers
             {
                 return HttpNotFound();
             }
-            return View(requesttype);
+            var requesttypemv = new RequestTypeMV();
+            requesttypemv.RequestTypeID = requesttype.RequestTypeID;
+            requesttypemv.RequestType = requesttype.RequestType;
+            return View(requesttypemv);
         }
 
         [HttpPost, ActionName("Delete")]
