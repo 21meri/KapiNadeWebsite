@@ -137,6 +137,8 @@
         <!-- START FOOTER  -->
 
         <div class="container" style="margin-bottom:25px">
+
+        
         @RenderBody()
         </div>
 
@@ -248,7 +250,7 @@
                     </div> <!--  end .col-md-4 col-sm-12 -->
 
                 </div> <!-- end row  -->
-                </div> <!-- end .container  -->
+                 <!-- end .container  -->
 
             </section> <!--  end .footer-widget-area  -->
             <!--FOOTER CONTENT  -->
@@ -281,7 +283,9 @@
         <a id="backTop">Back To Top</a>
 
         
-
+        <script type="text/javascript">
+            alert('@ViewData["Message"]');
+        </script>
         <script src="~/Content/Template/js/jquery.min.js"></script>
         <script src="~/Content/Template/js/bootstrap.min.js"></script>
         <script src="~/Content/Template/js/wow.min.js"></script>

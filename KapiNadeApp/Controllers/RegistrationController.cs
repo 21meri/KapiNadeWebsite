@@ -56,24 +56,41 @@ namespace KapiNadeApp.Controllers
                 var checktitle = DB.HospitalTables.Where(h => h.Name == registrationMV.Hospital.Name.Trim()).FirstOrDefault();
                 if (checktitle == null)
                 {
-                    var user = new UserTable();
-                    user.Username = registrationMV.User.Username;
-                    user.Password = registrationMV.User.Password;
-                    user.Email = registrationMV.User.Email;
-                    user.AccountStatusID = 1;
-                    user.UserTypeID = registrationMV.UserTypeID;
-                    DB.UserTables.Add(user);
+                    using (var transaction = DB.Database.BeginTransaction())
+                    {
+                        try
+                        {
+                            var user = new UserTable();
+                            user.Username = registrationMV.User.Username;
+                            user.Password = registrationMV.User.Password;
+                            user.Email = registrationMV.User.Email;
+                            user.AccountStatusID = 1;
+                            user.UserTypeID = registrationMV.UserTypeID;
+                            DB.UserTables.Add(user);
 
-                    var hospital = new HospitalTable();
-                    hospital.Name = registrationMV.Hospital.Name;
-                    hospital.Address = registrationMV.Hospital.Address;
-                    hospital.ContactNumber = registrationMV.Hospital.ContactNumber;
-                    hospital.Email = registrationMV.Hospital.Email;
-                    hospital.CityID = registrationMV.CityID;
-                    hospital.UserID = user.UserID;
-                    DB.HospitalTables.Add(hospital);
-                    DB.SaveChanges();
-                    return RedirectToAction("MainHome", "Home");
+                            var hospital = new HospitalTable();
+                            hospital.Name = registrationMV.Hospital.Name;
+                            hospital.Address = registrationMV.Hospital.Address;
+                            hospital.ContactNumber = registrationMV.Hospital.ContactNumber;
+                            hospital.Email = registrationMV.Hospital.Email;
+                            hospital.CityID = registrationMV.CityID;
+                            hospital.UserID = user.UserID;
+                            DB.HospitalTables.Add(hospital);
+                            DB.SaveChanges();
+                            transaction.Commit();
+                            ViewData["Message"] = "Thanks for registration, your query will be reviewed shortly!";
+                            return RedirectToAction("MainHome", "Home");
+                        }
+                        catch
+                        {
+                            ModelState.AddModelError(string.Empty, "Please provide correct information!");
+                            transaction.Rollback();
+                        }
+                    }
+                }
+                else
+                {
+                    ModelState.AddModelError(string.Empty, "Hospital already registered!");
                 }
     }
             ViewBag.CityID = new SelectList(DB.CityTables.ToList(), "CityID", "City", registrationMV.CityID);
