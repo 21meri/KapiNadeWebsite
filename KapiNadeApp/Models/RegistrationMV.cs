@@ -7,6 +7,18 @@ namespace KapiNadeApp.Models
 {
     public class RegistrationMV
     {
+        public RegistrationMV()
+        {
+            Seeker = new SeekerMV();
+            Hospital = new HospitalMV();
+            BloodBank = new BloodBankMV();
+            Donor = new DonorMV();
+            User = new UserMV();
+
+        }
+        public int UserTypeID { get; set; }
+        public string ContactNumber { get; set; }
+        public int CityID { get; set; }
         public SeekerMV Seeker { get; set; }
         public HospitalMV Hospital { get; set; }
         public BloodBankMV BloodBank { get; set; }
