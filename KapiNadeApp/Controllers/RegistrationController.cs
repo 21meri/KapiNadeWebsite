@@ -106,6 +106,7 @@ namespace KapiNadeApp.Controllers
         {
             ViewBag.BloodGroupID = new SelectList(DB.BloodGroupsTables.ToList(), "BloodGroupID", "BloodGroup", "0");
             ViewBag.CityID = new SelectList(DB.CityTables.ToList(), "CityID", "City", registrationmv.CityID);
+            ViewBag.GenderID = new SelectList(DB.GenderTables.ToList(), "GenderID", "Gender", "0");
             return View(registrationmv);
         }
 
@@ -138,6 +139,7 @@ namespace KapiNadeApp.Controllers
                             donor.BloodGroupID = registrationMV.BloodGroupID;
                             donor.Address = registrationMV.Donor.Address;
                             donor.CardNumber = registrationMV.Donor.CardNumber;
+                            donor.GenderID = registrationMV.GenderID;
                             donor.LastDonationDate = registrationMV.Donor.LastDonationDate;
                             donor.ContactNumber = registrationMV.Donor.ContactNumber;
                             donor.CityID = registrationMV.CityID;

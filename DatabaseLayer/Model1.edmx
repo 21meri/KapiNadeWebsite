@@ -63,6 +63,7 @@
           <Property Name="Address" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="CityID" Type="int" Nullable="false" />
           <Property Name="UserID" Type="int" Nullable="false" />
+          <Property Name="GenderID" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="GenderTable">
           <Key>
@@ -207,6 +208,18 @@
             </Principal>
             <Dependent Role="DonorTable">
               <PropertyRef Name="CityID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DonorTable_GenderTable">
+          <End Role="GenderTable" Type="Self.GenderTable" Multiplicity="1" />
+          <End Role="DonorTable" Type="Self.DonorTable" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="GenderTable">
+              <PropertyRef Name="GenderID" />
+            </Principal>
+            <Dependent Role="DonorTable">
+              <PropertyRef Name="GenderID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -416,6 +429,10 @@
             <End Role="CityTable" EntitySet="CityTable" />
             <End Role="DonorTable" EntitySet="DonorTable" />
           </AssociationSet>
+          <AssociationSet Name="FK_DonorTable_GenderTable" Association="Self.FK_DonorTable_GenderTable">
+            <End Role="GenderTable" EntitySet="GenderTable" />
+            <End Role="DonorTable" EntitySet="DonorTable" />
+          </AssociationSet>
           <AssociationSet Name="FK_DonorTable_UserTable" Association="Self.FK_DonorTable_UserTable">
             <End Role="UserTable" EntitySet="UserTable" />
             <End Role="DonorTable" EntitySet="DonorTable" />
@@ -545,6 +562,8 @@
           <NavigationProperty Name="RequestTables" Relationship="Self.FK_RequestTable_DonorTable" FromRole="DonorTable" ToRole="RequestTable" />
           <Property Name="UserID" Type="Int32" Nullable="false" />
           <NavigationProperty Name="UserTable" Relationship="KapiNadeDBModel.FK_DonorTable_UserTable" FromRole="DonorTable" ToRole="UserTable" />
+          <Property Name="GenderID" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="GenderTable" Relationship="KapiNadeDBModel.FK_DonorTable_GenderTable" FromRole="DonorTable" ToRole="GenderTable" />
         </EntityType>
         <EntityType Name="GenderTable">
           <Key>
@@ -553,6 +572,7 @@
           <Property Name="GenderID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Gender" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <NavigationProperty Name="SeekerTables" Relationship="Self.FK_SeekerTable_GenderTable" FromRole="GenderTable" ToRole="SeekerTable" />
+          <NavigationProperty Name="DonorTables" Relationship="KapiNadeDBModel.FK_DonorTable_GenderTable" FromRole="GenderTable" ToRole="DonorTable" />
         </EntityType>
         <EntityType Name="HospitalTable">
           <Key>
@@ -879,6 +899,10 @@
             <End Role="UserTypeTable" EntitySet="UserTypeTables" />
             <End Role="UserTable" EntitySet="UserTables" />
           </AssociationSet>
+          <AssociationSet Name="FK_DonorTable_GenderTable" Association="KapiNadeDBModel.FK_DonorTable_GenderTable">
+            <End Role="GenderTable" EntitySet="GenderTables" />
+            <End Role="DonorTable" EntitySet="DonorTables" />
+          </AssociationSet>
         </EntityContainer>
         <EntityType Name="AccountStatusTable">
           <Key>
@@ -985,6 +1009,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_DonorTable_GenderTable">
+          <End Type="KapiNadeDBModel.GenderTable" Role="GenderTable" Multiplicity="1" />
+          <End Type="KapiNadeDBModel.DonorTable" Role="DonorTable" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="GenderTable">
+              <PropertyRef Name="GenderID" />
+            </Principal>
+            <Dependent Role="DonorTable">
+              <PropertyRef Name="GenderID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -1035,6 +1071,7 @@
           <EntitySetMapping Name="DonorTables">
             <EntityTypeMapping TypeName="KapiNadeDBModel.DonorTable">
               <MappingFragment StoreEntitySet="DonorTable">
+                <ScalarProperty Name="GenderID" ColumnName="GenderID" />
                 <ScalarProperty Name="UserID" ColumnName="UserID" />
                 <ScalarProperty Name="DonorID" ColumnName="DonorID" />
                 <ScalarProperty Name="Name" ColumnName="Name" />

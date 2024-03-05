@@ -38,6 +38,7 @@
         <AssociationConnector Association="KapiNadeDBModel.FK_HospitalTable_UserTable" />
         <AssociationConnector Association="KapiNadeDBModel.FK_SeekerTable_UserTable" />
         <AssociationConnector Association="KapiNadeDBModel.FK_UserTable_UserTypeTable" />
+        <AssociationConnector Association="KapiNadeDBModel.FK_DonorTable_GenderTable" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

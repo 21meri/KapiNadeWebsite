@@ -20,6 +20,7 @@ namespace KapiNadeApp.Models
         public string ContactNumber { get; set; }
         public int CityID { get; set; }
         public int BloodGroupID { get; set; }
+        public int GenderID { get; set; }
         public SeekerMV Seeker { get; set; }
         public HospitalMV Hospital { get; set; }
         public BloodBankMV BloodBank { get; set; }

@@ -30,11 +30,13 @@ namespace DatabaseLayer
         public string Address { get; set; }
         public int CityID { get; set; }
         public int UserID { get; set; }
+        public int GenderID { get; set; }
     
         public virtual BloodGroupsTable BloodGroupsTable { get; set; }
         public virtual CityTable CityTable { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<RequestTable> RequestTables { get; set; }
         public virtual UserTable UserTable { get; set; }
+        public virtual GenderTable GenderTable { get; set; }
     }
 }
