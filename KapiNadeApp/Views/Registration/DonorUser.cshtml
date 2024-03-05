@@ -1,51 +1,47 @@
 ﻿@model KapiNadeApp.Models.RegistrationMV
 @{
-    ViewBag.Title = "Donor User";
+    ViewBag.Title = "Donor Registration";
 }
 
-<h2>Donor User</h2>
 
 <div class="appointment-form-wrapper text-center clearfix">
-    <h3 class="join-heading">Registration</h3>
-    @using (Html.BeginForm("SelectUser", "Registration", FormMethod.Post, new { @class = "appoinment-form" }))
+    <h3 class="join-heading join-heading-alt">Donor registration form</h3>
+    @using (Html.BeginForm("DonorUser", "Registration", FormMethod.Post, new { @class = "appoinment-form" }))
     {
 
         @Html.AntiForgeryToken()
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-
-
+        @Html.HiddenFor(model => model.UserTypeID)
+        @Html.HiddenFor(model => model.User.UserID)
+        @Html.HiddenFor(model => model.User.Username)
+        @Html.HiddenFor(model => model.User.Password)
+        @Html.HiddenFor(model => model.User.AccountStatus)
+        @Html.HiddenFor(model => model.User.AccountStatusID)
+        @Html.HiddenFor(model => model.User.Email)
         <div class="form-group col-md-6">
-            @Html.EditorFor(model => model.User.Username, new { htmlAttributes = new { @class = "form-control", @placeholder = "Username", @type = "text" } })
-            @Html.ValidationMessageFor(model => model.User.Username, "", new { @class = "text-danger" })
-
-
-        </div>
-        <div class="form-group col-md-6">
-            @Html.EditorFor(model => model.User.Email, new { htmlAttributes = new { @class = "form-control", @placeholder = "Email", @type = "email" } })
-            @Html.ValidationMessageFor(model => model.User.Email, "", new { @class = "text-danger" })
-
-
-        </div>
-        <div class="form-group col-md-6">
-            @Html.EditorFor(model => model.User.Password, new { htmlAttributes = new { @class = "form-control", @placeholder = "Password", @type = "password" } })
-            @Html.ValidationMessageFor(model => model.User.Password, "", new { @class = "text-danger" })
-
-
-        </div>
-        <div class="form-group col-md-6">
-            <div class="select-style">
-                @Html.DropDownList("UserTypeID", null, "--Relationship--", new { @class = "form-control" })
-                @Html.ValidationMessageFor(model => model.UserTypeID, "", new { @class = "text-danhger" })
-            </div>
+            @Html.EditorFor(model => model.Donor.Name, new { htmlAttributes = new { @class = "form-control", @placeholder = "Enter Name", @type = "text" } })
+            @Html.ValidationMessageFor(model => model.Donor.Name, "", new { @class = "text-danger" })
         </div>
 
         <div class="form-group col-md-6">
-            @Html.EditorFor(model => model.ContactNumber, new { htmlAttributes = new { @class = "form-control", @placeholder = "Contact number" } })
-            @Html.ValidationMessageFor(model => model.ContactNumber, "", new { @class = "text-danger" })
-
+            @Html.EditorFor(model => model.Donor.Surname, new { htmlAttributes = new { @class = "form-control", @placeholder = "Enter Surname", @type = "text" } })
+            @Html.ValidationMessageFor(model => model.Donor.Surname, "", new { @class = "text-danger" })
         </div>
 
+        <div class="form-group col-md-6">
+            @Html.EditorFor(model => model.Donor.Address, new { htmlAttributes = new { @class = "form-control", @placeholder = "Enter Address", @type = "text" } })
+            @Html.ValidationMessageFor(model => model.Donor.Address, "", new { @class = "text-danger" })
+        </div>
 
+        <div class="form-group col-md-6">
+            @Html.EditorFor(model => model.Donor.ContactNumber, new { htmlAttributes = new { @class = "form-control", @placeholder = "Enter Your Contact number" } })
+            @Html.ValidationMessageFor(model => model.Donor.ContactNumber, "", new { @class = "text-danger" })
+        </div>
+
+        <div class="form-group col-md-6">
+            @Html.EditorFor(model => model.Donor.CardNumber, new { htmlAttributes = new { @class = "form-control", @placeholder = "Enter Card Number", @type = "number" } })
+            @Html.ValidationMessageFor(model => model.Donor.CardNumber, "", new { @class = "text-danger" })
+        </div>
         <div class="form-group col-md-6">
             <div class="select-style">
                 @Html.DropDownList("CityID", null, "--Your City--", new { @class = "form-control" })
@@ -54,6 +50,17 @@
         </div>
 
 
+        <div class="form-group col-md-6">
+            <div class="select-style">
+                @Html.DropDownList("BloodGroupID", null, "--Select BloodGroup--", new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.BloodGroupID, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group col-md-6">
+            @Html.EditorFor(model => model.Donor.LastDonationDate, new { htmlAttributes = new { @class = "form-control", @placeholder = "Donation Date" } })
+            @Html.ValidationMessageFor(model => model.Donor.LastDonationDate, "", new { @class = "text-danger" })
+        </div>
 
         <div class="form-group col-md-12 col-sm-12 col-xs-12">
             <button id="btn_submit" class="btn-submit" type="submit">Submit</button>

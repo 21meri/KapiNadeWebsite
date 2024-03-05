@@ -67,6 +67,7 @@ namespace KapiNadeApp.Controllers
                             user.AccountStatusID = 1;
                             user.UserTypeID = registrationMV.UserTypeID;
                             DB.UserTables.Add(user);
+                            DB.SaveChanges();
 
                             var hospital = new HospitalTable();
                             hospital.Name = registrationMV.Hospital.Name;
@@ -103,7 +104,7 @@ namespace KapiNadeApp.Controllers
 
         public ActionResult DonorUser()
         {
-            ViewBag.UserTypeID = new SelectList(DB.UserTypeTables.Where(ut => ut.UserTypeID > 1).ToList(), "UserTypeID", "UserType", registrationmv.UserTypeID);
+            ViewBag.BloodGroupID = new SelectList(DB.BloodGroupsTables.ToList(), "BloodGroupID", "BloodGroup", "0");
             ViewBag.CityID = new SelectList(DB.CityTables.ToList(), "CityID", "City", registrationmv.CityID);
             return View(registrationmv);
         }
@@ -113,8 +114,55 @@ namespace KapiNadeApp.Controllers
 
         public ActionResult DonorUser(RegistrationMV registrationMV)
         {
-            ViewBag.CityID = new SelectList(DB.CityTables.ToList(), "CityID", "City", registrationmv.CityID);
-            return View();
+            if (ModelState.IsValid)
+            {
+                var checktitle = DB.DonorTables.Where(h => h.Name == registrationMV.Donor.Name.Trim() && h.CardNumber==registrationMV.Donor.CardNumber).FirstOrDefault();
+                if (checktitle == null)
+                {
+                    using (var transaction = DB.Database.BeginTransaction())
+                    {
+                        try
+                        {
+                            var user = new UserTable();
+                            user.Username = registrationMV.User.Username;
+                            user.Password = registrationMV.User.Password;
+                            user.Email = registrationMV.User.Email;
+                            user.AccountStatusID = 1;
+                            user.UserTypeID = registrationMV.UserTypeID;
+                            DB.UserTables.Add(user);
+                            DB.SaveChanges();
+
+                            var donor = new DonorTable();
+                            donor.Name = registrationMV.Donor.Name;
+                            donor.Surname = registrationMV.Donor.Surname;
+                            donor.BloodGroupID = registrationMV.BloodGroupID;
+                            donor.Address = registrationMV.Donor.Address;
+                            donor.CardNumber = registrationMV.Donor.CardNumber;
+                            donor.LastDonationDate = registrationMV.Donor.LastDonationDate;
+                            donor.ContactNumber = registrationMV.Donor.ContactNumber;
+                            donor.CityID = registrationMV.CityID;
+                            donor.UserID = user.UserID;
+                            DB.DonorTables.Add(donor);
+                            DB.SaveChanges();
+                            transaction.Commit();
+                            ViewData["Message"] = "Thanks for registration, your query will be reviewed shortly!";
+                            return RedirectToAction("MainHome", "Home");
+                        }
+                        catch
+                        {
+                            ModelState.AddModelError(string.Empty, "Please provide correct information!");
+                            transaction.Rollback();
+                        }
+                    }
+                }
+                else
+                {
+                    ModelState.AddModelError(string.Empty, "Donor already registered!");
+                }
+            }
+            ViewBag.BloodGroupID = new SelectList(DB.BloodGroupsTables.ToList(), "BloodGroupID", "BloodGroup",registrationMV.BloodGroupID);
+            ViewBag.CityID = new SelectList(DB.CityTables.ToList(), "CityID", "City", registrationMV.CityID);
+            return View(registrationMV);
         }
 
 
