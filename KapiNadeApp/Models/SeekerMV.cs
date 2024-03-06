@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
 
@@ -10,6 +11,7 @@ namespace KapiNadeApp.Models
         public int SeekerID { get; set; }
         public string Name { get; set; }
         public string Surname { get; set; }
+        [DataType(DataType.Date)]
         public System.DateTime DateOfBirth { get; set; }
         public int CityID { get; set; }
         public string City { get; set; }
@@ -19,6 +21,7 @@ namespace KapiNadeApp.Models
         public string CardNumber { get; set; }
         public int GenderID { get; set; }
         public string Gender { get; set; }
+     
         public System.DateTime RegistrationDate { get; set; }
         public string Email { get; set; }
         public int UserID { get; set; }

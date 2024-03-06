@@ -105,7 +105,7 @@ namespace KapiNadeApp.Controllers
         public ActionResult DonorUser()
         {
             ViewBag.BloodGroupID = new SelectList(DB.BloodGroupsTables.ToList(), "BloodGroupID", "BloodGroup", "0");
-            ViewBag.CityID = new SelectList(DB.CityTables.ToList(), "CityID", "City", registrationmv.CityID);
+            ViewBag.CityID = new SelectList(DB.CityTables.ToList(), "CityID", "City", "0");
             ViewBag.GenderID = new SelectList(DB.GenderTables.ToList(), "GenderID", "Gender", "0");
             return View(registrationmv);
         }
@@ -162,6 +162,7 @@ namespace KapiNadeApp.Controllers
                     ModelState.AddModelError(string.Empty, "Donor already registered!");
                 }
             }
+            ViewBag.GenderID = new SelectList(DB.GenderTables.ToList(), "GenderID", "Gender", registrationMV.GenderID);
             ViewBag.BloodGroupID = new SelectList(DB.BloodGroupsTables.ToList(), "BloodGroupID", "BloodGroup",registrationMV.BloodGroupID);
             ViewBag.CityID = new SelectList(DB.CityTables.ToList(), "CityID", "City", registrationMV.CityID);
             return View(registrationMV);
@@ -231,7 +232,9 @@ namespace KapiNadeApp.Controllers
 
         public ActionResult SeekerUser()
         {
-            ViewBag.CityID = new SelectList(DB.CityTables.ToList(), "CityID", "City", registrationmv.CityID);
+            ViewBag.BloodGroupID = new SelectList(DB.BloodGroupsTables.ToList(), "BloodGroupID", "BloodGroup", "0");
+            ViewBag.CityID = new SelectList(DB.CityTables.ToList(), "CityID", "City", "0");
+            ViewBag.GenderID = new SelectList(DB.GenderTables.ToList(), "GenderID", "Gender", "0");
             return View(registrationmv);
         }
 
@@ -240,8 +243,58 @@ namespace KapiNadeApp.Controllers
 
         public ActionResult SeekerUser(RegistrationMV registrationMV)
         {
-            ViewBag.CityID = new SelectList(DB.CityTables.ToList(), "CityID", "City", registrationmv.CityID);
-            return View();
+            if (ModelState.IsValid)
+            {
+                var checktitle = DB.SeekerTables.Where(h => h.Name == registrationMV.Seeker.Name.Trim() && h.CardNumber == registrationMV.Seeker.CardNumber).FirstOrDefault();
+                if (checktitle == null)
+                {
+                    using (var transaction = DB.Database.BeginTransaction())
+                    {
+                        try
+                        {
+                            var user = new UserTable();
+                            user.Username = registrationMV.User.Username;
+                            user.Password = registrationMV.User.Password;
+                            user.Email = registrationMV.User.Email;
+                            user.AccountStatusID = 1;
+                            user.UserTypeID = registrationMV.UserTypeID;
+                            DB.UserTables.Add(user);
+                            DB.SaveChanges();
+
+                            var seeker = new SeekerTable();
+                           seeker.Name = registrationMV.Seeker.Name;
+                           seeker.Surname = registrationMV.Seeker.Surname;
+                           seeker.BloodGroupID = registrationMV.BloodGroupID;
+                           seeker.Email = registrationMV.Seeker.Email;
+                           seeker.CardNumber = registrationMV.Seeker.CardNumber;
+                           seeker.GenderID = registrationMV.GenderID;
+                           seeker.RegistrationDate = DateTime.Now;
+                           seeker.DateOfBirth = registrationMV.Seeker.DateOfBirth;
+                           seeker.ContactNumber = registrationMV.Seeker.ContactNumber;
+                           seeker.CityID = registrationMV.CityID;
+                            seeker.UserID = user.UserID;
+                            DB.SeekerTables.Add(seeker);
+                            DB.SaveChanges();
+                            transaction.Commit();
+                            ViewData["Message"] = "Thanks for registration, your query will be reviewed shortly!";
+                            return RedirectToAction("MainHome", "Home");
+                        }
+                        catch
+                        {
+                            ModelState.AddModelError(string.Empty, "Please provide correct information!");
+                            transaction.Rollback();
+                        }
+                    }
+                }
+                else
+                {
+                    ModelState.AddModelError(string.Empty, "Seeker already registered!");
+                }
+            }
+            ViewBag.BloodGroupID = new SelectList(DB.BloodGroupsTables.ToList(), "BloodGroupID", "BloodGroup", registrationMV.BloodGroupID);
+            ViewBag.GenderID = new SelectList(DB.GenderTables.ToList(), "GenderID", "Gender", registrationMV.GenderID);
+            ViewBag.CityID = new SelectList(DB.CityTables.ToList(), "CityID", "City", registrationMV.CityID);
+            return View(registrationMV);
         }
 
 
