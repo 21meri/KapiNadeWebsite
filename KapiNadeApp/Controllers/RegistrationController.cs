@@ -180,8 +180,51 @@ namespace KapiNadeApp.Controllers
 
         public ActionResult BloodBankUser(RegistrationMV registrationMV)
         {
-            ViewBag.CityID = new SelectList(DB.CityTables.ToList(), "CityID", "City", registrationmv.CityID);
-            return View();
+            if (ModelState.IsValid)
+            {
+                var checktitle = DB.BloodBankTables.Where(h => h.Name == registrationMV.BloodBank.Name.Trim() && h.ContactNumber == registrationMV.BloodBank.ContactNumber).FirstOrDefault();
+                if (checktitle == null)
+                {
+                    using (var transaction = DB.Database.BeginTransaction())
+                    {
+                        try
+                        {
+                            var user = new UserTable();
+                            user.Username = registrationMV.User.Username;
+                            user.Password = registrationMV.User.Password;
+                            user.Email = registrationMV.User.Email;
+                            user.AccountStatusID = 1;
+                            user.UserTypeID = registrationMV.UserTypeID;
+                            DB.UserTables.Add(user);
+                            DB.SaveChanges();
+
+                            var bloodBank = new BloodBankTable();
+                            bloodBank.Name = registrationMV.BloodBank.Name;
+                            bloodBank.Address = registrationMV.BloodBank.Address;
+                            bloodBank.ContactNumber = registrationMV.BloodBank.ContactNumber;
+                            bloodBank.Email = registrationMV.BloodBank.Email;
+                            bloodBank.CityID = registrationMV.CityID;
+                            bloodBank.UserID = user.UserID;
+                            DB.BloodBankTables.Add(bloodBank);
+                            DB.SaveChanges();
+                            transaction.Commit();
+                            ViewData["Message"] = "Thanks for registration, your query will be reviewed shortly!";
+                            return RedirectToAction("MainHome", "Home");
+                        }
+                        catch
+                        {
+                            ModelState.AddModelError(string.Empty, "Please provide correct information!");
+                            transaction.Rollback();
+                        }
+                    }
+                }
+                else
+                {
+                    ModelState.AddModelError(string.Empty, "Blood Bank already registered!");
+                }
+            }
+            ViewBag.CityID = new SelectList(DB.CityTables.ToList(), "CityID", "City", registrationMV.CityID);
+            return View(registrationMV);
         }
 
 
