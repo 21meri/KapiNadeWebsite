@@ -23,6 +23,7 @@ namespace KapiNadeApp.Models
         public string Gender { get; set; }
      
         public System.DateTime RegistrationDate { get; set; }
+        public string Address { get; set; }
         public string Email { get; set; }
         public int UserID { get; set; }
         public string Username { get; set; }

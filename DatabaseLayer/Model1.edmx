@@ -120,6 +120,7 @@
           <Property Name="RegistrationDate" Type="date" Nullable="false" />
           <Property Name="Email" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="UserID" Type="int" Nullable="false" />
+          <Property Name="Address" Type="nvarchar" MaxLength="50" Nullable="false" />
         </EntityType>
         <EntityType Name="UserTable">
           <Key>
@@ -636,6 +637,7 @@
           <NavigationProperty Name="RequestTables" Relationship="Self.FK_RequestTable_SeekerTable" FromRole="SeekerTable" ToRole="RequestTable" />
           <Property Name="UserID" Type="Int32" Nullable="false" />
           <NavigationProperty Name="UserTable" Relationship="KapiNadeDBModel.FK_SeekerTable_UserTable" FromRole="SeekerTable" ToRole="UserTable" />
+          <Property Name="Address" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
         </EntityType>
         <Association Name="FK_BloodBankTable_CityTable">
           <End Role="CityTable" Type="Self.CityTable" Multiplicity="1" />
@@ -1131,6 +1133,7 @@
           <EntitySetMapping Name="SeekerTables">
             <EntityTypeMapping TypeName="KapiNadeDBModel.SeekerTable">
               <MappingFragment StoreEntitySet="SeekerTable">
+                <ScalarProperty Name="Address" ColumnName="Address" />
                 <ScalarProperty Name="UserID" ColumnName="UserID" />
                 <ScalarProperty Name="SeekerID" ColumnName="SeekerID" />
                 <ScalarProperty Name="Name" ColumnName="Name" />

@@ -32,6 +32,7 @@ namespace DatabaseLayer
         public System.DateTime RegistrationDate { get; set; }
         public string Email { get; set; }
         public int UserID { get; set; }
+        public string Address { get; set; }
     
         public virtual BloodGroupsTable BloodGroupsTable { get; set; }
         public virtual CityTable CityTable { get; set; }

@@ -262,16 +262,17 @@ namespace KapiNadeApp.Controllers
                             DB.SaveChanges();
 
                             var seeker = new SeekerTable();
-                           seeker.Name = registrationMV.Seeker.Name;
-                           seeker.Surname = registrationMV.Seeker.Surname;
-                           seeker.BloodGroupID = registrationMV.BloodGroupID;
-                           seeker.Email = registrationMV.Seeker.Email;
-                           seeker.CardNumber = registrationMV.Seeker.CardNumber;
-                           seeker.GenderID = registrationMV.GenderID;
-                           seeker.RegistrationDate = DateTime.Now;
-                           seeker.DateOfBirth = registrationMV.Seeker.DateOfBirth;
-                           seeker.ContactNumber = registrationMV.Seeker.ContactNumber;
-                           seeker.CityID = registrationMV.CityID;
+                            seeker.Name = registrationMV.Seeker.Name;
+                            seeker.Surname = registrationMV.Seeker.Surname;
+                            seeker.BloodGroupID = registrationMV.BloodGroupID;
+                            seeker.Address = registrationMV.Seeker.Address;
+                            seeker.Email = registrationMV.Seeker.Email;
+                            seeker.CardNumber = registrationMV.Seeker.CardNumber;
+                            seeker.GenderID = registrationMV.GenderID;
+                            seeker.RegistrationDate = DateTime.Now;
+                            seeker.DateOfBirth = registrationMV.Seeker.DateOfBirth;
+                            seeker.ContactNumber = registrationMV.Seeker.ContactNumber;
+                            seeker.CityID = registrationMV.CityID;
                             seeker.UserID = user.UserID;
                             DB.SeekerTables.Add(seeker);
                             DB.SaveChanges();
