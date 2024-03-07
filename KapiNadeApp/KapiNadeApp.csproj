@@ -125,6 +125,8 @@
     <Content Include="Content\Template\css\venobox.css" />
     <Content Include="Content\Template\fonts\fontawesome-webfont.svg" />
     <Content Include="Content\Template\images\appointment.jpg" />
+    <Content Include="Content\Template\images\.jpg" />
+    <Content Include="Content\Template\images\bgpic.jpg" />
     <Content Include="Content\Template\images\blog_1.jpg" />
     <Content Include="Content\Template\images\blog_2.jpg" />
     <Content Include="Content\Template\images\blog_3.jpg" />
@@ -294,6 +296,7 @@
     <Content Include="Views\Registration\SeekerUser.cshtml" />
     <Content Include="Views\Accounts\AllNewUserRequests.cshtml" />
     <Content Include="Views\Accounts\UserDetails.cshtml" />
+    <Content Include="Views\Home\Login.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
