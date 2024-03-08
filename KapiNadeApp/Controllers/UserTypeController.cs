@@ -15,6 +15,10 @@ namespace KapiNadeApp.Controllers
         KapiNadeDBEntities DB = new KapiNadeDBEntities();
         public ActionResult AllUserTypes()
         {
+            if (string.IsNullOrEmpty(Convert.ToString(Session["Username"])))
+            {
+                return RedirectToAction("Login", "Home");
+            }
             var usertypes = DB.UserTypeTables.ToList();
             var listusertypes = new List<UserTypeMV>();
             foreach (var usertype in usertypes)
@@ -28,6 +32,10 @@ namespace KapiNadeApp.Controllers
         }
         public ActionResult Create()
         {
+            if (string.IsNullOrEmpty(Convert.ToString(Session["Username"])))
+            {
+                return RedirectToAction("Login", "Home");
+            }
             var usertype = new UserTypeMV();
             return View(usertype);
         }
@@ -36,6 +44,10 @@ namespace KapiNadeApp.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create(UserTypeMV userTypeMV)
         {
+            if (string.IsNullOrEmpty(Convert.ToString(Session["Username"])))
+            {
+                return RedirectToAction("Login", "Home");
+            }
             if (ModelState.IsValid)
             {
                 var userTypeTable = new UserTypeTable();
@@ -51,6 +63,10 @@ namespace KapiNadeApp.Controllers
 
         public ActionResult Edit(int? id)
         {
+            if (string.IsNullOrEmpty(Convert.ToString(Session["Username"])))
+            {
+                return RedirectToAction("Login", "Home");
+            }
             var usertype = DB.UserTypeTables.Find(id);
             if (usertype == null)
             {
@@ -65,6 +81,10 @@ namespace KapiNadeApp.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Edit(UserTypeMV userTypeMV)
         {
+            if (string.IsNullOrEmpty(Convert.ToString(Session["Username"])))
+            {
+                return RedirectToAction("Login", "Home");
+            }
             if (ModelState.IsValid)
             {
                 var userTypeTable = new UserTypeTable();
@@ -80,6 +100,10 @@ namespace KapiNadeApp.Controllers
 
         public ActionResult Delete(int? id)
         {
+            if (string.IsNullOrEmpty(Convert.ToString(Session["Username"])))
+            {
+                return RedirectToAction("Login", "Home");
+            }
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -99,6 +123,10 @@ namespace KapiNadeApp.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirm(int? id)
         {
+            if (string.IsNullOrEmpty(Convert.ToString(Session["Username"])))
+            {
+                return RedirectToAction("Login", "Home");
+            }
             var usertype = DB.UserTypeTables.Find(id);
             DB.UserTypeTables.Remove(usertype);
             DB.SaveChanges();

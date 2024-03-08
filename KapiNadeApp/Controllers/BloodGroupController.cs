@@ -16,6 +16,10 @@ namespace KapiNadeApp.Controllers
         KapiNadeDBEntities DB = new KapiNadeDBEntities();
         public ActionResult AllBloodGroups()
         {
+            if (string.IsNullOrEmpty(Convert.ToString(Session["Username"])))
+            {
+                return RedirectToAction("Login", "Home");
+            }
             var bloodgroups = DB.BloodGroupsTables.ToList();
             var listbloodgroups = new List<BloodGroupsMV>();
             foreach (var bloodgroup in bloodgroups)
@@ -30,6 +34,10 @@ namespace KapiNadeApp.Controllers
 
         public ActionResult Create()
         {
+            if (string.IsNullOrEmpty(Convert.ToString(Session["Username"])))
+            {
+                return RedirectToAction("Login", "Home");
+            }
             var bloodgroup = new BloodGroupsMV();
             return View(bloodgroup);
         }
@@ -38,6 +46,10 @@ namespace KapiNadeApp.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create(BloodGroupsMV bloodGroupsMV)
         {
+            if (string.IsNullOrEmpty(Convert.ToString(Session["Username"])))
+            {
+                return RedirectToAction("Login", "Home");
+            }
             if (ModelState.IsValid)
             {
                 var checkbloodgroup = DB.BloodGroupsTables.Where(b => b.BloodGroup == bloodGroupsMV.BloodGroup).FirstOrDefault();
@@ -62,6 +74,10 @@ namespace KapiNadeApp.Controllers
 
         public ActionResult Edit(int? id)
         {
+            if (string.IsNullOrEmpty(Convert.ToString(Session["Username"])))
+            {
+                return RedirectToAction("Login", "Home");
+            }
             var bloodgroup = DB.BloodGroupsTables.Find(id);
             if (bloodgroup == null)
             {
@@ -76,6 +92,10 @@ namespace KapiNadeApp.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Edit(BloodGroupsMV bloodGroupsMV)
         {
+            if (string.IsNullOrEmpty(Convert.ToString(Session["Username"])))
+            {
+                return RedirectToAction("Login", "Home");
+            }
             if (ModelState.IsValid)
             {
                     var checkbloodgroup = DB.BloodGroupsTables.Where(b => b.BloodGroup == bloodGroupsMV.BloodGroup && b.BloodGroupID != bloodGroupsMV.BloodGroupID).FirstOrDefault();
@@ -99,6 +119,10 @@ namespace KapiNadeApp.Controllers
 
         public ActionResult Delete(int? id)
         {
+            if (string.IsNullOrEmpty(Convert.ToString(Session["Username"])))
+            {
+                return RedirectToAction("Login", "Home");
+            }
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -118,6 +142,10 @@ namespace KapiNadeApp.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirm(int? id)
         {
+            if (string.IsNullOrEmpty(Convert.ToString(Session["Username"])))
+            {
+                return RedirectToAction("Login", "Home");
+            }
             var bloodgroup = DB.BloodGroupsTables.Find(id);
             DB.BloodGroupsTables.Remove(bloodgroup);
             DB.SaveChanges();

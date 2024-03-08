@@ -16,6 +16,10 @@ namespace KapiNadeApp.Controllers
         KapiNadeDBEntities DB = new KapiNadeDBEntities();
         public ActionResult AllAccountStatus()
         {
+            if (string.IsNullOrEmpty(Convert.ToString(Session["Username"])))
+            {
+                return RedirectToAction("Login", "Home");
+            }
             var accountstatuses = DB.AccountStatusTables.ToList();
             var listaccountstatuses = new List<AccountStatusMV>();
             foreach (var accountstatus in accountstatuses)
@@ -30,6 +34,10 @@ namespace KapiNadeApp.Controllers
 
         public ActionResult Create()
         {
+            if (string.IsNullOrEmpty(Convert.ToString(Session["Username"])))
+            {
+                return RedirectToAction("Login", "Home");
+            }
             var accountstatus = new AccountStatusMV();
             return View(accountstatus);
         }
@@ -38,6 +46,10 @@ namespace KapiNadeApp.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create(AccountStatusMV accountStatusMV)
         {
+            if (string.IsNullOrEmpty(Convert.ToString(Session["Username"])))
+            {
+                return RedirectToAction("Login", "Home");
+            }
             if (ModelState.IsValid)
             {
                 var checkaccountstatus = DB.AccountStatusTables.Where(b => b.AccountStatus == accountStatusMV.AccountStatus).FirstOrDefault();
@@ -62,6 +74,10 @@ namespace KapiNadeApp.Controllers
 
         public ActionResult Edit(int? id)
         {
+            if (string.IsNullOrEmpty(Convert.ToString(Session["Username"])))
+            {
+                return RedirectToAction("Login", "Home");
+            }
             var accountstatus = DB.AccountStatusTables.Find(id);
             if (accountstatus == null)
             {
@@ -76,6 +92,10 @@ namespace KapiNadeApp.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Edit(AccountStatusMV accountStatusMV)
         {
+            if (string.IsNullOrEmpty(Convert.ToString(Session["Username"])))
+            {
+                return RedirectToAction("Login", "Home");
+            }
             if (ModelState.IsValid)
             {
                 var checkaccountstatus = DB.AccountStatusTables.Where(b => b.AccountStatus == accountStatusMV.AccountStatus && b.AccountStatusID != accountStatusMV.AccountStatusID).FirstOrDefault();
@@ -99,6 +119,10 @@ namespace KapiNadeApp.Controllers
 
         public ActionResult Delete(int? id)
         {
+            if (string.IsNullOrEmpty(Convert.ToString(Session["Username"])))
+            {
+                return RedirectToAction("Login", "Home");
+            }
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -118,6 +142,10 @@ namespace KapiNadeApp.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirm(int? id)
         {
+            if (string.IsNullOrEmpty(Convert.ToString(Session["Username"])))
+            {
+                return RedirectToAction("Login", "Home");
+            }
             var accountstatus = DB.AccountStatusTables.Find(id);
             DB.AccountStatusTables.Remove(accountstatus);
             DB.SaveChanges();

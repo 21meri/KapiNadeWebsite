@@ -53,7 +53,19 @@
                                 <a href="#"><i class="fa fa-google-plus"></i></a>
                                 <a href="#"><i class="fa fa-instagram"></i></a>
                                 <a href="#"><i class="fa fa-youtube"></i></a>
+
+                                @if (string.IsNullOrEmpty(Convert.ToString(Session["Username"])))
+                                {
+                                    @Html.ActionLink("Sign in", "Login", "Home", null, new { @class = "btn btn-theme" })
+                                }
+                                else
+                                {
+                                    @Html.ActionLink("Sign out", "Logout", "Home", null, new { @class = "btn btn-theme" })
+
+                                }
+                                
                             </div>
+                       
                         </div>
 
                     </div>
@@ -283,9 +295,7 @@
         <a id="backTop">Back To Top</a>
 
         
-        <script type="text/javascript">
-            alert('@ViewData["Message"]');
-        </script>
+       
         <script src="~/Content/Template/js/jquery.min.js"></script>
         <script src="~/Content/Template/js/bootstrap.min.js"></script>
         <script src="~/Content/Template/js/wow.min.js"></script>
