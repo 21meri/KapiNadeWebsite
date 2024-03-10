@@ -87,54 +87,79 @@
                             </button>
                             <a class="logo" href="index.html"><img alt="" src="~/Content/Template/images/logo.png"></a>
                         </div>
+                        @{
+                            int usertypeid = 0;
+                            int userid = 0;
+                            string sessionusertype = Convert.ToString(Session["UserTypeID"]);
+                            string userID = Convert.ToString(Session["UserID"]);
+
+                            int.TryParse(sessionusertype, out usertypeid);
+                            int.TryParse(userID, out userid);
 
                         <div class="navbar-collapse collapse">
-                            <ul class="nav navbar-nav navbar-right">
-                                <li class="drop">
-                                    <a href="index.html" title="Home Layout 01">Naslovna</a>
-                                    <ul class="drop-down">
-                                        <li><a href="index.html" title="Home Layout 01">Home Layout 1</a></li>
-                                        <li><a href="home-2.html" title="Home Layout 02">Home Layout 2</a></li>
-                                    </ul>
-                                </li>
-                                <li><a href="about-us.html" title="About Us">O nama</a></li>
+                                                    <ul class="nav navbar-nav navbar-right">
+                                                        <li class="drop">
+                                                            <a href="index.html" title="Home Layout 01">Naslovna</a>
+                                                            <ul class="drop-down">
+                                                                <li><a href="index.html" title="Home Layout 01">Home Layout 1</a></li>
+                                                                <li><a href="home-2.html" title="Home Layout 02">Home Layout 2</a></li>
+                                                            </ul>
+                                                        </li>
+
+                                                        @if (usertypeid == 1)
+                                                        {
+                                                            <li><a href="@Url.Content("~/Accounts/AllNewUserRequests")">Accounts requests</a></li>
+
+                                                        }
+                                                        <li><a href="about-us.html" title="About Us">O nama</a></li>
 
 
 
-                                <li>
-                                    <a href="#">Campaign</a>
-                                    <ul class="drop-down">
-                                        <li><a href="events.html">All Campaigns</a></li>
-                                        <li><a href="event-single.html">Single Campaign</a></li>
-                                    </ul>
-                                </li>
+                                                        <li>
+                                                            <a href="#">Campaign</a>
+                                                            <ul class="drop-down">
+                                                                <li><a href="events.html">All Campaigns</a></li>
+                                                                <li><a href="event-single.html">Single Campaign</a></li>
+                                                            </ul>
+                                                        </li>
+
+
+                                                        @if (usertypeid == 1)
+                                                        {
+                                                            <li>
+                                                                <a href="#">Setting</a>
+                                                                <ul class="drop-down">
+                                                                    <li><a href="@Url.Content("~/User/UserProfile/"+userid+"")">User Profile</a></li>
+                                                                    <li><a href="@Url.Content("~/AccountStatus/AllAccountStatus")">All account status</a></li>
+                                                                    <li><a href="@Url.Content("~/BloodGroup/AllBloodGroups")">Blood groups</a></li>
+                                                                    <li><a href="@Url.Content("~/CityTables/Index")">Cities</a></li>
+                                                                    <li><a href="@Url.Content("~/RequestType/AllRequestType")">Request type</a></li>
+                                                                    <li><a href="@Url.Content("~/UserType/AllUserTypes")">User type</a></li>
+                                                                    <li><a href="@Url.Content("~/Home/Logout")">Sign out</a></li>
+
+                                                                </ul>
+                                                            </li>
+                                                        }else if(usertypeid>1)
+                                                        {
+                                                            <li>
+                                                                <a href="#">Setting</a>
+                                                                <ul class="drop-down">
+                                                                    <li><a href="@Url.Content("~/User/UserProfile/"+userid+"")">User Profile</a></li>
+                                                                    <li><a href="@Url.Content("~/Home/Logout")">Sign out</a></li>
+
+                                                                </ul>
+                                                            </li>
+                                                        }
 
 
 
-                                <li>
-                                    <a href="#">Setting</a>
-                                    <ul class="drop-down">
-                                        <li><a href="@Url.Content("~/Accounts/AllNewUserRequests")">All new accounts requests</a></li>
-                                        <li><a href="@Url.Content("~/AccountStatus/AllAccountStatus")">All account status</a></li>
-                                        <li><a href="@Url.Content("~/BloodGroup/AllBloodGroups")">Blood groups</a></li>
-                                        <li><a href="@Url.Content("~/CityTables/Index")">Cities</a></li>
-                                        <li><a href="@Url.Content("~/RequestType/AllRequestType")">Request type</a></li>
-                                        <li><a href="@Url.Content("~/UserType/AllUserTypes")">User type</a></li>
-                                    </ul>
-                                </li>
 
 
 
-                                <li><a href="@Url.Content("~/Accounts/AllNewUserRequests")">Accounts requests</a></li>
-
-
-
-
-
-
-                                <li><a href="contact.html">Kontakt</a></li>
-                            </ul>
+                                                        <li><a href="contact.html">Kontakt</a></li>
+                                                    </ul>
                         </div>
+                         }
                     </div>
                 </div>
 
