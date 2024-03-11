@@ -133,14 +133,17 @@ namespace KapiNadeApp.Controllers
 
             }
 
+            ViewBag.BloodGroupID = new SelectList(DB.BloodGroupsTables.ToList(), "BloodGroupID", "BloodGroup", userprofile.BloodGroupID);
+            ViewBag.CityID = new SelectList(DB.CityTables.ToList(), "CityID", "City", userprofile.CityID);
+            ViewBag.GenderID = new SelectList(DB.GenderTables.ToList(), "GenderID", "Gender", userprofile.GenderID);
 
 
-            return View(user);
+            return View(userprofile);
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult EditUserProfile(RegistrationMV registrationMVid)
+        public ActionResult EditUserProfile(RegistrationMV userprofile)
         {
             if (string.IsNullOrEmpty(Convert.ToString(Session["Username"])))
             {
@@ -148,7 +151,11 @@ namespace KapiNadeApp.Controllers
             }
             //var userprofile = new RegistrationMV();
             //var user = DB.UserTables.Find(id);
-            return View(registrationMVid);
+            ViewBag.BloodGroupID = new SelectList(DB.BloodGroupsTables.ToList(), "BloodGroupID", "BloodGroup", userprofile.BloodGroupID);
+            ViewBag.CityID = new SelectList(DB.CityTables.ToList(), "CityID", "City", userprofile.CityID);
+            ViewBag.GenderID = new SelectList(DB.GenderTables.ToList(), "GenderID", "Gender", userprofile.GenderID);
+
+            return View(userprofile);
            
         }
     }
