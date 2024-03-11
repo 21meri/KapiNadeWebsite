@@ -18,6 +18,7 @@ namespace DatabaseLayer
         public DonorTable()
         {
             this.RequestTables = new HashSet<RequestTable>();
+            this.BloodStockDetailsTables = new HashSet<BloodStockDetailsTable>();
         }
     
         public int DonorID { get; set; }
@@ -38,5 +39,7 @@ namespace DatabaseLayer
         public virtual ICollection<RequestTable> RequestTables { get; set; }
         public virtual UserTable UserTable { get; set; }
         public virtual GenderTable GenderTable { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<BloodStockDetailsTable> BloodStockDetailsTables { get; set; }
     }
 }

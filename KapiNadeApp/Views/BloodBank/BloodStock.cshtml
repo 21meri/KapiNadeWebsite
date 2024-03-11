@@ -1,0 +1,58 @@
+﻿@model IEnumerable<KapiNadeApp.Models.BloodStockMV>
+
+@{
+    ViewBag.Title = "Stock";
+}
+
+<div class="col-md-8">
+
+    <div class="contact-form-block">
+
+        <h2 class="contact-title">Blood Stock</h2>
+
+        <p>
+            @Html.ActionLink("New Campaign", "NewCampaign", null, new { @class = "btn btn-theme" })
+            @Html.ActionLink("Campaign History", "CampaignHistory", null, new { @class = "btn btn-theme" })
+        </p>
+        <table class="table table-hover">
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.BloodGroup)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Status)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Quantity)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.BestBefore)
+                </th>
+                <th></th>
+            </tr>
+
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.BloodGroup)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Status)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Quantity)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.BestBefore)
+                    </td>
+                    <td>
+                        @Html.ActionLink("Donate", "Edit", new { id = item.BloodStockID }, new { @class = "btn btn-success" })
+                        @Html.ActionLink("Details History", "Details", new { id = item.BloodStockID }, new { @class = "btn btn-info" })
+                    </td>
+                </tr>
+            }
+
+        </table>
+    </div>
+</div>
