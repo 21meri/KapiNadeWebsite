@@ -45,5 +45,15 @@ namespace KapiNadeApp.Controllers
             }
             return View(list);
         }
+
+        public ActionResult NewCampaign()
+        {
+            if (string.IsNullOrEmpty(Convert.ToString(Session["Username"])))
+            {
+                return RedirectToAction("Login", "Home");
+            }
+
+            return View();
+        }
     }
 }

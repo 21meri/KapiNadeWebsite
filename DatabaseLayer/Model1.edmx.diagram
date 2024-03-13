@@ -39,9 +39,12 @@
         <AssociationConnector Association="KapiNadeDBModel.FK_SeekerTable_UserTable" />
         <AssociationConnector Association="KapiNadeDBModel.FK_UserTable_UserTypeTable" />
         <AssociationConnector Association="KapiNadeDBModel.FK_DonorTable_GenderTable" />
-        <EntityTypeShape EntityType="KapiNadeDBModel.BloodStockDetailsTable" Width="1.5" PointX="10.25" PointY="8.5" />
+        <EntityTypeShape EntityType="KapiNadeDBModel.BloodStockDetailsTable" Width="2.5" PointX="10.25" PointY="10.5" />
+        <EntityTypeShape EntityType="KapiNadeDBModel.CampaignTable" Width="1.5" PointX="5.25" PointY="17.375" />
+        <AssociationConnector Association="KapiNadeDBModel.FK_CampaignTable_BloodBankTable" />
         <AssociationConnector Association="KapiNadeDBModel.FK_BloodStockDetailsTable_BloodGroupsTable" />
         <AssociationConnector Association="KapiNadeDBModel.FK_BloodStockDetailsTable_BloodStockTable" />
+        <AssociationConnector Association="KapiNadeDBModel.FK_BloodStockDetailsTable_CampaignTable" />
         <AssociationConnector Association="KapiNadeDBModel.FK_BloodStockDetailsTable_DonorTable" />
       </Diagram>
     </edmx:Diagrams>
