@@ -313,6 +313,7 @@
     <Content Include="Views\BloodBank\BloodStock.cshtml" />
     <Content Include="Views\BloodBank\NewCampaign.cshtml" />
     <Content Include="Views\BloodBank\AllCampaigns.cshtml" />
+    <Content Include="Views\Home\AllCampaigns.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

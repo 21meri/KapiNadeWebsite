@@ -14,9 +14,12 @@ namespace KapiNadeApp.Controllers
         // GET: Home
         KapiNadeDBEntities DB= new KapiNadeDBEntities();
 
-        public ActionResult Index()
+        public ActionResult AllCampaigns()
         {
-            return View();
+
+            var date = DateTime.Now.AddDays(1);
+            var allcampaigns = DB.CampaignTables.Where(c => c.CampaignDate<date).ToList();
+            return View(allcampaigns);
         }
 
         public ActionResult MainHome()
