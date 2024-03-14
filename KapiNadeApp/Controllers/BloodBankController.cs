@@ -1,8 +1,10 @@
 ﻿using DatabaseLayer;
+using KapiNadeApp.Helper_Class;
 using KapiNadeApp.Models;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.Data.Entity;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -98,6 +100,20 @@ namespace KapiNadeApp.Controllers
 
                 DB.CampaignTables.Add(campaign);
                 DB.SaveChanges();
+
+                if (campaignMV.CampaignPhotoFile != null)
+                {
+                    var folder = "~/Content/CampaignPhoto";
+                    var file = string.Format("{0}.jpg", campaignMV.CampaignID);
+                    var response = FileHelpers.UploadPhoto(campaignMV.CampaignPhotoFile, folder, file);
+                    if(response)
+                    {
+                        var pic = string.Format("{0}/{1}", folder, file);
+                        campaign.CampaignPhoto = pic;
+                        DB.Entry(campaign).State = EntityState.Modified;
+                        DB.SaveChanges();
+                    }
+                }
 
                 return RedirectToAction("AllCampaigns");
 
