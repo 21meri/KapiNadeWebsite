@@ -17,6 +17,9 @@ namespace KapiNadeApp.Models
         public int CampaignID { get; set; }
         public double Quantity { get; set; }
         public int DonorID { get; set; }
+        public int GenderID { get; set; }
+        public int CityID { get; set; }
+
         public System.DateTime DonationDateTime { get; set; }
         public CollectBloodDonorDetailMV DonorDetails { get; set; }
     }

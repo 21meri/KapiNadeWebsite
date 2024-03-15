@@ -23,9 +23,14 @@ namespace KapiNadeApp.Controllers
             {
                 return RedirectToAction("Login", "Home");
             }
+
+            int bloodbankID = 0;
+            string bloodbankid = Convert.ToString(Session["BloodBankID"]);
+            int.TryParse(bloodbankid, out bloodbankID);
+         
+
+
             var list = new List<BloodStockMV>();
-            var bloodbankID = 0;
-            int.TryParse(Convert.ToString(Session["BloodBankID"]), out bloodbankID);
             var stocklist = DB.BloodStockTables.Where(b => b.BloodBankID == bloodbankID);
 
             foreach(var stock in stocklist)
