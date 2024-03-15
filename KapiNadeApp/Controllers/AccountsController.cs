@@ -55,5 +55,21 @@ namespace KapiNadeApp.Controllers
             DB.SaveChanges();
             return RedirectToAction("AllNewUserRequests");
         }
+
+        public ActionResult AddNewDonorByBloodBank()
+        {
+            var collectbloodMV = new CollectBloodMV();
+            return View(collectbloodMV);
+        }
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+
+        public ActionResult AddNewDonorByBloodBank(CollectBloodMV collectBloodMV)
+        {
+            return RedirectToAction("BloodStock", "BloodBank");
+            //return View(collectBloodMV);
+        }
+
+
     }
 }

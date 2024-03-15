@@ -200,48 +200,60 @@
                 </div> <!-- end .col-sm-12  -->
 
             </div> <!-- end .row  -->
+            @{ 
+                int usertypeid = 0;
+                string sessionusertype = Convert.ToString(Session["UserTypeID"]);
+              
 
+                int.TryParse(sessionusertype, out usertypeid);
+          
 
             <div class="row">
-            @foreach (var item in Model)
-            {
-                <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
-                    <div class="event-latest">
-                        <div class="row">
+                @foreach (var item in Model)
+                {
+                    <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                        <div class="event-latest">
+                            <div class="row">
 
-                            <div class="col-lg-5 col-md-5 hidden-sm hidden-xs">
-                                <div class="event-latest-thumbnail">
-                                    <a href="#">
-                                        <img src="@Url.Content(item.CampaignPhoto)" alt="">
-                                    </a>
-                                </div>
-                            </div> <!--  col-sm-5  -->
-
-                            <div class="col-lg-7 col-md-7 col-sm-12 col-xs-12">
-                                <div class="event-details">
-                                    <a class="latest-date" href="#"> @item.CampaignDate.ToString("dd MMMM, yyyy ")</a>
-                                    <h4 class="event-latest-title">
-                                        <a href="#">@item.CampaignTitle</a>
-                                    </h4>
-                                    <p>@item.CampaignDetails</p>
-                                    <div class="event-latest-details">
-                                        <a class="author" href="#"><i class="fa fa-clock-o" aria-hidden="true"></i> @item.StartTime - @item.EndTime</a>
-                                        <a class="comments" href="#"> <i class="fa fa-map-marker" aria-hidden="true"></i> @item.Location</a>
+                                <div class="col-lg-5 col-md-5 hidden-sm hidden-xs">
+                                    <div class="event-latest-thumbnail">
+                                        <a href="#">
+                                            <img src="@Url.Content(item.CampaignPhoto)" alt="">
+                                        </a>
                                     </div>
-                                </div>
-                            </div> <!--  col-sm-7  -->
+                                </div> <!--  col-sm-5  -->
+
+                                <div class="col-lg-7 col-md-7 col-sm-12 col-xs-12">
+                                    <div class="event-details">
+                                        <a class="latest-date" href="#"> @item.CampaignDate.ToString("dd MMMM, yyyy ")</a>
+                                        <h4 class="event-latest-title">
+                                            <a href="#">@item.CampaignTitle</a>
+                                        </h4>
+                                        @if (usertypeid != 5)
+                                        {
+                                            <p>@item.CampaignDetails</p>}
+                                        <div class="event-latest-details">
+                                            <a class="author" href="#"><i class="fa fa-clock-o" aria-hidden="true"></i> @item.StartTime - @item.EndTime</a>
+                                            <a class="comments" href="#"> <i class="fa fa-map-marker" aria-hidden="true"></i> @(item.Location ==null ? "No location" : item.Location)</a>
+                                        </div>
+                                        @if (usertypeid == 5)
+                                        {
+                                            <a href="@Url.Content("~/BloodBank/BloodStock")" class="btn btn-theme">Collect blood</a>
+                                        }
+                                    </div>
+                                </div> <!--  col-sm-7  -->
+
+                            </div>
 
                         </div>
+                    </div> <!--  col-sm-6  -->
+                }
 
-                    </div>
-                </div> <!--  col-sm-6  -->
-            }
 
-                
 
-                        </div>
-
-                    </div>
+            </div>
+                }
+        </div>
                 </div> <!--  col-sm-6  -->
 
             </div> <!--  end .row  -->
