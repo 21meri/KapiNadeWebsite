@@ -24,141 +24,164 @@
         <div class="contact-form-block">
 
             <h2 class="contact-title">Enter Collected BloodDetails</h2>
-
             <div>
-                @using (Html.BeginForm("AddNewDonorByBloodBank", "Accounts", FormMethod.Post))
-                {
-                    @Html.AntiForgeryToken()
-                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+                <div class="row">
+                    @using (Html.BeginForm("AddNewDonorByBloodBank", "Accounts", FormMethod.Post))
+                    {
+                        @Html.AntiForgeryToken()
+                        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                        <div class="col-md-6">
 
 
 
 
+                            <h4>Edit Donor Details</h4>
+                            <hr />
+                            <dl class="dl-horizontal">
+                                <dt>
+                                    Donor name
+                                </dt>
 
-                    <h4>Edit Donor Details</h4>
-                    <hr />
-                    <dl class="dl-horizontal">
-                        <dt>
-                            Donor name
-                        </dt>
+                                <dd>
+                                    @Html.EditorFor(model => model.DonorDetails.Name, new { htmlAttributes = new { @class = "form-control" } })
+                                    @Html.ValidationMessageFor(model => model.DonorDetails.Name, "", new { @class = "text-danger" })
+                                </dd>
 
-                        <dd>
-                            @Html.EditorFor(model => model.DonorDetails.Name, new { htmlAttributes = new { @class = "form-control" } })
-                            @Html.ValidationMessageFor(model => model.DonorDetails.Name, "", new { @class = "text-danger" })
-                        </dd>
+                                <dt>
+                                    Donor Email
+                                </dt>
 
-                        <dt>
-                            Donor Email
-                        </dt>
-
-                        <dd>
-                            @Html.EditorFor(model => model.DonorDetails.Email, new { htmlAttributes = new { @class = "form-control" } })
-                            @Html.ValidationMessageFor(model => model.DonorDetails.Email, "", new { @class = "text-danger" })
-                        </dd>
-
+                                <dd>
+                                    @Html.EditorFor(model => model.DonorDetails.Email, new { htmlAttributes = new { @class = "form-control" } })
+                                    @Html.ValidationMessageFor(model => model.DonorDetails.Email, "", new { @class = "text-danger" })
+                                </dd>
 
 
-                        <dt>
-                            Donor surname
-                        </dt>
 
-                        <dd>
-                            @Html.EditorFor(model => model.DonorDetails.Surname, new { htmlAttributes = new { @class = "form-control" } })
-                            @Html.ValidationMessageFor(model => model.DonorDetails.Surname, "", new { @class = "text-danger" })
-                        </dd>
+                                <dt>
+                                    Donor surname
+                                </dt>
 
-                    
-
-                        <dt>
-                            Donor contact number
-                        </dt>
-
-                        <dd>
-                            @Html.EditorFor(model => model.DonorDetails.ContactNumber, new { htmlAttributes = new { @class = "form-control" } })
-                            @Html.ValidationMessageFor(model => model.DonorDetails.ContactNumber, "", new { @class = "text-danger" })
-                        </dd>
-
-                        <dt>
-                            Donor card number
-                        </dt>
-
-                        <dd>
-                            @Html.EditorFor(model => model.DonorDetails.CardNumber, new { htmlAttributes = new { @class = "form-control" } })
-                            @Html.ValidationMessageFor(model => model.DonorDetails.CardNumber, "", new { @class = "text-danger" })
-                        </dd>
-
-                        <dt>
-                            Donor last donation date
-                        </dt>
-
-                        <dd>
-                            @Html.EditorFor(model => model.DonorDetails.LastDonationDate, new { htmlAttributes = new { @class = "form-control" } })
-                            @Html.ValidationMessageFor(model => model.DonorDetails.LastDonationDate, "", new { @class = "text-danger" })
-                        </dd>
+                                <dd>
+                                    @Html.EditorFor(model => model.DonorDetails.Surname, new { htmlAttributes = new { @class = "form-control" } })
+                                    @Html.ValidationMessageFor(model => model.DonorDetails.Surname, "", new { @class = "text-danger" })
+                                </dd>
 
 
-                        <dt>
-                            Donor address
-                        </dt>
 
-                        <dd>
-                            @Html.EditorFor(model => model.DonorDetails.Address, new { htmlAttributes = new { @class = "form-control" } })
-                            @Html.ValidationMessageFor(model => model.DonorDetails.Address, "", new { @class = "text-danger" })
-                        </dd>
+                                <dt>
+                                    Donor contact number
+                                </dt>
 
-                        <dt>
-                            Donor city
-                        </dt>
+                                <dd>
+                                    @Html.EditorFor(model => model.DonorDetails.ContactNumber, new { htmlAttributes = new { @class = "form-control" } })
+                                    @Html.ValidationMessageFor(model => model.DonorDetails.ContactNumber, "", new { @class = "text-danger" })
+                                </dd>
 
-                        <dd>
-                            <div class="select-style">
-                                @Html.DropDownList("CityID", null, "--Your City--", new { @class = "form-control" })
-                                @Html.ValidationMessageFor(model => model.CityID, "", new { @class = "text-danger" })
-                            </div>
-                        </dd>
+                                <dt>
+                                    Donor card number
+                                </dt>
 
-                        <dt>
-                            Donor gender
-                        </dt>
+                                <dd>
+                                    @Html.EditorFor(model => model.DonorDetails.CardNumber, new { htmlAttributes = new { @class = "form-control" } })
+                                    @Html.ValidationMessageFor(model => model.DonorDetails.CardNumber, "", new { @class = "text-danger" })
+                                </dd>
 
-                        <dd>
-                            <div class="select-style">
-                                @Html.DropDownList("GenderID", null, "--Select Gender--", new { @class = "form-control" })
-                                @Html.ValidationMessageFor(model => model.GenderID, "", new { @class = "text-danger" })
-                            </div>
-                        </dd>
-                    </dl>
+                                <dt>
+                                    Donor last donation date
+                                </dt>
+
+                                <dd>
+                                    @Html.EditorFor(model => model.DonorDetails.LastDonationDate, new { htmlAttributes = new { @class = "form-control" } })
+                                    @Html.ValidationMessageFor(model => model.DonorDetails.LastDonationDate, "", new { @class = "text-danger" })
+                                </dd>
 
 
-                    <hr />
-                    <h4>Enter Stock Details</h4>
-                    <hr/>
-                    <dl class="dl-horizontal">
-                        <dt>
-                            Blood group
-                        </dt>
+                                <dt>
+                                    Donor address
+                                </dt>
 
-                        <dd>
-                            <div class="select-style">
-                                @Html.DropDownList("BloodGroupID", null, "--Select BloodGroup--", new { @class = "form-control" })
-                                @Html.ValidationMessageFor(model => model.BloodGroupID, "", new { @class = "text-danger" })
-                            </div>
-                        </dd>
+                                <dd>
+                                    @Html.EditorFor(model => model.DonorDetails.Address, new { htmlAttributes = new { @class = "form-control" } })
+                                    @Html.ValidationMessageFor(model => model.DonorDetails.Address, "", new { @class = "text-danger" })
+                                </dd>
 
-                        <dt>
-                            Enter Quantity
-                        </dt>
+                                <dt>
+                                    Donor city
+                                </dt>
 
-                        <dd>
-                            @Html.EditorFor(model => model.Quantity, new { htmlAttributes = new { @class = "form-control" } })
-                            @Html.ValidationMessageFor(model => model.Quantity, "", new { @class = "text-danger" })
-                        </dd>
-                    </dl>
+                                <dd>
+                                    <div class="select-style">
+                                        @Html.DropDownList("CityID", null, "--Your City--", new { @class = "form-control" })
+                                        @Html.ValidationMessageFor(model => model.CityID, "", new { @class = "text-danger" })
+                                    </div>
+                                </dd>
 
-                }
+                                <dt>
+                                    Donor gender
+                                </dt>
 
+                                <dd>
+                                    <div class="select-style">
+                                        @Html.DropDownList("GenderID", null, "--Select Gender--", new { @class = "form-control" })
+                                        @Html.ValidationMessageFor(model => model.GenderID, "", new { @class = "text-danger" })
+                                    </div>
+                                </dd>
+                            </dl>
+
+
+                            <hr />
+                        </div>
+                        <div class="col-md-6">
+                            <h4>Enter Stock Details</h4>
+                            <hr />
+                            <dl class="dl-horizontal">
+                                <dt>
+                                    Blood group
+                                </dt>
+
+                                <dd>
+                                    <div class="select-style">
+                                        @Html.DropDownList("BloodGroupID", null, "--Select BloodGroup--", new { @class = "form-control" })
+                                        @Html.ValidationMessageFor(model => model.BloodGroupID, "", new { @class = "text-danger" })
+                                    </div>
+                                </dd>
+
+                                <dt>
+                                    Enter Quantity
+                                </dt>
+
+                                <dd>
+                                    @Html.EditorFor(model => model.Quantity, new { htmlAttributes = new { @class = "form-control" } })
+                                    @Html.ValidationMessageFor(model => model.Quantity, "", new { @class = "text-danger" })
+                                </dd>
+
+                                <dt>
+
+
+                                </dt>
+                                <dd>
+                                   
+                                    
+
+                                    <div class="row">
+                                        <div class="col-md-8" align="right">
+                                            <input type="submit" value="Submit" class="btn btn-custom" />
+                                        </div>
+                                    </div>
+
+                                </dd>
+                            </dl>
+                        </div>
+
+                    }
+
+
+                </div>
 
             </div>
         </div>
+
     </div>
 }

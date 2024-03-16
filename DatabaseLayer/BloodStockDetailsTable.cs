@@ -23,8 +23,8 @@ namespace DatabaseLayer
         public System.DateTime DonationDateTime { get; set; }
     
         public virtual BloodGroupsTable BloodGroupsTable { get; set; }
-        public virtual BloodStockTable BloodStockTable { get; set; }
         public virtual CampaignTable CampaignTable { get; set; }
         public virtual DonorTable DonorTable { get; set; }
+        public virtual BloodStockTable BloodStockTable { get; set; }
     }
 }

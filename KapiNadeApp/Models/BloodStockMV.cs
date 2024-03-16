@@ -17,9 +17,7 @@ namespace KapiNadeApp.Models
         public string BloodBank { get; set; }
         [Display(Name="Is ready")]
         public string Status { get; set; }
-        public int Quantity { get; set; }
-        [DataType(DataType.Date)]
-        public System.DateTime BestBefore { get; set; }
+        public double Quantity { get; set; }
 
     }
 }

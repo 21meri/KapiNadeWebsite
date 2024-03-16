@@ -16,7 +16,7 @@ namespace KapiNadeApp.Controllers
         {
             if (string.IsNullOrEmpty(Convert.ToString(Session["Username"])))
             {
-                return RedirectToAction("Login","Home");
+                return RedirectToAction("Login", "Home");
             }
             var users = DB.UserTables.Where(u => u.AccountStatusID == 1).ToList();
             return View(users);
@@ -66,7 +66,7 @@ namespace KapiNadeApp.Controllers
 
             var collectbloodMV = new CollectBloodMV();
 
-            ViewBag.BloodGroupID = new SelectList(DB.BloodGroupsTables.ToList(), "BloodGroupID", "BloodGroup","0");
+            ViewBag.BloodGroupID = new SelectList(DB.BloodGroupsTables.ToList(), "BloodGroupID", "BloodGroup", "0");
             ViewBag.CityID = new SelectList(DB.CityTables.ToList(), "CityID", "City", "0");
             ViewBag.GenderID = new SelectList(DB.GenderTables.ToList(), "GenderID", "Gender", "0");
 
@@ -87,71 +87,101 @@ namespace KapiNadeApp.Controllers
             int bloodbankID = 0;
             string bloodbankid = Convert.ToString(Session["BloodBankID"]);
             int.TryParse(bloodbankid, out bloodbankID);
+            var currentdate = DateTime.Now.Date;
 
+            var currentcampaign = DB.CampaignTables.Where(c => c.CampaignDate == currentdate && c.BloodBankID == bloodbankID).FirstOrDefault();
 
-            var currentcampaign = DB.CampaignTables.Where(c => c.CampaignDate.Date == DateTime.Now.Date && c.BloodBankID == bloodbankID).FirstOrDefault();
-          
 
 
             if (ModelState.IsValid)
             {
-                var checkdonor = DB.DonorTables.Where(d => d.CardNumber.Trim().Replace("-", "") == collectBloodMV.DonorDetails.CardNumber.Trim().Replace("-", "")).FirstOrDefault();
-                if (checkdonor == null)
+                using (var transaction = DB.Database.BeginTransaction())
                 {
-                    var user = new UserTable();
-                    user.Username = collectBloodMV.DonorDetails.Username.Trim();
-                    user.Password = "abcabc";
-                    user.Email = collectBloodMV.DonorDetails.Email;
-                    user.AccountStatusID = 2;
-                    user.UserTypeID = 2;
-                    DB.UserTables.Add(user);
-                    DB.SaveChanges();
+                    try
+                    {
 
-                    var donor = new DonorTable();
-                    donor.Name = collectBloodMV.DonorDetails.Name;
-                    donor.Surname = collectBloodMV.DonorDetails.Surname;
-                    donor.BloodGroupID = collectBloodMV.BloodGroupID;
-                    donor.Address = collectBloodMV.DonorDetails.Address;
-                    donor.CardNumber = collectBloodMV.DonorDetails.CardNumber;
-                    donor.GenderID = collectBloodMV.GenderID;
-                    donor.LastDonationDate = DateTime.Now;
-                    donor.ContactNumber = collectBloodMV.DonorDetails.ContactNumber;
-                    donor.CityID = collectBloodMV.CityID;
-                    donor.UserID = user.UserID;
-                    DB.DonorTables.Add(donor);
-                    DB.SaveChanges();
-                    checkdonor = DB.DonorTables.Where(d => d.CardNumber.Trim().Replace("-", "") == collectBloodMV.DonorDetails.CardNumber.Trim().Replace("-", "")).FirstOrDefault();
+                        var checkdonor = DB.DonorTables.Where(d => d.CardNumber.Trim().Replace("-", "") == collectBloodMV.DonorDetails.CardNumber.Trim().Replace("-", "")).FirstOrDefault();
+                        if (checkdonor == null)
+                        {
+                            var user = new UserTable();
+                            user.Username = collectBloodMV.DonorDetails.Name.Trim();
+                            user.Password = "abcabc";
+                            user.Email = collectBloodMV.DonorDetails.Email;
+                            user.AccountStatusID = 2;
+                            user.UserTypeID = 2;
+                            DB.UserTables.Add(user);
+                            DB.SaveChanges();
+
+                            var donor = new DonorTable();
+                            donor.Name = collectBloodMV.DonorDetails.Name;
+                            donor.Surname = collectBloodMV.DonorDetails.Surname;
+                            donor.BloodGroupID = collectBloodMV.BloodGroupID;
+                            donor.Address = collectBloodMV.DonorDetails.Address;
+                            donor.CardNumber = collectBloodMV.DonorDetails.CardNumber;
+                            donor.GenderID = collectBloodMV.GenderID;
+                            donor.LastDonationDate = DateTime.Now;
+                            donor.ContactNumber = collectBloodMV.DonorDetails.ContactNumber;
+                            donor.CityID = collectBloodMV.CityID;
+                            donor.UserID = user.UserID;
+                            DB.DonorTables.Add(donor);
+                            DB.SaveChanges();
+                            checkdonor = DB.DonorTables.Where(d => d.CardNumber.Trim().Replace("-", "") == collectBloodMV.DonorDetails.CardNumber.Trim().Replace("-", "")).FirstOrDefault();
+
+                        }
+
+                        var checkbloodgroupstock = DB.BloodStockTables.Where(s => s.BloodBankID == bloodbankID && s.BloodGroupID == collectBloodMV.BloodGroupID).FirstOrDefault();
+                        if (checkbloodgroupstock == null)
+                        {
+                            var bloodstock = new BloodStockTable();
+
+
+                            bloodstock.BloodGroupID = collectBloodMV.BloodGroupID;
+                            bloodstock.BloodBankID = bloodbankID;
+                            bloodstock.Status = true;
+                            bloodstock.Quantity = 0;
+                            DB.BloodStockTables.Add(bloodstock);
+                            DB.SaveChanges();
+
+                            checkbloodgroupstock = DB.BloodStockTables.Where(s => s.BloodBankID == bloodbankID && s.BloodGroupID == collectBloodMV.BloodGroupID).FirstOrDefault();
+
+                        }
+                        checkbloodgroupstock.Quantity += collectBloodMV.Quantity;
+                        DB.Entry(checkbloodgroupstock).State = System.Data.Entity.EntityState.Modified;
+                        DB.SaveChanges();
+
+                        var collectblooddetails = new BloodStockDetailsTable();
+                        collectblooddetails.BloodStockID = checkbloodgroupstock.BloodStockID;
+                        collectblooddetails.BloodGroupID = collectBloodMV.BloodGroupID;
+                        collectblooddetails.CampaignID = currentcampaign.CampaignID;
+                        collectblooddetails.Quantity = collectBloodMV.Quantity;
+                        collectblooddetails.DonorID = checkdonor.DonorID;
+                        collectblooddetails.DonationDateTime = DateTime.Now;
+                        DB.BloodStockDetailsTables.Add(collectblooddetails);
+                        DB.SaveChanges();
+                        transaction.Commit();
+                        return RedirectToAction("BloodStock", "BloodBank");
+                    }
+                    catch
+                    {
+                        ModelState.AddModelError(string.Empty, "Please provide correct information!");
+                        transaction.Rollback();
+                    }
+
 
                 }
 
-                var checkbloodgroupstock = DB.BloodStockTables.Where(s => s.BloodBankID == bloodbankID && s.BloodGroupID == collectBloodMV.BloodGroupID).FirstOrDefault();
-                if (checkbloodgroupstock == null)
-                {
-                    var bloodstock=new BloodStockTable();
-
-
-                    bloodstock.BloodGroupID = collectBloodMV.BloodGroupID;
-                    bloodstock.BloodBankID = bloodbankID;
-                    bloodstock.Status = true;
-                    bloodstock.Quantity = 0;
-                    bloodstock.BestBefore = DateTime.Now;
-                    DB.BloodStockTables.Add(bloodstock);
-                    DB.SaveChanges();
-
-                    checkbloodgroupstock = DB.BloodStockTables.Where(s => s.BloodBankID == bloodbankID && s.BloodGroupID == collectBloodMV.BloodGroupID).FirstOrDefault();
-
-                }
-                checkbloodgroupstock.Quantity += (int)collectBloodMV.Quantity;
             }
+            else
+            {
+                ModelState.AddModelError(string.Empty, "Please provide donor full details!");
 
-            return RedirectToAction("BloodStock", "BloodBank");
+            }
 
             ViewBag.BloodGroupID = new SelectList(DB.BloodGroupsTables.ToList(), "BloodGroupID", "BloodGroup", collectBloodMV.BloodGroupID);
             ViewBag.CityID = new SelectList(DB.CityTables.ToList(), "CityID", "City", collectBloodMV.CityID);
             ViewBag.GenderID = new SelectList(DB.GenderTables.ToList(), "GenderID", "Gender", collectBloodMV.GenderID);
-            //return View(collectBloodMV);
+            return View(collectBloodMV);
+
         }
-
-
     }
 }

@@ -27,7 +27,6 @@ namespace DatabaseLayer
     
         public virtual DbSet<BloodBankTable> BloodBankTables { get; set; }
         public virtual DbSet<BloodGroupsTable> BloodGroupsTables { get; set; }
-        public virtual DbSet<BloodStockTable> BloodStockTables { get; set; }
         public virtual DbSet<CityTable> CityTables { get; set; }
         public virtual DbSet<DonorTable> DonorTables { get; set; }
         public virtual DbSet<GenderTable> GenderTables { get; set; }
@@ -40,5 +39,6 @@ namespace DatabaseLayer
         public virtual DbSet<UserTypeTable> UserTypeTables { get; set; }
         public virtual DbSet<BloodStockDetailsTable> BloodStockDetailsTables { get; set; }
         public virtual DbSet<CampaignTable> CampaignTables { get; set; }
+        public virtual DbSet<BloodStockTable> BloodStockTables { get; set; }
     }
 }

@@ -24,8 +24,7 @@ namespace DatabaseLayer
         public int BloodGroupID { get; set; }
         public int BloodBankID { get; set; }
         public bool Status { get; set; }
-        public int Quantity { get; set; }
-        public System.DateTime BestBefore { get; set; }
+        public double Quantity { get; set; }
     
         public virtual BloodBankTable BloodBankTable { get; set; }
         public virtual BloodGroupsTable BloodGroupsTable { get; set; }

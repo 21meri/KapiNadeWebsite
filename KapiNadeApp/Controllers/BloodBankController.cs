@@ -46,7 +46,6 @@ namespace KapiNadeApp.Controllers
                 bloodStockmv.BloodBank = bloodbank;
                 bloodStockmv.Status = stock.Status == true ? "Ready for use" : "Not ready for use";
                 bloodStockmv.Quantity = stock.Quantity;
-                bloodStockmv.BestBefore = stock.BestBefore;
                 list.Add(bloodStockmv);
 
             }

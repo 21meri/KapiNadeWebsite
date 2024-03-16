@@ -51,8 +51,7 @@
           <Property Name="BloodGroupID" Type="int" Nullable="false" />
           <Property Name="BloodBankID" Type="int" Nullable="false" />
           <Property Name="Status" Type="bit" Nullable="false" />
-          <Property Name="Quantity" Type="int" Nullable="false" />
-          <Property Name="BestBefore" Type="date" Nullable="false" />
+          <Property Name="Quantity" Type="float" Nullable="false" />
         </EntityType>
         <EntityType Name="CampaignTable">
           <Key>
@@ -614,11 +613,11 @@
           <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="CityID" Type="Int32" Nullable="false" />
           <NavigationProperty Name="CityTable" Relationship="Self.FK_BloodBankTable_CityTable" FromRole="BloodBankTable" ToRole="CityTable" />
-          <NavigationProperty Name="BloodStockTables" Relationship="Self.FK_BloodStockTable_BloodBankTable" FromRole="BloodBankTable" ToRole="BloodStockTable" />
           <NavigationProperty Name="RequestTables" Relationship="Self.FK_RequestTable_BloodBankTable" FromRole="BloodBankTable" ToRole="RequestTable" />
           <Property Name="UserID" Type="Int32" Nullable="false" />
           <NavigationProperty Name="UserTable" Relationship="KapiNadeDBModel.FK_BloodBankTable_UserTable" FromRole="BloodBankTable" ToRole="UserTable" />
           <NavigationProperty Name="CampaignTables" Relationship="KapiNadeDBModel.FK_CampaignTable_BloodBankTable" FromRole="BloodBankTable" ToRole="CampaignTable" />
+          <NavigationProperty Name="BloodStockTables" Relationship="KapiNadeDBModel.FK_BloodStockTable_BloodBankTable" FromRole="BloodBankTable" ToRole="BloodStockTable" />
         </EntityType>
         <EntityType Name="BloodGroupsTable">
           <Key>
@@ -626,24 +625,10 @@
           </Key>
           <Property Name="BloodGroupID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="BloodGroup" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
-          <NavigationProperty Name="BloodStockTables" Relationship="Self.FK_BloodStockTable_BloodGroupsTable" FromRole="BloodGroupsTable" ToRole="BloodStockTable" />
           <NavigationProperty Name="DonorTables" Relationship="Self.FK_DonorTable_BloodGroupsTable" FromRole="BloodGroupsTable" ToRole="DonorTable" />
           <NavigationProperty Name="SeekerTables" Relationship="Self.FK_SeekerTable_BloodGroupsTable" FromRole="BloodGroupsTable" ToRole="SeekerTable" />
           <NavigationProperty Name="BloodStockDetailsTables" Relationship="KapiNadeDBModel.FK_BloodStockDetailsTable_BloodGroupsTable" FromRole="BloodGroupsTable" ToRole="BloodStockDetailsTable" />
-        </EntityType>
-        <EntityType Name="BloodStockTable">
-          <Key>
-            <PropertyRef Name="BloodStockID" />
-          </Key>
-          <Property Name="BloodStockID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="BloodGroupID" Type="Int32" Nullable="false" />
-          <Property Name="BloodBankID" Type="Int32" Nullable="false" />
-          <Property Name="Status" Type="Boolean" Nullable="false" />
-          <Property Name="Quantity" Type="Int32" Nullable="false" />
-          <Property Name="BestBefore" Type="DateTime" Nullable="false" Precision="0" />
-          <NavigationProperty Name="BloodBankTable" Relationship="Self.FK_BloodStockTable_BloodBankTable" FromRole="BloodStockTable" ToRole="BloodBankTable" />
-          <NavigationProperty Name="BloodGroupsTable" Relationship="Self.FK_BloodStockTable_BloodGroupsTable" FromRole="BloodStockTable" ToRole="BloodGroupsTable" />
-          <NavigationProperty Name="BloodStockDetailsTables" Relationship="KapiNadeDBModel.FK_BloodStockDetailsTable_BloodStockTable" FromRole="BloodStockTable" ToRole="BloodStockDetailsTable" />
+          <NavigationProperty Name="BloodStockTables" Relationship="KapiNadeDBModel.FK_BloodStockTable_BloodGroupsTable" FromRole="BloodGroupsTable" ToRole="BloodStockTable" />
         </EntityType>
         <EntityType Name="CityTable">
           <Key>
@@ -763,18 +748,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_BloodStockTable_BloodBankTable">
-          <End Role="BloodBankTable" Type="Self.BloodBankTable" Multiplicity="1" />
-          <End Role="BloodStockTable" Type="Self.BloodStockTable" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="BloodBankTable">
-              <PropertyRef Name="BloodBankID" />
-            </Principal>
-            <Dependent Role="BloodStockTable">
-              <PropertyRef Name="BloodBankID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_RequestTable_BloodBankTable">
           <End Role="BloodBankTable" Type="Self.BloodBankTable" Multiplicity="1" />
           <End Role="RequestTable" Type="Self.RequestTable" Multiplicity="*" />
@@ -784,18 +757,6 @@
             </Principal>
             <Dependent Role="RequestTable">
               <PropertyRef Name="BloodBankID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_BloodStockTable_BloodGroupsTable">
-          <End Role="BloodGroupsTable" Type="Self.BloodGroupsTable" Multiplicity="1" />
-          <End Role="BloodStockTable" Type="Self.BloodStockTable" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="BloodGroupsTable">
-              <PropertyRef Name="BloodGroupID" />
-            </Principal>
-            <Dependent Role="BloodStockTable">
-              <PropertyRef Name="BloodGroupID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -922,7 +883,6 @@
         <EntityContainer Name="KapiNadeDBEntities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="BloodBankTables" EntityType="Self.BloodBankTable" />
           <EntitySet Name="BloodGroupsTables" EntityType="Self.BloodGroupsTable" />
-          <EntitySet Name="BloodStockTables" EntityType="Self.BloodStockTable" />
           <EntitySet Name="CityTables" EntityType="Self.CityTable" />
           <EntitySet Name="DonorTables" EntityType="Self.DonorTable" />
           <EntitySet Name="GenderTables" EntityType="Self.GenderTable" />
@@ -934,17 +894,9 @@
             <End Role="CityTable" EntitySet="CityTables" />
             <End Role="BloodBankTable" EntitySet="BloodBankTables" />
           </AssociationSet>
-          <AssociationSet Name="FK_BloodStockTable_BloodBankTable" Association="Self.FK_BloodStockTable_BloodBankTable">
-            <End Role="BloodBankTable" EntitySet="BloodBankTables" />
-            <End Role="BloodStockTable" EntitySet="BloodStockTables" />
-          </AssociationSet>
           <AssociationSet Name="FK_RequestTable_BloodBankTable" Association="Self.FK_RequestTable_BloodBankTable">
             <End Role="BloodBankTable" EntitySet="BloodBankTables" />
             <End Role="RequestTable" EntitySet="RequestTables" />
-          </AssociationSet>
-          <AssociationSet Name="FK_BloodStockTable_BloodGroupsTable" Association="Self.FK_BloodStockTable_BloodGroupsTable">
-            <End Role="BloodGroupsTable" EntitySet="BloodGroupsTables" />
-            <End Role="BloodStockTable" EntitySet="BloodStockTables" />
           </AssociationSet>
           <AssociationSet Name="FK_DonorTable_BloodGroupsTable" Association="Self.FK_DonorTable_BloodGroupsTable">
             <End Role="BloodGroupsTable" EntitySet="BloodGroupsTables" />
@@ -1027,16 +979,25 @@
             <End Role="BloodGroupsTable" EntitySet="BloodGroupsTables" />
             <End Role="BloodStockDetailsTable" EntitySet="BloodStockDetailsTables" />
           </AssociationSet>
-          <AssociationSet Name="FK_BloodStockDetailsTable_BloodStockTable" Association="KapiNadeDBModel.FK_BloodStockDetailsTable_BloodStockTable">
-            <End Role="BloodStockTable" EntitySet="BloodStockTables" />
-            <End Role="BloodStockDetailsTable" EntitySet="BloodStockDetailsTables" />
-          </AssociationSet>
           <AssociationSet Name="FK_BloodStockDetailsTable_CampaignTable" Association="KapiNadeDBModel.FK_BloodStockDetailsTable_CampaignTable">
             <End Role="CampaignTable" EntitySet="CampaignTables" />
             <End Role="BloodStockDetailsTable" EntitySet="BloodStockDetailsTables" />
           </AssociationSet>
           <AssociationSet Name="FK_BloodStockDetailsTable_DonorTable" Association="KapiNadeDBModel.FK_BloodStockDetailsTable_DonorTable">
             <End Role="DonorTable" EntitySet="DonorTables" />
+            <End Role="BloodStockDetailsTable" EntitySet="BloodStockDetailsTables" />
+          </AssociationSet>
+          <EntitySet Name="BloodStockTables" EntityType="KapiNadeDBModel.BloodStockTable" />
+          <AssociationSet Name="FK_BloodStockTable_BloodBankTable" Association="KapiNadeDBModel.FK_BloodStockTable_BloodBankTable">
+            <End Role="BloodBankTable" EntitySet="BloodBankTables" />
+            <End Role="BloodStockTable" EntitySet="BloodStockTables" />
+          </AssociationSet>
+          <AssociationSet Name="FK_BloodStockTable_BloodGroupsTable" Association="KapiNadeDBModel.FK_BloodStockTable_BloodGroupsTable">
+            <End Role="BloodGroupsTable" EntitySet="BloodGroupsTables" />
+            <End Role="BloodStockTable" EntitySet="BloodStockTables" />
+          </AssociationSet>
+          <AssociationSet Name="FK_BloodStockDetailsTable_BloodStockTable" Association="KapiNadeDBModel.FK_BloodStockDetailsTable_BloodStockTable">
+            <End Role="BloodStockTable" EntitySet="BloodStockTables" />
             <End Role="BloodStockDetailsTable" EntitySet="BloodStockDetailsTables" />
           </AssociationSet>
           </EntityContainer>
@@ -1169,9 +1130,9 @@
           <Property Name="DonorID" Type="Int32" Nullable="false" />
           <Property Name="DonationDateTime" Type="DateTime" Nullable="false" Precision="3" />
           <NavigationProperty Name="BloodGroupsTable" Relationship="KapiNadeDBModel.FK_BloodStockDetailsTable_BloodGroupsTable" FromRole="BloodStockDetailsTable" ToRole="BloodGroupsTable" />
-          <NavigationProperty Name="BloodStockTable" Relationship="KapiNadeDBModel.FK_BloodStockDetailsTable_BloodStockTable" FromRole="BloodStockDetailsTable" ToRole="BloodStockTable" />
           <NavigationProperty Name="CampaignTable" Relationship="KapiNadeDBModel.FK_BloodStockDetailsTable_CampaignTable" FromRole="BloodStockDetailsTable" ToRole="CampaignTable" />
           <NavigationProperty Name="DonorTable" Relationship="KapiNadeDBModel.FK_BloodStockDetailsTable_DonorTable" FromRole="BloodStockDetailsTable" ToRole="DonorTable" />
+          <NavigationProperty Name="BloodStockTable" Relationship="KapiNadeDBModel.FK_BloodStockDetailsTable_BloodStockTable" FromRole="BloodStockDetailsTable" ToRole="BloodStockTable" />
         </EntityType>
         <EntityType Name="CampaignTable">
           <Key>
@@ -1213,18 +1174,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_BloodStockDetailsTable_BloodStockTable">
-          <End Type="KapiNadeDBModel.BloodStockTable" Role="BloodStockTable" Multiplicity="1" />
-          <End Type="KapiNadeDBModel.BloodStockDetailsTable" Role="BloodStockDetailsTable" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="BloodStockTable">
-              <PropertyRef Name="BloodStockID" />
-            </Principal>
-            <Dependent Role="BloodStockDetailsTable">
-              <PropertyRef Name="BloodStockID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_BloodStockDetailsTable_CampaignTable">
           <End Type="KapiNadeDBModel.CampaignTable" Role="CampaignTable" Multiplicity="1" />
           <End Type="KapiNadeDBModel.BloodStockDetailsTable" Role="BloodStockDetailsTable" Multiplicity="*" />
@@ -1246,6 +1195,55 @@
             </Principal>
             <Dependent Role="BloodStockDetailsTable">
               <PropertyRef Name="DonorID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="BloodStockTable">
+          <Key>
+            <PropertyRef Name="BloodStockID" />
+          </Key>
+          <Property Name="BloodStockID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="BloodGroupID" Type="Int32" Nullable="false" />
+          <Property Name="BloodBankID" Type="Int32" Nullable="false" />
+          <Property Name="Status" Type="Boolean" Nullable="false" />
+          <Property Name="Quantity" Type="Double" Nullable="false" />
+          <NavigationProperty Name="BloodBankTable" Relationship="KapiNadeDBModel.FK_BloodStockTable_BloodBankTable" FromRole="BloodStockTable" ToRole="BloodBankTable" />
+          <NavigationProperty Name="BloodGroupsTable" Relationship="KapiNadeDBModel.FK_BloodStockTable_BloodGroupsTable" FromRole="BloodStockTable" ToRole="BloodGroupsTable" />
+          <NavigationProperty Name="BloodStockDetailsTables" Relationship="KapiNadeDBModel.FK_BloodStockDetailsTable_BloodStockTable" FromRole="BloodStockTable" ToRole="BloodStockDetailsTable" />
+        </EntityType>
+        <Association Name="FK_BloodStockTable_BloodBankTable">
+          <End Type="KapiNadeDBModel.BloodBankTable" Role="BloodBankTable" Multiplicity="1" />
+          <End Type="KapiNadeDBModel.BloodStockTable" Role="BloodStockTable" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="BloodBankTable">
+              <PropertyRef Name="BloodBankID" />
+            </Principal>
+            <Dependent Role="BloodStockTable">
+              <PropertyRef Name="BloodBankID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_BloodStockTable_BloodGroupsTable">
+          <End Type="KapiNadeDBModel.BloodGroupsTable" Role="BloodGroupsTable" Multiplicity="1" />
+          <End Type="KapiNadeDBModel.BloodStockTable" Role="BloodStockTable" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="BloodGroupsTable">
+              <PropertyRef Name="BloodGroupID" />
+            </Principal>
+            <Dependent Role="BloodStockTable">
+              <PropertyRef Name="BloodGroupID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_BloodStockDetailsTable_BloodStockTable">
+          <End Type="KapiNadeDBModel.BloodStockTable" Role="BloodStockTable" Multiplicity="1" />
+          <End Type="KapiNadeDBModel.BloodStockDetailsTable" Role="BloodStockDetailsTable" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="BloodStockTable">
+              <PropertyRef Name="BloodStockID" />
+            </Principal>
+            <Dependent Role="BloodStockDetailsTable">
+              <PropertyRef Name="BloodStockID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -1273,18 +1271,6 @@
               <MappingFragment StoreEntitySet="BloodGroupsTable">
                 <ScalarProperty Name="BloodGroupID" ColumnName="BloodGroupID" />
                 <ScalarProperty Name="BloodGroup" ColumnName="BloodGroup" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="BloodStockTables">
-            <EntityTypeMapping TypeName="KapiNadeDBModel.BloodStockTable">
-              <MappingFragment StoreEntitySet="BloodStockTable">
-                <ScalarProperty Name="BloodStockID" ColumnName="BloodStockID" />
-                <ScalarProperty Name="BloodGroupID" ColumnName="BloodGroupID" />
-                <ScalarProperty Name="BloodBankID" ColumnName="BloodBankID" />
-                <ScalarProperty Name="Status" ColumnName="Status" />
-                <ScalarProperty Name="Quantity" ColumnName="Quantity" />
-                <ScalarProperty Name="BestBefore" ColumnName="BestBefore" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -1428,6 +1414,17 @@
                 <ScalarProperty Name="CampaignDate" ColumnName="CampaignDate" />
                 <ScalarProperty Name="BloodBankID" ColumnName="BloodBankID" />
                 <ScalarProperty Name="CampaignID" ColumnName="CampaignID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="BloodStockTables">
+            <EntityTypeMapping TypeName="KapiNadeDBModel.BloodStockTable">
+              <MappingFragment StoreEntitySet="BloodStockTable">
+                <ScalarProperty Name="Quantity" ColumnName="Quantity" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="BloodBankID" ColumnName="BloodBankID" />
+                <ScalarProperty Name="BloodGroupID" ColumnName="BloodGroupID" />
+                <ScalarProperty Name="BloodStockID" ColumnName="BloodStockID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
