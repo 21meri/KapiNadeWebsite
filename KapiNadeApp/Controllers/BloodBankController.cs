@@ -63,6 +63,10 @@ namespace KapiNadeApp.Controllers
             int.TryParse(Convert.ToString(Session["BloodBankID"]), out bloodbankID);
 
             var allcampaigns = DB.CampaignTables.Where(c => c.BloodBankID == bloodbankID);
+            if(allcampaigns.Count() > 0)
+            {
+                allcampaigns = allcampaigns.OrderByDescending(o => o.CampaignID);
+            }
             return View(allcampaigns);
         }
 

@@ -129,37 +129,51 @@ namespace KapiNadeApp.Controllers
 
                         }
 
-                        var checkbloodgroupstock = DB.BloodStockTables.Where(s => s.BloodBankID == bloodbankID && s.BloodGroupID == collectBloodMV.BloodGroupID).FirstOrDefault();
-                        if (checkbloodgroupstock == null)
+                        if ((DateTime.Now - checkdonor.LastDonationDate).TotalDays < 120)
                         {
-                            var bloodstock = new BloodStockTable();
+                            ModelState.AddModelError(string.Empty, "Donor already donated blood recently");
+                            transaction.Rollback();
+                        }
+                        else
+                        {
 
 
-                            bloodstock.BloodGroupID = collectBloodMV.BloodGroupID;
-                            bloodstock.BloodBankID = bloodbankID;
-                            bloodstock.Status = true;
-                            bloodstock.Quantity = 0;
-                            DB.BloodStockTables.Add(bloodstock);
+                            var checkbloodgroupstock = DB.BloodStockTables.Where(s => s.BloodBankID == bloodbankID && s.BloodGroupID == collectBloodMV.BloodGroupID).FirstOrDefault();
+                            if (checkbloodgroupstock == null)
+                            {
+                                var bloodstock = new BloodStockTable();
+
+
+                                bloodstock.BloodGroupID = collectBloodMV.BloodGroupID;
+                                bloodstock.BloodBankID = bloodbankID;
+                                bloodstock.Status = true;
+                                bloodstock.Quantity = 0;
+                                DB.BloodStockTables.Add(bloodstock);
+                                DB.SaveChanges();
+
+                                checkbloodgroupstock = DB.BloodStockTables.Where(s => s.BloodBankID == bloodbankID && s.BloodGroupID == collectBloodMV.BloodGroupID).FirstOrDefault();
+
+                            }
+                            checkbloodgroupstock.Quantity += collectBloodMV.Quantity;
+                            DB.Entry(checkbloodgroupstock).State = System.Data.Entity.EntityState.Modified;
                             DB.SaveChanges();
 
-                            checkbloodgroupstock = DB.BloodStockTables.Where(s => s.BloodBankID == bloodbankID && s.BloodGroupID == collectBloodMV.BloodGroupID).FirstOrDefault();
+                            var collectblooddetails = new BloodStockDetailsTable();
+                            collectblooddetails.BloodStockID = checkbloodgroupstock.BloodStockID;
+                            collectblooddetails.BloodGroupID = collectBloodMV.BloodGroupID;
+                            collectblooddetails.CampaignID = currentcampaign.CampaignID;
+                            collectblooddetails.Quantity = collectBloodMV.Quantity;
+                            collectblooddetails.DonorID = checkdonor.DonorID;
+                            collectblooddetails.DonationDateTime = DateTime.Now;
+                            DB.BloodStockDetailsTables.Add(collectblooddetails);
+                            DB.SaveChanges();
 
+                            checkdonor.LastDonationDate = DateTime.Now;
+                            DB.Entry(checkdonor).State = System.Data.Entity.EntityState.Modified;
+                            DB.SaveChanges();
+                            transaction.Commit();
+                            return RedirectToAction("BloodStock", "BloodBank");
                         }
-                        checkbloodgroupstock.Quantity += collectBloodMV.Quantity;
-                        DB.Entry(checkbloodgroupstock).State = System.Data.Entity.EntityState.Modified;
-                        DB.SaveChanges();
-
-                        var collectblooddetails = new BloodStockDetailsTable();
-                        collectblooddetails.BloodStockID = checkbloodgroupstock.BloodStockID;
-                        collectblooddetails.BloodGroupID = collectBloodMV.BloodGroupID;
-                        collectblooddetails.CampaignID = currentcampaign.CampaignID;
-                        collectblooddetails.Quantity = collectBloodMV.Quantity;
-                        collectblooddetails.DonorID = checkdonor.DonorID;
-                        collectblooddetails.DonationDateTime = DateTime.Now;
-                        DB.BloodStockDetailsTables.Add(collectblooddetails);
-                        DB.SaveChanges();
-                        transaction.Commit();
-                        return RedirectToAction("BloodStock", "BloodBank");
                     }
                     catch
                     {

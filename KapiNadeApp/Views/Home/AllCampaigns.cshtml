@@ -202,6 +202,7 @@
             </div> <!-- end .row  -->
             @{ 
                 int usertypeid = 0;
+                var date = DateTime.Now.Date;
                 string sessionusertype = Convert.ToString(Session["UserTypeID"]);
               
 
@@ -236,7 +237,7 @@
                                             <a class="author" href="#"><i class="fa fa-clock-o" aria-hidden="true"></i> @item.StartTime - @item.EndTime</a>
                                             <a class="comments" href="#"> <i class="fa fa-map-marker" aria-hidden="true"></i> @(item.Location ==null ? "No location" : item.Location)</a>
                                         </div>
-                                        @if (usertypeid == 5)
+                                        @if (usertypeid == 5 && item.CampaignDate == date)
                                         {
                                             <a href="@Url.Content("~/BloodBank/BloodStock")" class="btn btn-theme">Collect blood</a>
                                         }
@@ -254,9 +255,6 @@
             </div>
                 }
         </div>
-                </div> <!--  col-sm-6  -->
-
-            </div> <!--  end .row  -->
 
             <div class="row">
                 <div class="col-sm-12 col-md-4 col-md-offset-4 text-center">
