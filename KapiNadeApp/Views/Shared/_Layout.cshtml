@@ -98,8 +98,16 @@
 
                         <div class="navbar-collapse collapse">
                                                     <ul class="nav navbar-nav navbar-right">
-                                                        <li class="drop">
+                                                        <li>
                                                             <a href="@Url.Content("~/Home/MainHome")">Naslovna</a>
+                                                        </li>
+
+                                                        <li>
+                                                        <a href="@Url.Content("~/Home/AboutUs")">O nama</a>
+                                                        </li>
+
+                                                        <li>
+                                                            <a href="@Url.Content("~/Finder/FinderOfDonors")">Pronađi donora</a>
                                                         </li>
 
                                                         @if (usertypeid == 1)
@@ -107,7 +115,6 @@
                                                             <li><a href="@Url.Content("~/Accounts/AllNewUserRequests")">Accounts requests</a></li>
 
                                                         }
-                                                        <li><a href="about-us.html" title="About Us">O nama</a></li>
 
 
 
@@ -142,7 +149,8 @@
 
                                                                 </ul>
                                                             </li>
-                                                        }else if(usertypeid>1)
+                                                        }
+                                                        else if (usertypeid > 1)
                                                         {
                                                             <li>
                                                                 <a href="#">Setting</a>

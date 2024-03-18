@@ -4,7 +4,7 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="c6c4b1e91a8344189485e17a483521e6" Name="Diagram1" ZoomLevel="53">
+      <Diagram DiagramId="c6c4b1e91a8344189485e17a483521e6" Name="Diagram1" ZoomLevel="55">
         <EntityTypeShape EntityType="KapiNadeDBModel.BloodBankTable" Width="1.5" PointX="3" PointY="8.125" IsExpanded="true" />
         <EntityTypeShape EntityType="KapiNadeDBModel.BloodGroupsTable" Width="1.5" PointX="5.75" PointY="4" IsExpanded="true" />
         <EntityTypeShape EntityType="KapiNadeDBModel.CityTable" Width="1.5" PointX="0.75" PointY="10.125" IsExpanded="true" />
@@ -37,7 +37,7 @@
         <AssociationConnector Association="KapiNadeDBModel.FK_UserTable_UserTypeTable" />
         <AssociationConnector Association="KapiNadeDBModel.FK_DonorTable_GenderTable" />
         <EntityTypeShape EntityType="KapiNadeDBModel.BloodStockDetailsTable" Width="2.5" PointX="10.25" PointY="10.5" />
-        <EntityTypeShape EntityType="KapiNadeDBModel.CampaignTable" Width="1.5" PointX="5.25" PointY="17.375" />
+        <EntityTypeShape EntityType="KapiNadeDBModel.CampaignTable" Width="1.5" PointX="8.125" PointY="17.5" />
         <AssociationConnector Association="KapiNadeDBModel.FK_CampaignTable_BloodBankTable" />
         <AssociationConnector Association="KapiNadeDBModel.FK_BloodStockDetailsTable_BloodGroupsTable" />
         <AssociationConnector Association="KapiNadeDBModel.FK_BloodStockDetailsTable_CampaignTable" />
@@ -46,6 +46,12 @@
         <AssociationConnector Association="KapiNadeDBModel.FK_BloodStockTable_BloodBankTable" />
         <AssociationConnector Association="KapiNadeDBModel.FK_BloodStockTable_BloodGroupsTable" />
         <AssociationConnector Association="KapiNadeDBModel.FK_BloodStockDetailsTable_BloodStockTable" />
+        <EntityTypeShape EntityType="KapiNadeDBModel.AcceptedTypeTable" Width="1.5" PointX="3.375" PointY="20.375" />
+        <EntityTypeShape EntityType="KapiNadeDBModel.RequestStatusTable" Width="1.5" PointX="0.75" PointY="0.875" />
+        <AssociationConnector Association="KapiNadeDBModel.FK_RequestTable_AcceptedTypeTable" />
+        <AssociationConnector Association="KapiNadeDBModel.FK_RequestTable_BloodBankTable1" />
+        <AssociationConnector Association="KapiNadeDBModel.FK_RequestTable_DonorTable1" />
+        <AssociationConnector Association="KapiNadeDBModel.FK_RequestTable_RequestStatusTable" />
         </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
