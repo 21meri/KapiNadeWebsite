@@ -17,10 +17,9 @@ namespace DatabaseLayer
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public BloodBankTable()
         {
-            this.RequestTables = new HashSet<RequestTable>();
             this.CampaignTables = new HashSet<CampaignTable>();
             this.BloodStockTables = new HashSet<BloodStockTable>();
-            this.RequestTables1 = new HashSet<RequestTable>();
+            this.RequestTables = new HashSet<RequestTable>();
         }
     
         public int BloodBankID { get; set; }
@@ -32,14 +31,12 @@ namespace DatabaseLayer
         public int UserID { get; set; }
     
         public virtual CityTable CityTable { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<RequestTable> RequestTables { get; set; }
         public virtual UserTable UserTable { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<CampaignTable> CampaignTables { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<BloodStockTable> BloodStockTables { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<RequestTable> RequestTables1 { get; set; }
+        public virtual ICollection<RequestTable> RequestTables { get; set; }
     }
 }

@@ -14,12 +14,6 @@ namespace DatabaseLayer
     
     public partial class HospitalTable
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public HospitalTable()
-        {
-            this.RequestTables = new HashSet<RequestTable>();
-        }
-    
         public int HospitalID { get; set; }
         public string Name { get; set; }
         public string Address { get; set; }
@@ -29,8 +23,6 @@ namespace DatabaseLayer
         public int UserID { get; set; }
     
         public virtual CityTable CityTable { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<RequestTable> RequestTables { get; set; }
         public virtual UserTable UserTable { get; set; }
     }
 }
