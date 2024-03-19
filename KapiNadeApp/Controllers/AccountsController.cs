@@ -101,7 +101,16 @@ namespace KapiNadeApp.Controllers
                     {
 
                         var checkdonor = DB.DonorTables.Where(d => d.CardNumber.Trim().Replace("-", "") == collectBloodMV.DonorDetails.CardNumber.Trim().Replace("-", "")).FirstOrDefault();
-                        if (checkdonor == null)
+                        if (checkdonor != null)
+                        {
+                            if ((DateTime.Now - checkdonor.LastDonationDate).TotalDays < 120)
+                            {
+                                ModelState.AddModelError(string.Empty, "Donor already donated blood recently");
+                                transaction.Rollback();
+                            }
+                        }
+
+                        else 
                         {
                             var user = new UserTable();
                             user.Username = collectBloodMV.DonorDetails.Name.Trim();
@@ -126,19 +135,6 @@ namespace KapiNadeApp.Controllers
                             DB.DonorTables.Add(donor);
                             DB.SaveChanges();
                             checkdonor = DB.DonorTables.Where(d => d.CardNumber.Trim().Replace("-", "") == collectBloodMV.DonorDetails.CardNumber.Trim().Replace("-", "")).FirstOrDefault();
-
-                        }
-
-
-                            if ((DateTime.Now - checkdonor.LastDonationDate).TotalDays < 120)
-                            {
-                                ModelState.AddModelError(string.Empty, "Donor already donated blood recently");
-                                transaction.Rollback();
-                            }
-
-                            else
-                            {
-
 
                                 var checkbloodgroupstock = DB.BloodStockTables.Where(s => s.BloodBankID == bloodbankID && s.BloodGroupID == collectBloodMV.BloodGroupID).FirstOrDefault();
                                 if (checkbloodgroupstock == null)
