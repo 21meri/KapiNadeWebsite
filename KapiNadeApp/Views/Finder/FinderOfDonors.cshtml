@@ -56,12 +56,12 @@
                     <tr>
                         <td>
                             <div>
-                                <strong>@item.Name</strong>
+                                <strong>@item.Name (@item.BloodGroup)</strong>
                             </div>
                             @item.UserType
                         </td>
                         <td class="text-right">
-                            @Html.ActionLink("Request", "Edit", new { id = item.DonorID, donortypeid = item.UsertypeID }, new { @class = "btn btn-primary" })
+                            @Html.ActionLink("Request", "RequestForBlood", new { donorid = item.DonorID, usertypeid = item.UsertypeID, bloodgroupid=item.BloodGroupID  }, new { @class = "btn btn-primary" })
 
                         </td>
                     </tr>
