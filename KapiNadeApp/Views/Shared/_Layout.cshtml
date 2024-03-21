@@ -103,7 +103,7 @@
                                                         </li>
 
                                                         <li>
-                                                        <a href="@Url.Content("~/Home/AboutUs")">O nama</a>
+                                                            <a href="@Url.Content("~/Home/AboutUs")">O nama</a>
                                                         </li>
 
                                                         <li>
@@ -116,8 +116,16 @@
 
                                                         }
 
+                                                        else if (usertypeid == 3 || usertypeid == 4 || usertypeid == 5)
+                                                        {
+                                                            <li><a href="@Url.Content("~/Finder/ShowAllRequests")">All requests</a></li>
 
+                                                        }
+                                                        else if (usertypeid == 2 || usertypeid==5)
+                                                        {
+                                                            <li><a href="@Url.Content("~/Finder/DonorRequests")">New requests</a></li>
 
+                                                        }
                                                         <li>
                                                             <a href="#">Campaign</a>
                                                             <ul class="drop-down">

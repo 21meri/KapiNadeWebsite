@@ -235,6 +235,7 @@
     <Compile Include="Models\FinderSearchResultsMV.cs" />
     <Compile Include="Models\HospitalMV.cs" />
     <Compile Include="Models\RegistrationMV.cs" />
+    <Compile Include="Models\RequestListMV.cs" />
     <Compile Include="Models\RequestMV.cs" />
     <Compile Include="Models\RequestTypeMV.cs" />
     <Compile Include="Models\SeekerMV.cs" />
