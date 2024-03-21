@@ -7,6 +7,11 @@
 
 @using (Html.BeginForm())
 {
+    bool isuserlogin = false;
+    if (!string.IsNullOrEmpty(Convert.ToString(Session["Username"])))
+    {
+        isuserlogin = true;
+    }
     @Html.AntiForgeryToken()
 
 
@@ -14,60 +19,93 @@
     @Html.ValidationSummary(true, "", new { @class = "text-danger" })
 
 
-    <div class="col-md-8">
+<div class="col-md-8">
 
-        <div class="contact-form-block">
+    <div class="contact-form-block">
 
-            <h2 class="contact-title">Finder of Donor</h2>
+        <h2 class="contact-title">Finder of Donor</h2>
 
-            <p>
+        <p>
 
-                <div class="form-group col-md-4">
-                    <div class="select-style">
-                        @Html.DropDownList("CityID", null, "--Your City--", new { @class = "form-control" })
-                        @Html.ValidationMessageFor(model => model.CityID, "", new { @class = "text-danger" })
-                    </div>
+            <div class="form-group col-md-4">
+                <div class="select-style">
+                    @Html.DropDownList("CityID", null, "--Your City--", new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.CityID, "", new { @class = "text-danger" })
                 </div>
+            </div>
 
 
-                <div class="form-group col-md-4">
-                    <div class="select-style">
-                        @Html.DropDownList("BloodGroupID", null, "--Select BloodGroup--", new { @class = "form-control" })
-                        @Html.ValidationMessageFor(model => model.BloodGroupID, "", new { @class = "text-danger" })
-                    </div>
+            <div class="form-group col-md-4">
+                <div class="select-style">
+                    @Html.DropDownList("BloodGroupID", null, "--Select BloodGroup--", new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.BloodGroupID, "", new { @class = "text-danger" })
                 </div>
+            </div>
 
-                <div class="form-group col-md-4">
+            <div class="form-group col-md-4">
 
-                    <input type="submit" style="float:right;" value="Search" class="btn btn-custom" />
-                </div>
+                <input type="submit" style="float:right;" value="Search" class="btn btn-custom" />
+            </div>
 
-            </p>
-            <table class="table table-hover">
-                <tr>
-                    <th>
-                        Donor
-                    </th>
-                    <th></th>
-                </tr>
+        </p>
 
-                @foreach (var item in Model.SearchResult)
-                {
-                    <tr>
-                        <td>
-                            <div>
-                                <strong>@item.Name (@item.BloodGroup)</strong>
-                            </div>
-                            @item.UserType
-                        </td>
-                        <td class="text-right">
-                            @Html.ActionLink("Request", "RequestForBlood", new { donorid = item.DonorID, usertypeid = item.UsertypeID, bloodgroupid=item.BloodGroupID  }, new { @class = "btn btn-primary" })
 
-                        </td>
-                    </tr>
-                }
-
-            </table>
-        </div>
     </div>
-}
+    
+        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12" id="accordion">
+
+            @foreach (var item in Model.SearchResult)
+            {
+
+                <div class="panel panel-default faq-box">
+                    <div class="panel-heading">
+
+                        <h4 class="panel-title">
+                            <a class="accordion-toggle collapsed" data-toggle="collapse" data-parent="#accordion" href="#@string.Format("collapse{0}",item.UserID)"><strong>@item.Name (@item.BloodGroup)</strong> </a>
+                            @Html.ActionLink("Request", "RequestForBlood", new { donorid = item.DonorID, usertypeid = item.UserTypeID, bloodgroupid = item.BloodGroupID }, new { @class = "btn btn-default", @style = "float:right; " })
+                            @*background-color:#e6e6e6 ;border:5px; color:black;padding: 10px 22px; text-align:center; display:inline-block; font-size:14px;*@
+
+                        </h4>
+
+
+                    </div>
+                    @if (isuserlogin == true)
+                    {
+                        <div id="@string.Format("collapse{0}", item.UserID)" class="panel-collapse collapse">
+                            <div class="panel-body">
+                                <strong>
+                                    Type:  @item.UserType
+                                </strong><br />
+                                <strong>
+                                    Phone No: @item.ContactNumber
+                                </strong>
+                                <br />
+                                <strong>
+                                    Address: @item.Address
+                                </strong>
+
+                            </div>
+                        </div>
+                    }
+                    else
+                    {
+                        <div id="@string.Format("collapse{0}", item.UserID)" class="panel-collapse collapse">
+                            <div class="panel-body">
+                                <strong>
+                                   Please login to see donor details
+                                </strong><br />
+                               
+
+                            </div>
+                        </div>
+                    }
+                </div>
+
+
+
+            }
+
+        </div>
+ 
+        </div>
+           }

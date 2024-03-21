@@ -24,24 +24,31 @@ namespace KapiNadeApp.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult FinderOfDonors(FinderMV finderMV)
         {
+            int userid = 0;
+            int.TryParse(Convert.ToString(Session["UserID"]), out userid);
             var setdate = DateTime.Now.AddDays(-120);
             var donors = DB.DonorTables.Where(d => d.BloodGroupID == finderMV.BloodGroupID && d.CityID==finderMV.CityID && d.LastDonationDate < setdate).ToList();
             foreach (var donor in donors)
             {
                 var user = DB.UserTables.Find(donor.UserID);
-                if (user.AccountStatusID == 2)
+                if (userid != user.UserID)
                 {
+                    if (user.AccountStatusID == 2)
+                    {
 
-                    var adddonor = new FinderSearchResultsMV();
-                    adddonor.BloodGroup = donor.BloodGroupsTable.BloodGroup;
-                    adddonor.BloodGroupID = donor.BloodGroupID;
-                    adddonor.ContactNumber = donor.ContactNumber;
-                    adddonor.DonorID = donor.DonorID;
-                    adddonor.Name = donor.Name;
-                    adddonor.Surname = donor.Surname;
-                    adddonor.UserType = "Person";
-                    adddonor.UsertypeID = user.UserTypeID;
-                    finderMV.SearchResult.Add(adddonor);
+                        var adddonor = new FinderSearchResultsMV();
+                        adddonor.UserID=user.UserID;
+                        adddonor.BloodGroup = donor.BloodGroupsTable.BloodGroup;
+                        adddonor.BloodGroupID = donor.BloodGroupID;
+                        adddonor.ContactNumber = donor.ContactNumber;
+                        adddonor.DonorID = donor.DonorID;
+                        adddonor.Name = donor.Name;
+                        adddonor.Surname = donor.Surname;
+                        adddonor.Address = donor.Address;
+                        adddonor.UserType = "Person";
+                        adddonor.UserTypeID = user.UserTypeID;
+                        finderMV.SearchResult.Add(adddonor);
+                    }
                 }
             }
 
@@ -50,17 +57,22 @@ namespace KapiNadeApp.Controllers
             {
                 var getbloodbank = DB.BloodBankTables.Find(bloodbank.BloodBankID);
                 var user = DB.UserTables.Find(getbloodbank.UserID);
-                if (user.AccountStatusID == 2)
+                if (userid != user.UserID)
                 {
-                    var adddonor = new FinderSearchResultsMV();
-                    adddonor.BloodGroup = bloodbank.BloodGroupsTable.BloodGroup;
-                    adddonor.BloodGroupID = bloodbank.BloodGroupID;
-                    adddonor.ContactNumber = bloodbank.BloodBankTable.ContactNumber;
-                    adddonor.DonorID = bloodbank.BloodBankID;
-                    adddonor.Name = bloodbank.BloodBankTable.Name;
-                    adddonor.UserType = "Blood Bank";
-                    adddonor.UsertypeID = user.UserTypeID;
-                    finderMV.SearchResult.Add(adddonor);
+                    if (user.AccountStatusID == 2)
+                    {
+                        var adddonor = new FinderSearchResultsMV();
+                        adddonor.UserID = user.UserID;
+                        adddonor.BloodGroup = bloodbank.BloodGroupsTable.BloodGroup;
+                        adddonor.BloodGroupID = bloodbank.BloodGroupID;
+                        adddonor.ContactNumber = bloodbank.BloodBankTable.ContactNumber;
+                        adddonor.Address = bloodbank.BloodBankTable.Address;
+                        adddonor.DonorID = bloodbank.BloodBankID;
+                        adddonor.Name = bloodbank.BloodBankTable.Name;
+                        adddonor.UserType = "Blood Bank";
+                        adddonor.UserTypeID = user.UserTypeID;
+                        finderMV.SearchResult.Add(adddonor);
+                    }
                 }
             }
             ViewBag.BloodGroupID = new SelectList(DB.BloodGroupsTables.ToList(), "BloodGroupID", "BloodGroup", finderMV.BloodGroupID);
