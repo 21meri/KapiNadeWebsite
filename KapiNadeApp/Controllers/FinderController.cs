@@ -238,5 +238,18 @@ namespace KapiNadeApp.Controllers
             }
             return View(list);
         }
+        public ActionResult CancelRequest (int? id)
+        {
+            if (string.IsNullOrEmpty(Convert.ToString(Session["Username"])))
+            {
+                return RedirectToAction("Login","Home");
+            }
+            var request =DB.RequestTables.Find(id);
+            request.RequestStatusID = 4;
+            DB.Entry(request).State = System.Data.Entity.EntityState.Modified;
+            DB.SaveChanges();
+            return RedirectToAction("ShowAllRequests");
+
+        }
     }
 }
