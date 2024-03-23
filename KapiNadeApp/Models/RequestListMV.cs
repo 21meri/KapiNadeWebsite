@@ -28,7 +28,7 @@ namespace KapiNadeApp.Models
         public int RequestStatusID { get; set; }
 
         public string ExpectedDate { get; set; }
-        public string  ContatcNumber { get; set; }
+        public string  ContactNumber { get; set; }
         public string Address { get; set; }
 
         public string RequestDetails { get; set; }
