@@ -252,6 +252,21 @@ namespace KapiNadeApp.Controllers
 
         }
 
+        public ActionResult CancelRequestByDonor(int? id)
+        {
+            if (string.IsNullOrEmpty(Convert.ToString(Session["Username"])))
+            {
+                return RedirectToAction("Login", "Home");
+            }
+            var request = DB.RequestTables.Find(id);
+            request.RequestStatusID = 4;
+            DB.Entry(request).State = System.Data.Entity.EntityState.Modified;
+            DB.SaveChanges();
+            return RedirectToAction("DonorRequests");
+
+        }
+
+
         public ActionResult AcceptRequest(int? id)
         {
             if (string.IsNullOrEmpty(Convert.ToString(Session["Username"])))
@@ -262,7 +277,7 @@ namespace KapiNadeApp.Controllers
             request.RequestStatusID = 2;
             DB.Entry(request).State = System.Data.Entity.EntityState.Modified;
             DB.SaveChanges();
-            return RedirectToAction("ShowAllRequests");
+            return RedirectToAction("DonorRequests");
 
         }
 
@@ -370,11 +385,66 @@ namespace KapiNadeApp.Controllers
                 donor.LastDonationDate = DateTime.Now;
                 DB.Entry(donor).State = System.Data.Entity.EntityState.Modified;
                 DB.SaveChanges();
+
+                request.RequestStatusID = 3;
+                DB.Entry(request).State = System.Data.Entity.EntityState.Modified;
+                DB.SaveChanges();
+                return RedirectToAction("ShowAllRequests");
+
             }
-            request.RequestStatusID = 3;
-            DB.Entry(request).State = System.Data.Entity.EntityState.Modified;
-            DB.SaveChanges();
-            return RedirectToAction("ShowAllRequests");
+           
+                var bloodbank = DB.BloodBankTables.Find(request.AcceptedID);
+                var bloodstockMV = new BloodStockMV();
+                bloodstockMV.BloodStockID = request.RequestID;
+                bloodstockMV.BloodBankID = bloodbank.BloodBankID;
+                bloodstockMV.BloodGroupID = request.RequiredBloodID;
+                bloodstockMV.BloodBank = bloodbank.Name;
+                var bloodgroup = DB.BloodGroupsTables.Find(request.RequiredBloodID);
+                bloodstockMV.BloodGroup = bloodgroup.BloodGroup;
+                bloodstockMV.Quantity = 1;
+
+            return View(bloodstockMV);
+
         }
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult CompleteRequest(BloodStockMV bloodStockMV)
+        {
+            if (string.IsNullOrEmpty(Convert.ToString(Session["Username"])))
+            {
+                return RedirectToAction("Login", "Home");
+            }
+            try
+            {
+                var request = DB.RequestTables.Find(bloodStockMV.BloodStockID);
+                var bloodstock = DB.BloodStockTables.Where(b => b.BloodBankID == bloodStockMV.BloodBankID && b.BloodGroupID == bloodStockMV.BloodGroupID).FirstOrDefault();
+                if(bloodstock.Quantity < bloodStockMV.Quantity)
+                {
+                    ModelState.AddModelError(string.Empty, "Available quantity is "+bloodstock.Quantity+"!");
+                    return View(bloodStockMV);
+
+                }
+
+                bloodstock.Quantity = bloodstock.Quantity - bloodStockMV.Quantity;
+                DB.Entry(bloodstock).State = System.Data.Entity.EntityState.Modified;
+                DB.SaveChanges();
+
+                request.RequestStatusID = 3;
+                DB.Entry(request).State = System.Data.Entity.EntityState.Modified;
+                DB.SaveChanges();
+                return RedirectToAction("ShowAllRequests");
+
+            }
+            catch (Exception)
+            {
+                ModelState.AddModelError(string.Empty, "Please provide quantity!");
+                return View(bloodStockMV);
+            }
+
+
+        }
+
+
+
     }
 }

@@ -26,7 +26,7 @@
                     Donor
                 </th>
                 <th>
-                    Blood Group
+                    Required Blood Group
                 </th>
                 <th>
                     Expected Date
@@ -51,8 +51,8 @@
                         @Html.DisplayFor(modelItem => item.RequestDate)
                     </td>
                     <td>
-                        @item.AcceptedName ( @item.AcceptedType)
-                        
+                        @item.AcceptedName ( @item.AcceptedType-@item.ContactNumber)
+
                     </td>
                     <td>
                         @Html.DisplayFor(modelItem => item.BloodGroup)

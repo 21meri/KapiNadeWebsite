@@ -9,15 +9,16 @@ namespace KapiNadeApp.Models
     public class BloodStockMV
     {
         public int BloodStockID { get; set; }
+        public int BloodBankID { get; set; }
+        [Display(Name = "Blood Bank")]
+        public string BloodBank { get; set; }
+
         public int BloodGroupID { get; set; }
         [Display(Name = "Blood Group")]
         public string BloodGroup { get; set; }
-        [Display(Name = "Blood Bank")]
-        public int BloodBankID { get; set; }
-        public string BloodBank { get; set; }
-        [Display(Name="Is ready")]
-        public string Status { get; set; }
         public double Quantity { get; set; }
 
+        [Display(Name="Is ready")]
+        public string Status { get; set; }
     }
 }

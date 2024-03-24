@@ -96,66 +96,100 @@
                         </button>
                         <a class="logo" href="index.html"><img alt="" src="~/Content/Template/images/logo.png"></a>
                     </div>
+                    @{
+                        int usertypeid = 0;
+                        int userid = 0;
+                        string sessionusertype = Convert.ToString(Session["UserTypeID"]);
+                        string userID = Convert.ToString(Session["UserID"]);
 
-                    <div class="navbar-collapse collapse">
-                        <ul class="nav navbar-nav navbar-right">
-                            <li>
-                                <a href="@Url.Content("~/Home/MainHome")">Naslovna</a>
-                            </li>
+                        int.TryParse(sessionusertype, out usertypeid);
+                        int.TryParse(userID, out userid);
 
-                            <li>
-                                <a href="@Url.Content("~/Home/AboutUs")">O nama</a>
-                            </li>
+                        <div class="navbar-collapse collapse">
+                            <ul class="nav navbar-nav navbar-right">
+                                <li>
+                                    <a href="@Url.Content("~/Home/MainHome")">Naslovna</a>
+                                </li>
 
-                            <li>
-                                <a href="@Url.Content("~/Finder/FinderOfDonors")">Pronađi donora</a>
-                            </li>
+                                <li>
+                                    <a href="@Url.Content("~/Home/AboutUs")">O nama</a>
+                                </li>
+
+                                <li>
+                                    <a href="@Url.Content("~/Finder/FinderOfDonors")">Pronađi donora</a>
+                                </li>
+
+                                @if (usertypeid == 1)
+                                {
+                                    <li><a href="@Url.Content("~/Accounts/AllNewUserRequests")">Accounts requests</a></li>
+
+                                }
+
+                                @if (usertypeid == 3 || usertypeid == 4 || usertypeid == 5)
+                                {
+                                    <li><a href="@Url.Content("~/Finder/ShowAllRequests")">All requests</a></li>
+
+                                }
+
+                                @if (usertypeid == 2 || usertypeid == 5)
+                                {
+                                    <li><a href="@Url.Content("~/Finder/DonorRequests")">Seeker requests</a></li>
+
+                                }
 
 
-                            <li>
-                                <a href="#">Campaign</a>
-                                <ul class="drop-down">
-                                    <li><a href="@Url.Content("~/Home/AllCampaigns")">All Campaigns</a></li>
-                                    <li><a href="event-single.html">Single Campaign</a></li>
-                                </ul>
-                            </li>
+                                <li>
+                                    <a href="#">Campaign</a>
+                                    <ul class="drop-down">
+                                        <li><a href="@Url.Content("~/Home/AllCampaigns")">All Campaigns</a></li>
+                                        @if (usertypeid == 5)
+                                        {
+                                            <li><a href="@Url.Content("~/BloodBank/AllCampaigns")">Add Campaign</a></li>
+                                            <li><a href="@Url.Content("~/BloodBank/BloodStock")">Stock</a></li>
 
-                            <li class="drop">
-                                <a href="#">Pages</a>
-                                <ul class="drop-down">
+                                        }
+
+                                    </ul>
+                                </li>
 
 
-                                    <li><a href="faq.html" title="FAQ">FAQ</a></li>
-                                    <li class="drop">
-                                        <a href="#">Galerija</a>
-                                        <ul class="drop-down level3">
-                                            <li><a href="gallery-1.html">Layout 01</a></li>
-                                            <li><a href="gallery-2.html">Layout 02</a></li>
+                                @if (usertypeid == 1)
+                                {
+                                    <li>
+                                        <a href="#">Setting</a>
+                                        <ul class="drop-down">
+                                            <li><a href="@Url.Content("~/User/UserProfile/"+userid+"")">User Profile</a></li>
+                                            <li><a href="@Url.Content("~/AccountStatus/AllAccountStatus")">All account status</a></li>
+                                            <li><a href="@Url.Content("~/BloodGroup/AllBloodGroups")">Blood groups</a></li>
+                                            <li><a href="@Url.Content("~/CityTables/Index")">Cities</a></li>
+                                            <li><a href="@Url.Content("~/RequestType/AllRequestType")">Request type</a></li>
+                                            <li><a href="@Url.Content("~/UserType/AllUserTypes")">User type</a></li>
+                                            <li><a href="@Url.Content("~/Home/Logout")">Sign out</a></li>
 
                                         </ul>
                                     </li>
+                                }
+                                else if (usertypeid > 1)
+                                {
+                                    <li>
+                                        <a href="#">Setting</a>
+                                        <ul class="drop-down">
+                                            <li><a href="@Url.Content("~/User/UserProfile/"+userid+"")">User Profile</a></li>
+                                            <li><a href="@Url.Content("~/Home/Logout")">Sign out</a></li>
 
-
-
-
-
-                                    <li><a href="404.html" title="404 Page">404 Page</a></li>
-                                    <li class="drop">
-                                        <a href="#">Level 3</a>
-                                        <ul class="drop-down level3">
-                                            <li><a href="#">Level 3.1</a></li>
-                                            <li><a href="#">Level 3.2</a></li>
-                                            <li><a href="#">Level 3.3</a></li>
                                         </ul>
                                     </li>
-                                </ul>
-                            </li>
+                                }
 
 
 
-                            <li><a href="contact.html">Kontakt</a></li>
-                        </ul>
-                    </div>
+
+
+
+                                <li><a href="contact.html">Kontakt</a></li>
+                            </ul>
+                        </div>
+                    }
                 </div>
             </div>
 
@@ -1117,7 +1151,7 @@
                 </div> <!--  end .col-md-4 col-sm-12 -->
 
             </div> <!-- end row  -->
-            </div> <!-- end .container  -->
+             <!-- end .container  -->
 
         </section> <!--  end .footer-widget-area  -->
         <!--FOOTER CONTENT  -->
