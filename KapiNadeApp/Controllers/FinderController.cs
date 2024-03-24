@@ -357,6 +357,24 @@ namespace KapiNadeApp.Controllers
             return View(list);
         }
 
-
+        public ActionResult CompleteRequest(int? id)
+        {
+            if (string.IsNullOrEmpty(Convert.ToString(Session["Username"])))
+            {
+                return RedirectToAction("Login", "Home");
+            }
+            var request = DB.RequestTables.Find(id);
+            if(request.AcceptedTypeID == 1) //Donor
+            {
+                var donor = DB.DonorTables.Find(request.AcceptedID);
+                donor.LastDonationDate = DateTime.Now;
+                DB.Entry(donor).State = System.Data.Entity.EntityState.Modified;
+                DB.SaveChanges();
+            }
+            request.RequestStatusID = 3;
+            DB.Entry(request).State = System.Data.Entity.EntityState.Modified;
+            DB.SaveChanges();
+            return RedirectToAction("ShowAllRequests");
+        }
     }
 }
