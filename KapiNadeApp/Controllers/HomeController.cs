@@ -97,7 +97,7 @@ namespace KapiNadeApp.Controllers
                                 Session["Address"] = donor.Address;
                                 Session["CityID"] = donor.CityID;
                                 Session["City"] = donor.CityTable.City;
-                                return RedirectToAction("Finder", "DonorRequests");
+                                return RedirectToAction("Donor","Dashboard");
                             }
                             else
                             {
@@ -126,7 +126,7 @@ namespace KapiNadeApp.Controllers
                                 Session["RegistrationDate"] = seeker.RegistrationDate;
                                 Session["Address"] = seeker.Address;
                                 Session["Email"] = seeker.Email;
-                                return RedirectToAction("Finder", "ShowAllRequests");
+                                return RedirectToAction("Seeker", "Dashboard");
                             }
                             else
                             {
@@ -146,7 +146,7 @@ namespace KapiNadeApp.Controllers
                                 Session["Email"] = hospital.Email;
                                 Session["CityID"] = hospital.CityID;
                                 Session["City"] = hospital.CityTable.City;
-                                return RedirectToAction("Finder", "ShowAllRequests");
+                                return RedirectToAction("Hospital", "Dashboard");
                             }
                             else
                             {
@@ -166,7 +166,7 @@ namespace KapiNadeApp.Controllers
                                 Session["Email"] = bloodbank.Email;
                                 Session["CityID"] = bloodbank.CityID;
                                 Session["City"] = bloodbank.CityTable.City;
-                                return RedirectToAction("BloodBank", "BloodStock");
+                                return RedirectToAction("BloodBank", "Dashboard");
 
                             }
                             else
