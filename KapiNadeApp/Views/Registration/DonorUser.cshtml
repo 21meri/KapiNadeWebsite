@@ -18,56 +18,69 @@
         @Html.HiddenFor(model => model.User.AccountStatus)
         @Html.HiddenFor(model => model.User.AccountStatusID)
         @Html.HiddenFor(model => model.User.Email)
+
         <div class="form-group col-md-6">
-            @Html.EditorFor(model => model.Donor.Name, new { htmlAttributes = new { @class = "form-control", @placeholder = "Enter Name", @type = "text" } })
+            <label style="float:left;">Enter your name:</label>
+
+            @Html.EditorFor(model => model.Donor.Name, new { htmlAttributes = new { @class = "form-control", @placeholder = "", @type = "text" } })
             @Html.ValidationMessageFor(model => model.Donor.Name, "", new { @class = "text-danger" })
         </div>
 
         <div class="form-group col-md-6">
-            @Html.EditorFor(model => model.Donor.Surname, new { htmlAttributes = new { @class = "form-control", @placeholder = "Enter Surname", @type = "text" } })
+            <label style="float:left;">Enter your surname:</label>
+
+            @Html.EditorFor(model => model.Donor.Surname, new { htmlAttributes = new { @class = "form-control", @placeholder = "", @type = "text" } })
             @Html.ValidationMessageFor(model => model.Donor.Surname, "", new { @class = "text-danger" })
         </div>
 
         <div class="form-group col-md-6">
-            @Html.EditorFor(model => model.Donor.Address, new { htmlAttributes = new { @class = "form-control", @placeholder = "Enter Address", @type = "text" } })
+            <label style="float:left;">Enter your address:</label>
+
+            @Html.EditorFor(model => model.Donor.Address, new { htmlAttributes = new { @class = "form-control", @placeholder = "", @type = "text" } })
             @Html.ValidationMessageFor(model => model.Donor.Address, "", new { @class = "text-danger" })
         </div>
 
         <div class="form-group col-md-6">
-            @Html.EditorFor(model => model.Donor.ContactNumber, new { htmlAttributes = new { @class = "form-control", @placeholder = "Enter Your Contact number" } })
+            <label style="float:left;">Enter your contact number:</label>
+
+            @Html.EditorFor(model => model.Donor.ContactNumber, new { htmlAttributes = new { @class = "form-control", @placeholder = "" } })
             @Html.ValidationMessageFor(model => model.Donor.ContactNumber, "", new { @class = "text-danger" })
         </div>
 
         <div class="form-group col-md-6">
-            @Html.EditorFor(model => model.Donor.CardNumber, new { htmlAttributes = new { @class = "form-control", @placeholder = "Enter Card Number" } })
+            <label style="float:left;">Enter your card number:</label>
+            @Html.EditorFor(model => model.Donor.CardNumber, new { htmlAttributes = new { @class = "form-control", @placeholder = "" } })
             @Html.ValidationMessageFor(model => model.Donor.CardNumber, "", new { @class = "text-danger" })
         </div>
 
 
         <div class="form-group col-md-6">
+            <label style="float:left;">Select your gender:</label>
             <div class="select-style">
-                @Html.DropDownList("GenderID", null, "--Select Gender--", new { @class = "form-control" })
+                @Html.DropDownList("GenderID", null, "", new { @class = "form-control" })
                 @Html.ValidationMessageFor(model => model.GenderID, "", new { @class = "text-danger" })
             </div>
         </div>
 
         <div class="form-group col-md-6">
+            <label style="float:left;">Select your city:</label>
             <div class="select-style">
-                @Html.DropDownList("CityID", null, "--Your City--", new { @class = "form-control" })
+                @Html.DropDownList("CityID", null, "", new { @class = "form-control" })
                 @Html.ValidationMessageFor(model => model.CityID, "", new { @class = "text-danger" })
             </div>
         </div>
 
 
         <div class="form-group col-md-6">
+            <label style="float:left;">Select your blood group:</label>
             <div class="select-style">
-                @Html.DropDownList("BloodGroupID", null, "--Select BloodGroup--", new { @class = "form-control" })
+                @Html.DropDownList("BloodGroupID", null, "", new { @class = "form-control" })
                 @Html.ValidationMessageFor(model => model.BloodGroupID, "", new { @class = "text-danger" })
             </div>
         </div>
 
         <div class="form-group col-md-6">
-            <label style="float:left;">Enter last donation date</label>
+            <label style="float:left;">Enter last donation date:</label>
             @Html.EditorFor(model => model.Donor.LastDonationDate, new { htmlAttributes = new { @class = "form-control", @placeholder = "Donation Date" } })
             @Html.ValidationMessageFor(model => model.Donor.LastDonationDate, "", new { @class = "text-danger" })
         </div>
@@ -75,6 +88,8 @@
         <div class="form-group col-md-12 col-sm-12 col-xs-12">
             <button id="btn_submit" class="btn-submit" type="submit">Submit</button>
         </div>
+
+
 
     }
 
