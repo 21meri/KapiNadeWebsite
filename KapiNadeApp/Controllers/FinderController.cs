@@ -26,8 +26,14 @@ namespace KapiNadeApp.Controllers
         {
             int userid = 0;
             int.TryParse(Convert.ToString(Session["UserID"]), out userid);
-            var setdate = DateTime.Now.AddDays(-120);
-            var donors = DB.DonorTables.Where(d => d.BloodGroupID == finderMV.BloodGroupID && d.CityID==finderMV.CityID && d.LastDonationDate < setdate).ToList();
+            var maleThresholdDate = DateTime.Now.AddDays(-90);
+            var femaleThresholdDate = DateTime.Now.AddDays(-120);
+
+            var donors = DB.DonorTables.Where(d =>
+                (d.BloodGroupID == finderMV.BloodGroupID && d.CityID == finderMV.CityID && d.GenderID == 1 && d.LastDonationDate < maleThresholdDate) ||
+                (d.BloodGroupID == finderMV.BloodGroupID && d.CityID == finderMV.CityID && d.GenderID == 2 && d.LastDonationDate < femaleThresholdDate)
+            ).ToList();
+
             foreach (var donor in donors)
             {
                 var user = DB.UserTables.Find(donor.UserID);
