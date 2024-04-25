@@ -92,6 +92,7 @@
           <Property Name="LastDonationDate" Type="date" Nullable="false" />
           <Property Name="ContactNumber" Type="nvarchar" MaxLength="20" Nullable="false" />
           <Property Name="CardNumber" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="Email" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="Address" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="CityID" Type="int" Nullable="false" />
           <Property Name="UserID" Type="int" Nullable="false" />
@@ -373,30 +374,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_RequestTable_BloodBankTable">
-          <End Role="BloodBankTable" Type="Self.BloodBankTable" Multiplicity="1" />
-          <End Role="RequestTable" Type="Self.RequestTable" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="BloodBankTable">
-              <PropertyRef Name="BloodBankID" />
-            </Principal>
-            <Dependent Role="RequestTable">
-              <PropertyRef Name="RequestByID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_RequestTable_DonorTable">
-          <End Role="DonorTable" Type="Self.DonorTable" Multiplicity="1" />
-          <End Role="RequestTable" Type="Self.RequestTable" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="DonorTable">
-              <PropertyRef Name="DonorID" />
-            </Principal>
-            <Dependent Role="RequestTable">
-              <PropertyRef Name="AcceptedID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_RequestTable_RequestStatusTable">
           <End Role="RequestStatusTable" Type="Self.RequestStatusTable" Multiplicity="1" />
           <End Role="RequestTable" Type="Self.RequestTable" Multiplicity="*" />
@@ -575,14 +552,6 @@
             <End Role="AcceptedTypeTable" EntitySet="AcceptedTypeTable" />
             <End Role="RequestTable" EntitySet="RequestTable" />
           </AssociationSet>
-          <AssociationSet Name="FK_RequestTable_BloodBankTable" Association="Self.FK_RequestTable_BloodBankTable">
-            <End Role="BloodBankTable" EntitySet="BloodBankTable" />
-            <End Role="RequestTable" EntitySet="RequestTable" />
-          </AssociationSet>
-          <AssociationSet Name="FK_RequestTable_DonorTable" Association="Self.FK_RequestTable_DonorTable">
-            <End Role="DonorTable" EntitySet="DonorTable" />
-            <End Role="RequestTable" EntitySet="RequestTable" />
-          </AssociationSet>
           <AssociationSet Name="FK_RequestTable_RequestStatusTable" Association="Self.FK_RequestTable_RequestStatusTable">
             <End Role="RequestStatusTable" EntitySet="RequestStatusTable" />
             <End Role="RequestTable" EntitySet="RequestTable" />
@@ -680,6 +649,7 @@
           <NavigationProperty Name="GenderTable" Relationship="KapiNadeDBModel.FK_DonorTable_GenderTable" FromRole="DonorTable" ToRole="GenderTable" />
           <NavigationProperty Name="BloodStockDetailsTables" Relationship="KapiNadeDBModel.FK_BloodStockDetailsTable_DonorTable" FromRole="DonorTable" ToRole="BloodStockDetailsTable" />
           <NavigationProperty Name="RequestTables" Relationship="KapiNadeDBModel.FK_RequestTable_DonorTable" FromRole="DonorTable" ToRole="RequestTable" />
+          <Property Name="Email" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="GenderTable">
           <Key>
@@ -1321,6 +1291,7 @@
           <EntitySetMapping Name="DonorTables">
             <EntityTypeMapping TypeName="KapiNadeDBModel.DonorTable">
               <MappingFragment StoreEntitySet="DonorTable">
+                <ScalarProperty Name="Email" ColumnName="Email" />
                 <ScalarProperty Name="GenderID" ColumnName="GenderID" />
                 <ScalarProperty Name="UserID" ColumnName="UserID" />
                 <ScalarProperty Name="DonorID" ColumnName="DonorID" />

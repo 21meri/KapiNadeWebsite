@@ -32,6 +32,7 @@ namespace DatabaseLayer
         public int CityID { get; set; }
         public int UserID { get; set; }
         public int GenderID { get; set; }
+        public string Email { get; set; }
     
         public virtual BloodGroupsTable BloodGroupsTable { get; set; }
         public virtual CityTable CityTable { get; set; }
