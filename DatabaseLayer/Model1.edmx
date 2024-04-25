@@ -88,6 +88,7 @@
           <Property Name="DonorID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Name" Type="nvarchar" MaxLength="150" Nullable="false" />
           <Property Name="Surname" Type="nvarchar" MaxLength="150" Nullable="false" />
+          <Property Name="DateOfBirth" Type="date" Nullable="false" />
           <Property Name="BloodGroupID" Type="int" Nullable="false" />
           <Property Name="LastDonationDate" Type="date" Nullable="false" />
           <Property Name="ContactNumber" Type="nvarchar" MaxLength="20" Nullable="false" />
@@ -650,6 +651,7 @@
           <NavigationProperty Name="BloodStockDetailsTables" Relationship="KapiNadeDBModel.FK_BloodStockDetailsTable_DonorTable" FromRole="DonorTable" ToRole="BloodStockDetailsTable" />
           <NavigationProperty Name="RequestTables" Relationship="KapiNadeDBModel.FK_RequestTable_DonorTable" FromRole="DonorTable" ToRole="RequestTable" />
           <Property Name="Email" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="DateOfBirth" Type="DateTime" Nullable="false" Precision="0" />
         </EntityType>
         <EntityType Name="GenderTable">
           <Key>
@@ -1291,6 +1293,7 @@
           <EntitySetMapping Name="DonorTables">
             <EntityTypeMapping TypeName="KapiNadeDBModel.DonorTable">
               <MappingFragment StoreEntitySet="DonorTable">
+                <ScalarProperty Name="DateOfBirth" ColumnName="DateOfBirth" />
                 <ScalarProperty Name="Email" ColumnName="Email" />
                 <ScalarProperty Name="GenderID" ColumnName="GenderID" />
                 <ScalarProperty Name="UserID" ColumnName="UserID" />
