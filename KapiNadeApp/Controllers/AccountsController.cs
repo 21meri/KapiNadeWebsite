@@ -171,6 +171,10 @@ namespace KapiNadeApp.Controllers
                             donor.CardNumber = collectBloodMV.DonorDetails.CardNumber;
                             donor.GenderID = collectBloodMV.GenderID;
                             donor.LastDonationDate = DateTime.Now;
+
+                            donor.Email = collectBloodMV.DonorDetails.Email;
+                            donor.DateOfBirth = collectBloodMV.DonorDetails.DateOfBirth;
+
                             donor.ContactNumber = collectBloodMV.DonorDetails.ContactNumber;
                             donor.CityID = collectBloodMV.CityID;
                             donor.UserID = user.UserID;

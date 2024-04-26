@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
 
@@ -12,7 +13,9 @@ namespace KapiNadeApp.Models
 
         public string Name { get; set; }
         public string Surname { get; set; }
-
+        public string Email { get; set; }
+        [DataType(DataType.Date)]
+        public System.DateTime DateOfBirth { get; set; }
         public string ContactNumber { get; set; }
         public string Address { get; set; }
         public string UserType { get; set; }

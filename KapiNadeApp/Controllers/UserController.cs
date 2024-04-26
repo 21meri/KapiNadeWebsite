@@ -114,6 +114,10 @@ namespace KapiNadeApp.Controllers
                 userprofile.Donor.DonorID = donor.DonorID;
                 userprofile.Donor.Name = donor.Name;
                 userprofile.Donor.Surname = donor.Surname;
+
+                userprofile.Donor.Email = donor.Email;
+                userprofile.Donor.DateOfBirth = donor.DateOfBirth;
+
                 userprofile.Donor.GenderID = donor.GenderID;
                 userprofile.Donor.BloodGroupID = donor.BloodGroupID;
                 userprofile.Donor.LastDonationDate = donor.LastDonationDate;
@@ -168,6 +172,11 @@ namespace KapiNadeApp.Controllers
                             var donor = DB.DonorTables.Find(userprofile.Donor.DonorID);
                             donor.Name = userprofile.Donor.Name;
                             donor.Surname = userprofile.Donor.Surname;
+
+                            donor.Email = userprofile.Donor.Email;
+                            donor.DateOfBirth = userprofile.Donor.DateOfBirth;
+
+
                             donor.BloodGroupID = userprofile.BloodGroupID;
                             donor.GenderID = userprofile.GenderID;
                             donor.ContactNumber = userprofile.Donor.ContactNumber;

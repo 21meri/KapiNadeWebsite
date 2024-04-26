@@ -51,6 +51,10 @@ namespace KapiNadeApp.Controllers
                         adddonor.Name = donor.Name;
                         adddonor.Surname = donor.Surname;
                         adddonor.Address = donor.Address;
+
+                        adddonor.Email = donor.Email;
+                        adddonor.DateOfBirth = donor.DateOfBirth;
+
                         adddonor.UserType = "Person";
                         adddonor.UserTypeID = user.UserTypeID;
                         finderMV.SearchResult.Add(adddonor);

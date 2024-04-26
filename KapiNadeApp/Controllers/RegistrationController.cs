@@ -136,6 +136,10 @@ namespace KapiNadeApp.Controllers
                             var donor = new DonorTable();
                             donor.Name = registrationMV.Donor.Name;
                             donor.Surname = registrationMV.Donor.Surname;
+
+                            donor.Email = registrationMV.Donor.Email;
+                            donor.DateOfBirth = registrationMV.Donor.DateOfBirth;
+
                             donor.BloodGroupID = registrationMV.BloodGroupID;
                             donor.Address = registrationMV.Donor.Address;
                             donor.CardNumber = registrationMV.Donor.CardNumber;

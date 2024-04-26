@@ -88,6 +88,10 @@ namespace KapiNadeApp.Controllers
                                 Session["DonorID"] = donor.DonorID;
                                 Session["Name"] = donor.Name;
                                 Session["Surname"] = donor.Surname;
+
+                                Session["Email"] = donor.Email;
+                                Session["DateOfBirth"] = donor.DateOfBirth;
+
                                 Session["GenderID"] = donor.GenderID;
                                 Session["BloodGroupID"] = donor.BloodGroupID;
                                 Session["BloodGroup"] = donor.BloodGroupsTable.BloodGroup;

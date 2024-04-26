@@ -58,6 +58,15 @@
                                 </dd>
 
 
+                                <dt>
+                                    Donor date of birth
+                                </dt>
+
+                                <dd>
+                                    @Html.EditorFor(model => model.DonorDetails.DateOfBirth, new { htmlAttributes = new { @class = "form-control" } })
+                                    @Html.ValidationMessageFor(model => model.DonorDetails.DateOfBirth, "", new { @class = "text-danger" })
+                                </dd>
+
 
                                 <dt>
                                     Donor surname

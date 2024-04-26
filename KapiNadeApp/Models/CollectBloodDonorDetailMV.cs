@@ -11,6 +11,10 @@ namespace KapiNadeApp.Models
         public int DonorID { get; set; }
         public string Name { get; set; }
         public string Surname { get; set; }
+
+        [DataType(DataType.Date)]
+        public System.DateTime DateOfBirth { get; set; }
+
         public int GenderID { get; set; }
         public int BloodGroupID { get; set; }
         public string BloodGroup { get; set; }
