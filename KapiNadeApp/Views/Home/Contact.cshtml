@@ -1,0 +1,513 @@
+﻿@{
+    Layout = null;
+    ViewBag.Title = "Contact";
+}
+
+
+<!DOCTYPE html>
+<!--[if IE 8]> <html lang="en" class="ie8"> <![endif]-->
+<!--[if !IE]><!-->
+<html lang="en">
+<!--<![endif]-->
+
+<head>
+    <meta charset="utf-8">
+    <title>Kapi nade</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="description" content="Blood Donation - Activism & Campaign HTML5 Template">
+    <meta name="author" content="xenioushk">
+    <link rel="shortcut icon" href="~/Content/Template/images/favicon.png" />
+
+    <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
+    <!--[if lt IE 9]>
+      <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <!-- The styles -->
+    <link rel="stylesheet" href="~/Content/Template/css/bootstrap.min.css" />
+    <link href="~/Content/Template/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link href="~/Content/Template/css/animate.css" rel="stylesheet" type="text/css">
+    <link href="~/Content/Template/css/owl.carousel.css" rel="stylesheet" type="text/css">
+    <link href="~/Content/Template/css/venobox.css" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" href="~/Content/Template/css/styles.css" />
+</head>
+
+
+
+<body>
+
+    <div id="preloader">
+        <span class="margin-bottom"><img src="~/Content/Template/images/loader.gif" alt="" /></span>
+    </div>
+
+    <!--  HEADER -->
+
+    <header class="main-header clearfix" data-sticky_header="true">
+
+        <div class="top-bar clearfix">
+
+            <div class="container">
+
+                <div class="row">
+
+                    <div class="col-md-8 col-sm-12">
+
+                        <p><marquee>Dobro došli na web stranicu centra za darivanje krvi.</marquee></p>
+
+                    </div>
+
+                    <div class="col-md-4col-sm-12">
+                        <div class="top-bar-social">
+                            <a href="#"><i class="fa fa-facebook"></i></a>
+                            <a href="#"><i class="fa fa-twitter"></i></a>
+                            <a href="#"><i class="fa fa-google-plus"></i></a>
+                            <a href="#"><i class="fa fa-instagram"></i></a>
+                            <a href="#"><i class="fa fa-youtube"></i></a>
+                            @if (string.IsNullOrEmpty(Convert.ToString(Session["Username"])))
+                            {
+                                @Html.ActionLink("Sign in", "Login", "Home", null, new { @class = "btn btn-theme" })
+                            }
+                            else
+                            {
+                                @Html.ActionLink("Sign out", "Logout", "Home", null, new { @class = "btn btn-theme" })
+
+                            }
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div> <!--  end .container -->
+
+        </div> <!--  end .top-bar  -->
+
+        <section class="header-wrapper navgiation-wrapper">
+
+            <div class="navbar navbar-default">
+                <div class="container">
+
+
+                    <div class="navbar-header">
+                        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                        </button>
+                        <a class="logo" href="index.html"><img alt="" src="~/Content/Template/images/logo.png"></a>
+                    </div>
+
+                    @{
+                        int usertypeid = 0;
+                        int userid = 0;
+                        string sessionusertype = Convert.ToString(Session["UserTypeID"]);
+                        string userID = Convert.ToString(Session["UserID"]);
+
+                        int.TryParse(sessionusertype, out usertypeid);
+                        int.TryParse(userID, out userid);
+
+                        <div class="navbar-collapse collapse">
+                            <ul class="nav navbar-nav navbar-right">
+                                <li>
+                                    <a href="@Url.Content("~/Home/MainHome")">Naslovna</a>
+                                </li>
+
+                                <li>
+                                    <a href="@Url.Content("~/Home/AboutUs")">O nama</a>
+                                </li>
+
+                                <li>
+                                    <a href="@Url.Content("~/Finder/FinderOfDonors")">Pronađi donora</a>
+                                </li>
+
+                                @if (usertypeid == 1)
+                                {
+                                    <li><a href="@Url.Content("~/Accounts/AllNewUserRequests")">Accounts requests</a></li>
+
+                                }
+
+                                @if (usertypeid == 3 || usertypeid == 4 || usertypeid == 5)
+                                {
+                                    <li><a href="@Url.Content("~/Finder/ShowAllRequests")">All requests</a></li>
+
+                                }
+
+                                @if (usertypeid == 2 || usertypeid == 5)
+                                {
+                                    <li><a href="@Url.Content("~/Finder/DonorRequests")">Seeker requests</a></li>
+
+                                }
+
+
+                                <li>
+                                    <a href="#">Campaign</a>
+                                    <ul class="drop-down">
+                                        <li><a href="@Url.Content("~/Home/AllCampaigns")">All Campaigns</a></li>
+                                        @if (usertypeid == 5)
+                                        {
+                                            <li><a href="@Url.Content("~/BloodBank/AllCampaigns")">Add Campaign</a></li>
+                                            <li><a href="@Url.Content("~/BloodBank/BloodStock")">Stock</a></li>
+
+                                        }
+
+                                    </ul>
+                                </li>
+
+
+                                @if (usertypeid == 1)
+                                {
+                                    <li>
+                                        <a href="#">Setting</a>
+                                        <ul class="drop-down">
+                                            <li><a href="@Url.Content("~/User/UserProfile/"+userid+"")">User Profile</a></li>
+                                            <li><a href="@Url.Content("~/AccountStatus/AllAccountStatus")">All account status</a></li>
+                                            <li><a href="@Url.Content("~/BloodGroup/AllBloodGroups")">Blood groups</a></li>
+                                            <li><a href="@Url.Content("~/CityTables/Index")">Cities</a></li>
+                                            <li><a href="@Url.Content("~/RequestType/AllRequestType")">Request type</a></li>
+                                            <li><a href="@Url.Content("~/UserType/AllUserTypes")">User type</a></li>
+                                            <li><a href="@Url.Content("~/Home/Logout")">Sign out</a></li>
+
+                                        </ul>
+                                    </li>
+                                }
+                                else if (usertypeid > 1)
+                                {
+                                    <li>
+                                        <a href="#">Setting</a>
+                                        <ul class="drop-down">
+                                            <li><a href="@Url.Content("~/User/UserProfile/"+userid+"")">User Profile</a></li>
+                                            <li><a href="@Url.Content("~/Home/Logout")">Sign out</a></li>
+
+                                        </ul>
+                                    </li>
+                                }
+                                <li><a href="@Url.Content("~/Home/Contact")">Kontakt</a></li>
+                            </ul>
+                        </div>
+                    }
+                </div>
+            </div>
+
+        </section>
+
+    </header> <!-- end main-header  -->
+    <!--  PAGE HEADING -->
+
+
+
+
+
+    <section class="page-header" data-stellar-background-ratio="1.2">
+
+        <div class="container">
+
+            <div class="row">
+
+                <div class="col-sm-12 text-center">
+
+
+                    <h3>
+                        Contact Us
+                    </h3>
+
+                    <p class="page-breadcrumb">
+                        <a href="#">Home</a> / Contact
+                    </p>
+
+
+                </div>
+
+            </div> <!-- end .row  -->
+
+        </div> <!-- end .container  -->
+
+    </section> <!-- end .page-header  -->
+    <!--  MAIN CONTENT  -->
+
+    <section class="section-content-block section-contact-block no-bottom-padding">
+
+        <div class="container">
+
+            <div class="row">
+
+                <div class="col-md-12">
+                    <h2 class="contact-title">Contact us</h2>
+                </div>
+
+                <div class="col-md-3">
+
+                    <ul class="contact-info">
+                        <li>
+                            <span class="icon-container"><i class="fa fa-home"></i></span>
+                            <address>Branislava Đurđevića bb</address>
+                        </li>
+                    </ul>
+
+                </div>
+
+                <div class="col-md-2">
+
+                    <ul class="contact-info">
+
+                        <li>
+                            <span class="icon-container"><i class="fa fa-phone"></i></span>
+                            <address><a href="#">+ 037 226 086</a></address>
+                        </li>
+
+                    </ul>
+
+                </div>
+
+                <div class="col-md-4">
+                    <ul class="contact-info">
+                        <li>
+                            <span class="icon-container"><i class="fa fa-envelope"></i></span>
+                            <address><a href="mailto:">minela.prosic.mp@gmail.com</a></address>
+                        </li>
+                    </ul>
+
+                </div>
+
+                <div class="col-md-3">
+
+                    <ul class="contact-info">
+                        <li>
+                            <span class="icon-container"><i class="fa fa-globe"></i></span>
+                            <address><a href="#">hrnjicamerjem@gmail.com</a></address>
+                        </li>
+                    </ul>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+    <section class="section-content-block section-contact-block">
+
+        <div class="container">
+
+            <div class="row">
+
+                <div class="col-sm-6 wow fadeInLeft">
+
+                    <div class="contact-form-block">
+
+                        <h2 class="contact-title">Say hello to us</h2>
+                        <form role="form" action="#" method="post" id="contact-form">
+
+
+                         
+
+                                <div class="form-group">
+                                    <input type="text" class="form-control" id="user_name" name="user_name" placeholder="Name" data-msg="Please Write Your Name" />
+                                </div>
+
+                                <div class="form-group">
+                                    <input type="email" class="form-control" id="user_email" name="user_email" placeholder="Email" data-msg="Please Write Your Valid Email" />
+                                </div>
+                                <div class="form-group">
+                                    <input type="text" class="form-control" id="email_subject" name="email_subject" placeholder="Subject" data-msg="Please Write Your Message Subject" />
+                                </div>
+
+                                <div class="form-group">
+                                    <textarea class="form-control" rows="5" name="email_message" id="email_message" placeholder="Message" data-msg="Please Write Your Message"></textarea>
+                                </div>
+
+                                <div class="form-group">
+                                    <button type="submit" class="btn btn-custom">Send Now</button>
+                                </div>
+
+                            </form>
+
+                    </div> <!-- end .contact-form-block  -->
+
+                </div> <!--  end col-sm-6  -->
+
+                <div class="col-sm-6 wow fadeInRight">
+
+                    <h2 class="contact-title">Our Location</h2>
+
+
+                    @*<div class="section-google-map-block wow fadeInUp">
+
+        <div id="map_canvas"></div>*@
+                    <div class="section-google-map-block wow fadeInUp">
+                        <iframe width="100%" height="400" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="https://www.openstreetmap.org/export/embed.html?bbox=15.8562,44.8093,15.8573,44.8101&amp;layer=mapnik&amp;marker=44.8097,15.8567"></iframe>
+                    </div>
+
+
+
+                </div> <!-- end .section-content-block  -->
+
+
+
+                </div> <!--  end col-sm-6  -->
+
+            </div> <!-- end row  -->
+
+        </div> <!--  end .container -->
+
+    </section> <!-- end .section-content-block  -->
+
+
+
+
+    <footer>
+
+        <section class="footer-widget-area footer-widget-area-bg">
+
+            <div class="container">
+
+                <div class="row">
+
+                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+
+                        <div class="about-footer">
+
+                            <div class="row">
+
+                                <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
+                                    <img src="~/Content/Template/images/logo-footer.png" alt="" />
+                                </div> <!--  end col-lg-3-->
+
+                                <div class="col-lg-9 col-md-9 col-sm-9 col-xs-12">
+                                    <p align="justify">
+                                        Dvije predane studentice, Minela i Merjem, udružile su snage kako bi stvorile inovativnu web aplikaciju posvećenu darivanju krvi. Njihova misija je olakšati proces doniranja krvi i povećati svijest o važnosti ove humane geste.
+                                    </p>
+                                </div> <!--  end .col-lg-9  -->
+
+                            </div> <!--  end .row -->
+
+                        </div> <!--  end .about-footer  -->
+
+                    </div> <!--  end .col-md-12  -->
+
+                </div> <!--  end .row  -->
+
+                <div class="row">
+
+                    <div class="col-md-4 col-sm-6 col-xs-12">
+
+                        <div class="footer-widget">
+                            <div class="sidebar-widget-wrapper">
+                                <div class="footer-widget-header clearfix">
+                                    <h3>Pretplatite se</h3>
+                                </div>
+                                <p align="justify">Prijavite se na redovni newsletter i budite u toku s našim najnovijim vijestima.</p>
+                                <div class="footer-subscription">
+                                    <p>
+                                        <input id="mc4wp_email" class="form-control" required="" placeholder="Unesite svoju e-poštu" name="EMAIL" type="email">
+                                    </p>
+                                    <p>
+                                        <input class="btn btn-default" value="Pretplatite se sad" type="submit">
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div> <!--  end .col-md-4 col-sm-12 -->
+
+                    <div class="col-md-4 col-sm-6 col-xs-12">
+
+                        <div class="footer-widget">
+
+                            <div class="sidebar-widget-wrapper">
+
+                                <div class="footer-widget-header clearfix">
+
+                                </div>  <!--  end .footer-widget-header -->
+
+
+                                <div class="textwidget">
+
+
+
+                                </div>
+
+                            </div> <!-- end .footer-widget-wrapper  -->
+
+                        </div> <!--  end .footer-widget  -->
+
+                    </div> <!--  end .col-md-4 col-sm-12 -->
+
+                    <div class="col-md-4 col-sm-12 col-xs-12">
+
+                        <div class="footer-widget">
+
+                            <div class="sidebar-widget-wrapper">
+
+                                <div class="footer-widget-header clearfix">
+                                    <h3>Kontaktirajte nas</h3>
+                                </div>  <!--  end .footer-widget-header -->
+
+
+                                <div class="textwidget">
+
+                                    <i class="fa fa-envelope-o fa-contact"></i> <p align="justify"><a href="#">minela.prosic.mp@gmail.com</a><br /><a href="#">hrnjicamerjem@gmail.com</a></p>
+
+                                    <i class="fa fa-location-arrow fa-contact"></i> <p align="justify">Branislava Đurđevića bb, Bihać 77000<br />Nedima Filipovića 9, 71120 Sarajevo, BiH</p>
+
+                                    <i class="fa fa-phone fa-contact"></i> <p align="justify">+ 037 226 086<br />+ 387 33 645 746</p>
+
+                                </div>
+
+                            </div> <!-- end .footer-widget-wrapper  -->
+
+                        </div> <!--  end .footer-widget  -->
+
+                    </div> <!--  end .footer-widget  -->
+
+                </div> <!--  end .col-md-4 col-sm-12 -->
+
+            </div> <!-- end row  -->
+            <!-- end .container  -->
+
+        </section> <!--  end .footer-widget-area  -->
+        <!--FOOTER CONTENT  -->
+
+        <section class="footer-contents">
+
+            <div class="container">
+
+                <div class="row clearfix">
+
+                    <div align="center">
+                        <p class="copyright-text"> Copyright 2024 © Kapi nade </p>
+                        <p class="copyright-text"> Design by Minela & Merjem </p>
+
+                    </div>  <!-- end .col-sm-6  -->
+
+
+
+                </div> <!-- end .row  -->
+
+            </div> <!--  end .container  -->
+
+        </section> <!--  end .footer-content  -->
+
+    </footer>
+
+    <!-- END FOOTER  -->
+    <!-- Back To Top Button  -->
+
+    <a id="backTop">Back To Top</a>
+
+
+
+    <script src="~/Content/Template/js/jquery.min.js"></script>
+    <script src="~/Content/Template/js/bootstrap.min.js"></script>
+    <script src="~/Content/Template/js/wow.min.js"></script>
+    <script src="~/Content/Template/js/jquery.backTop.min.js "></script>
+    <script src="~/Content/Template/js/waypoints.min.js"></script>
+    <script src="~/Content/Template/js/waypoints-sticky.min.js"></script>
+    <script src="~/Content/Template/js/owl.carousel.min.js"></script>
+    <script src="~/Content/Template/js/jquery.stellar.min.js"></script>
+    <script src="~/Content/Template/js/jquery.counterup.min.js"></script>
+    <script src="~/Content/Template/js/venobox.min.js"></script>
+    <script src="~/Content/Template/js/custom-scripts.js"></script>
+
+
+</body>
+</html>
