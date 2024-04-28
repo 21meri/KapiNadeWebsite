@@ -115,6 +115,10 @@
                                                         <a href="@Url.Content("~/Home/AboutUs")">O nama</a>
                                                     </li>
 
+
+
+
+
                                                     <li>
                                                         <a href="@Url.Content("~/Finder/FinderOfDonors")">Pronađi donora</a>
                                                     </li>
@@ -139,11 +143,12 @@
 
 
                                                     <li>
-                                                        <a href="#">Campaign</a>
+                                                        <a href="@Url.Content("~/Home/AllCampaigns")">Campaign</a>
                                                         <ul class="drop-down">
-                                                            <li><a href="@Url.Content("~/Home/AllCampaigns")">All Campaigns</a></li>
+
                                                             @if (usertypeid == 5)
                                                             {
+                                                                <li><a href="@Url.Content("~/Home/AllCampaigns")">All Campaigns</a></li>
                                                                 <li><a href="@Url.Content("~/BloodBank/AllCampaigns")">Add Campaign</a></li>
                                                                 <li><a href="@Url.Content("~/BloodBank/BloodStock")">Stock</a></li>
 
@@ -181,12 +186,11 @@
                                                         </li>
                                                     }
 
+                                                    @if (string.IsNullOrEmpty(Convert.ToString(Session["Username"])))
+                                                    {
+                                                        <li><a href="@Url.Content("~/Home/Contact")">Kontakt</a></li>
+                                                    }
 
-
-
-
-
-                                                    <li><a href="@Url.Content("~/Home/Contact")">Kontakt</a></li>
                                                 </ul>
                         </div>
                     }
