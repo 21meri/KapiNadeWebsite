@@ -65,12 +65,13 @@
                             <a href="#"><i class="fa fa-youtube"></i></a>
                             @if (string.IsNullOrEmpty(Convert.ToString(Session["Username"])))
                             {
-                                @Html.ActionLink("Sign in", "Login", "Home", null, new { @class = "btn btn-theme" })
+                                <button class="btn btn-default" onclick="location.href='@Url.Action("Login", "Home")'">Sign in</button>
+                                <button class="btn btn-default" onclick="window.location.href='#registrationsection'">Register</button>
+
                             }
                             else
                             {
-                                @Html.ActionLink("Sign out", "Logout", "Home", null, new { @class = "btn btn-theme" })
-
+                                <button class="btn btn-default" onclick="location.href='@Url.Action("Logout", "Home")'">Sign out</button>
                             }
                         </div>
 

@@ -74,21 +74,20 @@
                         <div id="@string.Format("collapse{0}", item.UserID)" class="panel-collapse collapse">
                             <div class="panel-body">
                                 <strong>
-                                    Type:  @item.UserType
-                                </strong><br />
-                                <strong>
                                     Phone No: @item.ContactNumber
                                 </strong>
                                 <br />
                                 <strong>
-                                    Address: @item.Address
+                                    Contact Email: @item.Email
                                 </strong>
-                                <br />
-                                @if (item.UserTypeID == 2)
+                                <br/>
+                                @if (item.UserTypeID == 5)
                                 {
+
                                     <strong>
-                                        Contact Email: @item.Email
+                                        Address: @item.Address
                                     </strong>
+                                    <br />
                                 }
                             </div>
                         </div>

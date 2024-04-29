@@ -889,23 +889,24 @@ a.btn-load-more:hover {
   color: #FFFFFF;
 }
 .top-bar-social {
-  float: right;
-  margin-right: 12px;
-  color: #FFFFFF;
-  font-size: 16px;
-  margin-top: 5px;
-  border: 0px solid #FFF;
-  letter-spacing: 1px;
-  text-transform: uppercase;
-  -webkit-border-radius: 0px;
-  -moz-border-radius: 0px;
-  border-radius: 0px;
-  -webkit-background-clip: padding-box;
-  -moz-background-clip: padding;
-  background-clip: padding-box;
+    float: right;
+    margin-right: 12px;
+    color: #FFFFFF;
+    font-size: 16px;
+    margin-top: 5px;
+    border: 0px solid #FFF;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    -webkit-border-radius: 0px;
+    -moz-border-radius: 0px;
+    border-radius: 0px;
+    -webkit-background-clip: padding-box;
+    -moz-background-clip: padding;
+    background-clip: padding-box;
 }
 .top-bar-social a {
-  display: inline-block;
+  display: flex;
+  align-items: center;
   -webkit-transition: all 0.3s ease-out;
   -moz-transition: all 0.3s ease-out;
   -o-transition: all 0.3s ease-out;

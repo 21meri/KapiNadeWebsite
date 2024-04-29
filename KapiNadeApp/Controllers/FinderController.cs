@@ -77,6 +77,7 @@ namespace KapiNadeApp.Controllers
                         adddonor.BloodGroupID = bloodbank.BloodGroupID;
                         adddonor.ContactNumber = bloodbank.BloodBankTable.ContactNumber;
                         adddonor.Address = bloodbank.BloodBankTable.Address;
+                        adddonor.Email = bloodbank.BloodBankTable.Email;
                         adddonor.DonorID = bloodbank.BloodBankID;
                         adddonor.Name = bloodbank.BloodBankTable.Name;
                         adddonor.UserType = "Blood Bank";
