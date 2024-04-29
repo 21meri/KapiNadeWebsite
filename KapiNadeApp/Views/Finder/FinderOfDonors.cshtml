@@ -83,7 +83,13 @@
                                 <strong>
                                     Address: @item.Address
                                 </strong>
-
+                                <br />
+                                @if (item.UserTypeID == 2)
+                                {
+                                    <strong>
+                                        Contact Email: @item.Email
+                                    </strong>
+                                }
                             </div>
                         </div>
                     }
