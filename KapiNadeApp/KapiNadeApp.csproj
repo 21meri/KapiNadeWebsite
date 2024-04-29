@@ -323,7 +323,6 @@
     <Content Include="Views\Home\AllCampaigns.cshtml" />
     <Content Include="Views\Accounts\AddNewDonorByBloodBank.cshtml" />
     <Content Include="Views\Finder\FinderOfDonors.cshtml" />
-    <Content Include="Views\Home\AboutUs.cshtml" />
     <Content Include="Views\Finder\RequestForBlood.cshtml" />
     <Content Include="Views\Finder\ShowAllRequests.cshtml" />
     <Content Include="Views\Finder\DonorRequests.cshtml" />

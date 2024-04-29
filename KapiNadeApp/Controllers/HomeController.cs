@@ -221,10 +221,7 @@ namespace KapiNadeApp.Controllers
             return RedirectToAction("MainHome");
         }
 
-        public ActionResult AboutUs()
-        {
-            return View();
-        }
+     
 
         public ActionResult Contact()
         {
