@@ -48,7 +48,7 @@ namespace KapiNadeApp.Controllers
         {
             if(ModelState.IsValid)
             {
-                var user = DB.UserTables.Where(u => u.Password == userMV.Password && u.Username == userMV.Username).FirstOrDefault();
+                var user = DB.UserTables.Where(u => u.Password == userMV.Password && (u.Email == userMV.UsernameOrEmail || u.Username == userMV.UsernameOrEmail)).FirstOrDefault();
                 if(user != null)
                 {
                     if(user.AccountStatusID == 1)
@@ -197,7 +197,7 @@ namespace KapiNadeApp.Controllers
             }
             else
             {
-                ModelState.AddModelError(string.Empty, "Please provide username and password");
+                ModelState.AddModelError(string.Empty, "Please provide username/email and password");
             }
             ClearSession();
             return View(userMV);

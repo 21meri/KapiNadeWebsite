@@ -11,6 +11,7 @@ namespace KapiNadeApp.Models
         public string Username { get; set; }
         public string Password { get; set; }
         public string Email { get; set; }
+        public string UsernameOrEmail { get; set; }
         public int AccountStatusID { get; set; }
         public string AccountStatus { get; set; }
         public int UserTypeID { get; set; }
