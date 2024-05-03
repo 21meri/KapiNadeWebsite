@@ -199,11 +199,10 @@ namespace KapiNadeApp.Controllers
         {
             if (ModelState.IsValid)
             {
-                var existingUser = DB.UserTables.FirstOrDefault(u => u.Username == registrationMV.User.Username);
-                if (existingUser != null)
+                var usernameExists = DB.UserTables.Any(u => u.Username == registrationMV.User.Username);
+                if (usernameExists)
                 {
                     ModelState.AddModelError(string.Empty, "Username already exists. Please choose a different username.");
-
                 }
                 var checktitle = DB.BloodBankTables.Where(h => h.Name == registrationMV.BloodBank.Name.Trim() && h.ContactNumber == registrationMV.BloodBank.ContactNumber).FirstOrDefault();
                 if (checktitle == null)
