@@ -53,7 +53,7 @@ namespace KapiNadeApp.Controllers
         {
             if(ModelState.IsValid)
             {
-                var checktitle = DB.HospitalTables.Where(h => h.Name == registrationMV.Hospital.Name.Trim()).FirstOrDefault();
+                var checktitle = DB.HospitalTables.FirstOrDefault(h => h.Name.Trim() == registrationMV.Hospital.Name.Trim());
                 if (checktitle == null)
                 {
                     using (var transaction = DB.Database.BeginTransaction())
@@ -117,7 +117,7 @@ namespace KapiNadeApp.Controllers
         {
             if (ModelState.IsValid)
             {
-                var checktitle = DB.DonorTables.Where(h => h.Name == registrationMV.Donor.Name.Trim() && h.CardNumber==registrationMV.Donor.CardNumber).FirstOrDefault();
+                var checktitle = DB.DonorTables.FirstOrDefault(d => d.Name.Trim() == registrationMV.Donor.Name.Trim() && d.CardNumber == registrationMV.Donor.CardNumber);
                 if (checktitle == null)
                 {
                     using (var transaction = DB.Database.BeginTransaction())
@@ -187,7 +187,7 @@ namespace KapiNadeApp.Controllers
         {
             if (ModelState.IsValid)
             {
-                var checktitle = DB.BloodBankTables.Where(h => h.Name == registrationMV.BloodBank.Name.Trim() && h.ContactNumber == registrationMV.BloodBank.ContactNumber).FirstOrDefault();
+                var checktitle = DB.BloodBankTables.FirstOrDefault(b => b.Name.Trim() == registrationMV.BloodBank.Name.Trim() && b.ContactNumber == registrationMV.BloodBank.ContactNumber);
                 if (checktitle == null)
                 {
                     using (var transaction = DB.Database.BeginTransaction())
@@ -249,7 +249,7 @@ namespace KapiNadeApp.Controllers
         {
             if (ModelState.IsValid)
             {
-                var checktitle = DB.SeekerTables.Where(h => h.Name == registrationMV.Seeker.Name.Trim() && h.CardNumber == registrationMV.Seeker.CardNumber).FirstOrDefault();
+                var checktitle = DB.SeekerTables.FirstOrDefault(s => s.Name.Trim() == registrationMV.Seeker.Name.Trim() && s.CardNumber == registrationMV.Seeker.CardNumber);
                 if (checktitle == null)
                 {
                     using (var transaction = DB.Database.BeginTransaction())
