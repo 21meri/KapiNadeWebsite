@@ -65,7 +65,7 @@
                             @if (string.IsNullOrEmpty(Convert.ToString(Session["Username"])))
                             {
                                 <button class="btn btn-default" onclick="location.href='@Url.Action("Login", "Home")'">Sign in</button>
-                                <button class="btn btn-default" onclick="window.location.href='#registrationsection'">Register</button>
+                                <button class="btn btn-default" onclick="location.href='@Url.Action("MainHome", "Home")'">Register</button>
 
                             }
                             else
