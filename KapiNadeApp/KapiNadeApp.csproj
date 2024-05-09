@@ -328,6 +328,7 @@
     <Content Include="Views\Finder\DonorRequests.cshtml" />
     <Content Include="Views\Finder\CompleteRequest.cshtml" />
     <Content Include="Views\Home\Contact.cshtml" />
+    <Content Include="Views\Home\Faq.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

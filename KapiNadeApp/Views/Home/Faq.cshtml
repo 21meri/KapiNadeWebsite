@@ -1,11 +1,7 @@
-﻿@model IEnumerable<DatabaseLayer.CampaignTable>
-
-@{
+﻿@{
     Layout = null;
-    ViewBag.Title = "All Campaigns";
+    ViewBag.Title = "Faq";
 }
-
-
 
 
 <!DOCTYPE html>
@@ -34,6 +30,9 @@
     <link href="~/Content/Template/css/venobox.css" rel="stylesheet" type="text/css">
     <link rel="stylesheet" href="~/Content/Template/css/styles.css" />
 </head>
+
+
+
 <body>
 
     <div id="preloader">
@@ -114,7 +113,6 @@
                                                     </li>
 
 
-
                                                     <li>
                                                         <a href="@Url.Content("~/Finder/FinderOfDonors")">Pronađi donora</a>
                                                     </li>
@@ -186,10 +184,13 @@
                                                         <li><a href="@Url.Content("~/Home/Contact")">Kontakt</a></li>
                                                     }
 
+
                                                     @if (string.IsNullOrEmpty(Convert.ToString(Session["Username"])))
                                                     {
                                                         <li><a href="@Url.Content("~/Home/Faq")">Česta pitanja</a></li>
                                                     }
+
+
                                                 </ul>
                         </div>
                     }
@@ -201,7 +202,13 @@
     </header> <!-- end main-header  -->
     <!--  PAGE HEADING -->
 
-    <section class="page-header" data-stellar-background-ratio="1.2">
+
+
+
+    <!--  MAIN CONTENT  -->
+    <!--  PAGE HEADING -->
+
+    <section class="page-header">
 
         <div class="container">
 
@@ -210,11 +217,11 @@
                 <div class="col-sm-12 text-center">
 
                     <h3>
-                        Campaign Lists
+                        FAQ
                     </h3>
 
                     <p class="page-breadcrumb">
-                        <a href="@Url.Content("~/Home/MainHome")">Home</a> / All Campaigns
+                        <a href="@Url.Content("~/Home/MainHome")">Home</a> / FAQ
                     </p>
 
 
@@ -225,99 +232,161 @@
         </div> <!-- end .container  -->
 
     </section> <!-- end .page-header  -->
-    <!--  MAIN CONTENT  -->
-    <!--  SECTION CAMPAIGNS   -->
+    <!--  SECTION FAQ -->
 
-    <section class="section-content-block">
+    <section class="section-content-block section-faq">
 
         <div class="container">
 
-            <div class="row section-heading-wrapper">
+            <div class="row">
 
                 <div class="col-md-12 col-sm-12 text-center">
-                    <h2 class="section-heading">Donation Campaigns</h2>
-                    <p class="section-subheading">Campaigns to encourage new donors to join and existing to continue to give blood.</p>
-                </div> <!-- end .col-sm-12  -->
+                    <h2 class="section-heading">Česta pitanja o darivanju krvi</h2>
+                    <p class="section-subheading">
+                        saznaj više o darivanju krvi i kako možeš pomoći drugima.
+                    </p>
+                </div> <!-- end .col-sm-10  -->
+
+            </div> <!--  end .row  -->
+
+            <div class="row">
+
+                <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12" id="accordion">
+
+                    <div class="panel panel-default faq-box">
+                        <div class="panel-heading">
+                            <h4 class="panel-title">
+                                <a class="accordion-toggle collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseOne">Šteti li darivanje krvi zdravlju ?</a>
+                            </h4>
+                        </div>
+                        <div id="collapseOne" class="panel-collapse collapse">
+                            <div class="panel-body">
+                                Darivanje krvi ne šteti zdravlju ako se provedu svi propisani postupci pri odabiru darivaoca krvi. Svaka zdrava osoba između 18 i 65 godina starosti može bez opasnosti za svoje zdravlje darovati krv, 3 do 4 puta u toku jedne godine.
+
+                                Zdrav organizam darivaoca krvi vrlo brzo u potpunosti nadoknađuje količinu i sve sastavne dijelove darovane krvi: već unutar 24 sata organizam nadoknadi tekući dio krvi – plazmu i njene sastojke, broj trombocita i leukocita. Eritrociti se nadoknade unutar 4 do 6 sedmica.
+                                Darivanje krvi najviše utječe na željezo koje se u obliku hemoglobina nalazi u eritrocitima (crvene krvne stanice).
+                                Darivanjem 450 mL krvi darivalac gubi oko 200 mg željeza. Organizam nadoknađuje gubitak željeza u roku 1 do 2 mjeseca povećanom apsorpcijom iz hrane.
+                                Prije svakog darivanja krvi obavezno provjeravamo zdravstveno stanje darivaoca krvi i vrijednost hemoglobinau njegovoj krvi.
+
+                                Darivanje krvi nikako ne ugrožava zdravlje darivaoca. Darivanje krvi ujedno je i jedan oblik kontrola zdravlja darivaoca.
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="panel panel-default faq-box">
+                        <div class="panel-heading">
+                            <h4 class="panel-title">
+                                <a class="accordion-toggle collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo">Može li se darivanjem krvi zaraziti od neke bolesti ?</a>
+                            </h4>
+                        </div>
+                        <div id="collapseTwo" class="panel-collapse collapse">
+                            <div class="panel-body">
+                                Mogućnost zaraze u toku darivanja krvi ne postoji.
+                                Sav pribor za uzimanje krvi – igle, plastične kese i ostali materijal koji se koristi pri uzimanju krvi su sterilni i za jednokratnu su upotrebu. Pribor je napravljen na način koji onemogućuje njegovu ponovnu upotrebu.
+                            </div>
+                        </div>
+                    </div>
+                    <div class="panel panel-default faq-box">
+                        <div class="panel-heading">
+                            <h4 class="panel-title">
+                                <a class="accordion-toggle collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseThree"> Zašto se odmah nakon darivanja krvi ne smije pušiti ?</a>
+                            </h4>
+                        </div>
+                        <div id="collapseThree" class="panel-collapse collapse">
+                            <div class="panel-body">
+                                Mnogi se pušači – darivaoci krvi ljute kada ih zamolimo da ne zapale cigaretu odmah nakon darivanja.
+                                Jedna od rjeđih, ali neugodnih reakcija organizma na pušenje je kratkotrajno stiskanje (spazam) krvnih žila u mozgu. Stoga, ako se puši odmah nakon završenog darivanja krvi, kod nekih, posebno mlađih osoba, može doći do blage omaglice i mučnine. Postoji još čitav niz zdravstvenih i društvenih razloga koji pokazuju da ne bi trebalo pušiti, zar ne?
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="panel panel-default faq-box">
+                        <div class="panel-heading">
+                            <h4 class="panel-title">
+                                <a class="accordion-toggle collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseFour">Razvija li se ovisnost za darivanje krvi ?</a>
+                            </h4>
+                        </div>
+                        <div id="collapseFour" class="panel-collapse collapse">
+                            <div class="panel-body">
+                                Darivanje krvi ne uzrokuje ovisnost!
+                                Darivanje krvi može se započeti i prestati u svako doba između 18. i 65. godine života. Darivanjem krvi ne nastaju nikakve štetne tjelesne promjene ili posljedice po organizam
+                                Neki ljudi se ipak bolje osjećaju nakon što daruju krv i zato daruju krv nekoliko puta godišnje. Ta je pojava češća u osoba s blago povišenim krvnim tlakom. U tih je osoba darivanje krvi ujedno i način ublažavanja simptoma uzrokovanih blagim povišenjem krvnog tlaka, ali nije način liječenja povišenog tlaka.
+                            </div>
+                        </div>
+                    </div>
+
+                </div> <!-- end .col-md-6  -->
+
+                <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12" id="accordion2">
+
+                    <div class="panel panel-default faq-box">
+                        <div class="panel-heading">
+                            <h4 class="panel-title">
+                                <a class="accordion-toggle collapsed" data-toggle="collapse" data-parent="#accordion2" href="#collapseFive">Zašto otekne mjesto uboda igle kroz koju je uzeta krv ?</a>
+                            </h4>
+                        </div>
+                        <div id="collapseFive" class="panel-collapse collapse">
+                            <div class="panel-body">
+                                Uzimanje krvi izvodi se ubodom sterilnom iglom u venu lakatne jame. Darivanje traje 8 do 12 minuta i kroz to vrijeme igla se nalazi u veni. Po završetku uzimanja krvi igla se vadi, a kožu se na mjestu uboda zaštićuje . Da bi se ubrzalo zatvaranje otvora u veni, ispružena ruka se podiže u vis. U većini je slučajeva otvor u veni potpuno zatvoren u roku od par minuta i na koži ostaje samo mali trag uboda.
+
+                                U oko 1 do 2% darivalaca krvi oko mjesta uboda nastaje oteklina s promjenom boje kože (hematom), uz osjećaj zatezanja i lagane boli. Oteklina može nastati u toku ili nakon darivanja. Uzrok otekline u toku darivanja posljedica je težeg uvođenja igle u venu ili lošeg položaja igle u veni, zbog kojeg mali dio krvi uz iglu izlazi u potkožno tkivo.
+
+                                Oteklina koja nastane nakon darivanja uzrokovana je nedovoljnim stiskanjem (spazmom) vene ili jačim pokretima ruke. Oteklina nije opasna nuspojava darivanja krvi. Oteklina se liječi oblogom od alkohola i mirovanjem ruke. Ako se stanje ne popravi za 2 do 3 dana, potrebno je javiti se u transfuzijsku ustanovu ili liječniku opće prakse.
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="panel panel-default faq-box">
+                        <div class="panel-heading">
+                            <h4 class="panel-title">
+                                <a class="accordion-toggle collapsed" data-toggle="collapse" data-parent="#accordion2" href="#collapseSix">Zašto se neki darivaoci ne osjećaju dobro nakon darivanja krvi?</a>
+                            </h4>
+                        </div>
+                        <div id="collapseSix" class="panel-collapse collapse">
+                            <div class="panel-body">
+                                Većina zdravih osoba koje daruju krv podnosi gubitak 450 mL krvi bez ikakvih nuspojava. Nuspojave su tijekom darivanja krvi rijetkost i opažaju se u oko 3 do 5% darivanja krvi. Nuspojave se mogu pojaviti u toku darivanja, ali i do više sati nakon darivanja krvi.
+
+                                Najčešće se javljaju blage nuspojave. Najčešći uzrok nuspojava su strah od darivanja krvi, premorenost ili neispavanost, zbog čega se organizam nije u stanju prilagoditi kratkotrajnom gubitku krvi.
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="panel panel-default faq-box">
+                        <div class="panel-heading">
+                            <h4 class="panel-title">
+                                <a class="accordion-toggle collapsed" data-toggle="collapse" data-parent="#accordion2" href="#collapseSeven"> Koliko često se može darivati krv ?</a>
+                            </h4>
+                        </div>
+                        <div id="collapseSeven" class="panel-collapse collapse">
+                            <div class="panel-body">
+                                Muškarci mogu darivati punu krv svaka 3 mjeseca, a žene svaka 4 mjeseca.
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="panel panel-default faq-box">
+                        <div class="panel-heading">
+                            <h4 class="panel-title">
+                                <a class="accordion-toggle collapsed" data-toggle="collapse" data-parent="#accordion2" href="#collapseEight">Mora li se nakon darivanja krvi nešto pojesti i popiti ?</a>
+                            </h4>
+                        </div>
+                        <div id="collapseEight" class="panel-collapse collapse">
+                            <div class="panel-body">
+                                Posebni medicinski razlozi ne zabranjuju darivaocu da jede ili pije nakon davrianja krvi. To je oblik društvenog ponašanja.
+                                <br>
+                                Uobičajeno je nakon darivanja krvi sjesti u društvu drugih darivalaca i osvježiti se laganim obrokom i bezalkoholnim pićem.
+                                Kroz to vrijeme darivalac je pod kontrolom zdravstvenih radnika. Želimo znati da se dobro osjećate prije nego napustite mjesto darivanja krvi.
+                            </div>
+                        </div>
+                    </div>
+
+                </div> <!-- end .col-md-12  -->
 
             </div> <!-- end .row  -->
-            @{ 
-                //int usertypeid = 0;
-                var date = DateTime.Now.Date;
-                //string sessionusertype = Convert.ToString(Session["UserTypeID"]);
-              
 
-                int.TryParse(sessionusertype, out usertypeid);
-          
+        </div> <!-- end .container  -->
 
-            <div class="row">
-                @foreach (var item in Model)
-                {
-                    <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
-                        <div class="event-latest">
-                            <div class="row">
-
-                                <div class="col-lg-5 col-md-5 hidden-sm hidden-xs">
-                                    <div class="event-latest-thumbnail">
-                                        <a href="#">
-                                            <img src="@Url.Content(item.CampaignPhoto)" alt="">
-                                        </a>
-                                    </div>
-                                </div> <!--  col-sm-5  -->
-
-                                <div class="col-lg-7 col-md-7 col-sm-12 col-xs-12">
-                                    <div class="event-details">
-                                        <a class="latest-date" href="#"> @item.CampaignDate.ToString("dd MMMM, yyyy ")</a>
-                                        <h4 class="event-latest-title">
-                                            <a href="#">@item.CampaignTitle</a>
-                                        </h4>
-                                        @if (usertypeid != 5)
-                                        {
-                                            <p>@item.CampaignDetails</p>}
-                                        <div class="event-latest-details">
-                                            <a class="author" href="#"><i class="fa fa-clock-o" aria-hidden="true"></i> @item.StartTime - @item.EndTime</a>
-                                            <a class="comments" href="#"> <i class="fa fa-map-marker" aria-hidden="true"></i> @(item.Location ==null ? "No location" : item.Location)</a>
-                                        </div>
-                                        @if (usertypeid == 5 && item.CampaignDate == date)
-                                        {
-                                            <a href="@Url.Content("~/BloodBank/BloodStock")" class="btn btn-theme">Collect blood</a>
-                                        }
-                                    </div>
-                                </div> <!--  col-sm-7  -->
-
-                            </div>
-
-                        </div>
-                    </div> <!--  col-sm-6  -->
-                }
-
-
-
-            </div>
-                }
-        </div>
-
-         
-
-         <!--  end .container  -->
-
-    </section>
-
-    <!-- SECTION CTA  -->
-
-    <section class="cta-section-2">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 col-sm-12 col-xs-12">
-                    <h2>We are helping people from 40 years</h2>
-                    <p>
-                        You can give blood at any of our blood donation venues all over the world. We have total sixty thousands donor centers and visit thousands of other venues on various occasions.
-                    </p>
-                    <a class="btn btn-cta-2" href="#">BECOME VOLUNTEER</a>
-                </div> <!--  end .col-md-8  -->
-            </div> <!--  end .row  -->
-        </div>
-    </section>
-
+    </section> <!--  end .section-faq -->
     <!-- CLIENT LOGO SECTION  -->
 
     <section class="section-client-logo section-secondary-bg">
@@ -390,9 +459,9 @@
         </div> <!-- end .container  -->
 
     </section> <!--  end .section-client-logo -->
-    <!-- START FOOTER  -->
 
-   
+
+
 
     <footer>
 

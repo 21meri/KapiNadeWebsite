@@ -227,5 +227,9 @@ namespace KapiNadeApp.Controllers
         {
             return View();
         }
+        public ActionResult Faq()
+        {
+            return View();
+        }
     }
 }

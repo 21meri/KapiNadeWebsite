@@ -107,83 +107,87 @@
                         int.TryParse(userID, out userid);
 
                         <div class="navbar-collapse collapse">
-                            <ul class="nav navbar-nav navbar-right">
-                                <li>
-                                    <a href="@Url.Content("~/Home/MainHome")">Naslovna</a>
-                                </li>
+                                                <ul class="nav navbar-nav navbar-right">
+                                                    <li>
+                                                        <a href="@Url.Content("~/Home/MainHome")">Naslovna</a>
+                                                    </li>
 
 
-                                <li>
-                                    <a href="@Url.Content("~/Finder/FinderOfDonors")">Pronađi donora</a>
-                                </li>
+                                                    <li>
+                                                        <a href="@Url.Content("~/Finder/FinderOfDonors")">Pronađi donora</a>
+                                                    </li>
 
-                                @if (usertypeid == 1)
-                                {
-                                    <li><a href="@Url.Content("~/Accounts/AllNewUserRequests")">Accounts requests</a></li>
+                                                    @if (usertypeid == 1)
+                                                    {
+                                                        <li><a href="@Url.Content("~/Accounts/AllNewUserRequests")">Accounts requests</a></li>
 
-                                }
+                                                    }
 
-                                @if (usertypeid == 3 || usertypeid == 4 || usertypeid == 5)
-                                {
-                                    <li><a href="@Url.Content("~/Finder/ShowAllRequests")">All requests</a></li>
+                                                    @if (usertypeid == 3 || usertypeid == 4 || usertypeid == 5)
+                                                    {
+                                                        <li><a href="@Url.Content("~/Finder/ShowAllRequests")">All requests</a></li>
 
-                                }
+                                                    }
 
-                                @if (usertypeid == 2 || usertypeid == 5)
-                                {
-                                    <li><a href="@Url.Content("~/Finder/DonorRequests")">Seeker requests</a></li>
+                                                    @if (usertypeid == 2 || usertypeid == 5)
+                                                    {
+                                                        <li><a href="@Url.Content("~/Finder/DonorRequests")">Seeker requests</a></li>
 
-                                }
-
-
-                                <li>
-                                    <a href="@Url.Content("~/Home/AllCampaigns")">Campaign</a>
-                                    <ul class="drop-down">
-
-                                        @if (usertypeid == 5)
-                                        {
-                                            <li><a href="@Url.Content("~/Home/AllCampaigns")">All Campaigns</a></li>
-                                            <li><a href="@Url.Content("~/BloodBank/AllCampaigns")">Add Campaign</a></li>
-                                            <li><a href="@Url.Content("~/BloodBank/BloodStock")">Stock</a></li>
-
-                                        }
-
-                                    </ul>
-                                </li>
+                                                    }
 
 
-                                @if (usertypeid == 1)
-                                {
-                                    <li>
-                                        <a href="#">Setting</a>
-                                        <ul class="drop-down">
-                                            <li><a href="@Url.Content("~/User/UserProfile/"+userid+"")">User Profile</a></li>
-                                            <li><a href="@Url.Content("~/AccountStatus/AllAccountStatus")">All account status</a></li>
-                                            <li><a href="@Url.Content("~/BloodGroup/AllBloodGroups")">Blood groups</a></li>
-                                            <li><a href="@Url.Content("~/CityTables/Index")">Cities</a></li>
-                                            <li><a href="@Url.Content("~/RequestType/AllRequestType")">Request type</a></li>
-                                            <li><a href="@Url.Content("~/UserType/AllUserTypes")">User type</a></li>
-                                            <li><a href="@Url.Content("~/Home/Logout")">Sign out</a></li>
+                                                    <li>
+                                                        <a href="@Url.Content("~/Home/AllCampaigns")">Campaign</a>
+                                                        <ul class="drop-down">
 
-                                        </ul>
-                                    </li>
-                                }
-                                else if (usertypeid > 1)
-                                {
-                                    <li>
-                                        <a href="#">Setting</a>
-                                        <ul class="drop-down">
-                                            <li><a href="@Url.Content("~/User/UserProfile/"+userid+"")">User Profile</a></li>
-                                            <li><a href="@Url.Content("~/Home/Logout")">Sign out</a></li>
+                                                            @if (usertypeid == 5)
+                                                            {
+                                                                <li><a href="@Url.Content("~/Home/AllCampaigns")">All Campaigns</a></li>
+                                                                <li><a href="@Url.Content("~/BloodBank/AllCampaigns")">Add Campaign</a></li>
+                                                                <li><a href="@Url.Content("~/BloodBank/BloodStock")">Stock</a></li>
 
-                                        </ul>
-                                    </li>
-                                }
-                                @if (string.IsNullOrEmpty(Convert.ToString(Session["Username"])))
-                                {
-                                    <li><a href="@Url.Content("~/Home/Contact")">Kontakt</a></li>
-                                }
-                            </ul>
+                                                            }
+
+                                                        </ul>
+                                                    </li>
+
+
+                                                    @if (usertypeid == 1)
+                                                    {
+                                                        <li>
+                                                            <a href="#">Setting</a>
+                                                            <ul class="drop-down">
+                                                                <li><a href="@Url.Content("~/User/UserProfile/"+userid+"")">User Profile</a></li>
+                                                                <li><a href="@Url.Content("~/AccountStatus/AllAccountStatus")">All account status</a></li>
+                                                                <li><a href="@Url.Content("~/BloodGroup/AllBloodGroups")">Blood groups</a></li>
+                                                                <li><a href="@Url.Content("~/CityTables/Index")">Cities</a></li>
+                                                                <li><a href="@Url.Content("~/RequestType/AllRequestType")">Request type</a></li>
+                                                                <li><a href="@Url.Content("~/UserType/AllUserTypes")">User type</a></li>
+                                                                <li><a href="@Url.Content("~/Home/Logout")">Sign out</a></li>
+
+                                                            </ul>
+                                                        </li>
+                                                    }
+                                                    else if (usertypeid > 1)
+                                                    {
+                                                        <li>
+                                                            <a href="#">Setting</a>
+                                                            <ul class="drop-down">
+                                                                <li><a href="@Url.Content("~/User/UserProfile/"+userid+"")">User Profile</a></li>
+                                                                <li><a href="@Url.Content("~/Home/Logout")">Sign out</a></li>
+
+                                                            </ul>
+                                                        </li>
+                                                    }
+                                                    @if (string.IsNullOrEmpty(Convert.ToString(Session["Username"])))
+                                                    {
+                                                        <li><a href="@Url.Content("~/Home/Contact")">Kontakt</a></li>
+                                                    }
+                                                    @if (string.IsNullOrEmpty(Convert.ToString(Session["Username"])))
+                                                    {
+                                                        <li><a href="@Url.Content("~/Home/Faq")">Česta pitanja</a></li>
+                                                    }
+                                                </ul>
                         </div>
                     }
                 </div>

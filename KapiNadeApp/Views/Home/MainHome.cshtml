@@ -113,7 +113,7 @@
                                                         <a href="@Url.Content("~/Home/MainHome")">Naslovna</a>
                                                     </li>
 
-                                                   
+
 
 
 
@@ -189,6 +189,11 @@
                                                     @if (string.IsNullOrEmpty(Convert.ToString(Session["Username"])))
                                                     {
                                                         <li><a href="@Url.Content("~/Home/Contact")">Kontakt</a></li>
+                                                    }
+
+                                                    @if (string.IsNullOrEmpty(Convert.ToString(Session["Username"])))
+                                                    {
+                                                        <li><a href="@Url.Content("~/Home/Faq")">Česta pitanja</a></li>
                                                     }
 
                                                 </ul>
