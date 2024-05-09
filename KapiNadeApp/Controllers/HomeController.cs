@@ -221,7 +221,11 @@ namespace KapiNadeApp.Controllers
             return RedirectToAction("MainHome");
         }
 
-     
+        public ActionResult Index()
+        {
+            
+            return RedirectToAction("MainHome");
+        }
 
         public ActionResult Contact()
         {
