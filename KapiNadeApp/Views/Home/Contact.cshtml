@@ -107,88 +107,88 @@
                         int.TryParse(userID, out userid);
 
                         <div class="navbar-collapse collapse">
-                                                <ul class="nav navbar-nav navbar-right">
-                                                    <li>
-                                                        <a href="@Url.Content("~/Home/MainHome")">Naslovna</a>
-                                                    </li>
+                            <ul class="nav navbar-nav navbar-right">
+                                <li>
+                                    <a href="@Url.Content("~/Home/MainHome")">Naslovna</a>
+                                </li>
 
 
-                                                    <li>
-                                                        <a href="@Url.Content("~/Finder/FinderOfDonors")">Pronađi donora</a>
-                                                    </li>
+                                <li>
+                                    <a href="@Url.Content("~/Finder/FinderOfDonors")">Pronađi donora</a>
+                                </li>
 
-                                                    @if (usertypeid == 1)
-                                                    {
-                                                        <li><a href="@Url.Content("~/Accounts/AllNewUserRequests")">Accounts requests</a></li>
+                                @if (usertypeid == 1)
+                                {
+                                    <li><a href="@Url.Content("~/Accounts/AllNewUserRequests")">Accounts requests</a></li>
 
-                                                    }
+                                }
 
-                                                    @if (usertypeid == 3 || usertypeid == 4 || usertypeid == 5)
-                                                    {
-                                                        <li><a href="@Url.Content("~/Finder/ShowAllRequests")">All requests</a></li>
+                                @if (usertypeid == 3 || usertypeid == 4 || usertypeid == 5)
+                                {
+                                    <li><a href="@Url.Content("~/Finder/ShowAllRequests")">All requests</a></li>
 
-                                                    }
+                                }
 
-                                                    @if (usertypeid == 2 || usertypeid == 5)
-                                                    {
-                                                        <li><a href="@Url.Content("~/Finder/DonorRequests")">Seeker requests</a></li>
+                                @if (usertypeid == 2 || usertypeid == 5)
+                                {
+                                    <li><a href="@Url.Content("~/Finder/DonorRequests")">Seeker requests</a></li>
 
-                                                    }
-
-
-                                                    <li>
-                                                        <a href="@Url.Content("~/Home/AllCampaigns")">Campaign</a>
-                                                        <ul class="drop-down">
-
-                                                            @if (usertypeid == 5)
-                                                            {
-                                                                <li><a href="@Url.Content("~/Home/AllCampaigns")">All Campaigns</a></li>
-                                                                <li><a href="@Url.Content("~/BloodBank/AllCampaigns")">Add Campaign</a></li>
-                                                                <li><a href="@Url.Content("~/BloodBank/BloodStock")">Stock</a></li>
-
-                                                            }
-
-                                                        </ul>
-                                                    </li>
+                                }
 
 
-                                                    @if (usertypeid == 1)
-                                                    {
-                                                        <li>
-                                                            <a href="#">Setting</a>
-                                                            <ul class="drop-down">
-                                                                <li><a href="@Url.Content("~/User/UserProfile/"+userid+"")">User Profile</a></li>
-                                                                <li><a href="@Url.Content("~/AccountStatus/AllAccountStatus")">All account status</a></li>
-                                                                <li><a href="@Url.Content("~/BloodGroup/AllBloodGroups")">Blood groups</a></li>
-                                                                <li><a href="@Url.Content("~/CityTables/Index")">Cities</a></li>
-                                                                <li><a href="@Url.Content("~/RequestType/AllRequestType")">Request type</a></li>
-                                                                <li><a href="@Url.Content("~/UserType/AllUserTypes")">User type</a></li>
-                                                                <li><a href="@Url.Content("~/User/AllUsers")">All Users</a></li>
-                                                                <li><a href="@Url.Content("~/Home/Logout")">Sign out</a></li>
+                                <li>
+                                    <a href="@Url.Content("~/Home/AllCampaigns")">Campaign</a>
+                                    <ul class="drop-down">
 
-                                                            </ul>
-                                                        </li>
-                                                    }
-                                                    else if (usertypeid > 1)
-                                                    {
-                                                        <li>
-                                                            <a href="#">Setting</a>
-                                                            <ul class="drop-down">
-                                                                <li><a href="@Url.Content("~/User/UserProfile/"+userid+"")">User Profile</a></li>
-                                                                <li><a href="@Url.Content("~/Home/Logout")">Sign out</a></li>
+                                        @if (usertypeid == 5)
+                                        {
+                                            <li><a href="@Url.Content("~/Home/AllCampaigns")">All Campaigns</a></li>
+                                            <li><a href="@Url.Content("~/BloodBank/AllCampaigns")">Add Campaign</a></li>
+                                            <li><a href="@Url.Content("~/BloodBank/BloodStock")">Stock</a></li>
 
-                                                            </ul>
-                                                        </li>
-                                                    }
-                                                    @if (string.IsNullOrEmpty(Convert.ToString(Session["Username"])))
-                                                    {
-                                                        <li><a href="@Url.Content("~/Home/Contact")">Kontakt</a></li>
-                                                    }
-                                                    @if (string.IsNullOrEmpty(Convert.ToString(Session["Username"])))
-                                                    {
-                                                        <li><a href="@Url.Content("~/Home/Faq")">Česta pitanja</a></li>
-                                                    }
-                                                </ul>
+                                        }
+
+                                    </ul>
+                                </li>
+
+
+                                @if (usertypeid == 1)
+                                {
+                                    <li>
+                                        <a href="#">Setting</a>
+                                        <ul class="drop-down">
+                                            <li><a href="@Url.Content("~/User/UserProfile/"+userid+"")">User Profile</a></li>
+                                            <li><a href="@Url.Content("~/AccountStatus/AllAccountStatus")">All account status</a></li>
+                                            <li><a href="@Url.Content("~/BloodGroup/AllBloodGroups")">Blood groups</a></li>
+                                            <li><a href="@Url.Content("~/CityTables/Index")">Cities</a></li>
+                                            <li><a href="@Url.Content("~/RequestType/AllRequestType")">Request type</a></li>
+                                            <li><a href="@Url.Content("~/UserType/AllUserTypes")">User type</a></li>
+                                            <li><a href="@Url.Content("~/User/AllUsers")">All Users</a></li>
+                                            <li><a href="@Url.Content("~/Home/Logout")">Sign out</a></li>
+
+                                        </ul>
+                                    </li>
+                                }
+                                else if (usertypeid > 1)
+                                {
+                                    <li>
+                                        <a href="#">Setting</a>
+                                        <ul class="drop-down">
+                                            <li><a href="@Url.Content("~/User/UserProfile/"+userid+"")">User Profile</a></li>
+                                            <li><a href="@Url.Content("~/Home/Logout")">Sign out</a></li>
+
+                                        </ul>
+                                    </li>
+                                }
+                                @if (string.IsNullOrEmpty(Convert.ToString(Session["Username"])))
+                                {
+                                    <li><a href="@Url.Content("~/Home/Contact")">O nama</a></li>
+                                }
+                                @if (string.IsNullOrEmpty(Convert.ToString(Session["Username"])))
+                                {
+                                    <li><a href="@Url.Content("~/Home/Faq")">Česta pitanja</a></li>
+                                }
+                            </ul>
                         </div>
                     }
                 </div>
@@ -213,11 +213,11 @@
 
 
                     <h3>
-                        Contact Us
+                        O nama
                     </h3>
 
                     <p class="page-breadcrumb">
-                        <a href="@Url.Content("~/Home/MainHome")">Home</a>/ Contact
+                        <a href="@Url.Content("~/Home/MainHome")">Home</a>/ O nama
                     </p>
 
 
@@ -229,6 +229,56 @@
 
     </section> <!-- end .page-header  -->
     <!--  MAIN CONTENT  -->
+
+
+
+
+
+    <section class="section-content-block section-contact-block">
+
+        <div class="container">
+
+            <div class="row">
+
+                <div class="col-sm-6 wow fadeInLeft">
+
+
+
+                    <h2 class="contact-title">Who We Are?</h2>
+
+                    <p>Blood Buddies is for public donation center with blood donation members in the changing health care system.</p>
+
+
+                    <ul class="custom-bullet-list">
+                        <li>Specialist blood donors and clinical supervision.</li>
+                        <li>Increasing communication with our members.</li>
+                        <li>High quality assessment, diagnosis and treatment.</li>
+                        <li>Examine critically to ensure alignment.</li>
+                        <li>The extra care of a multi-disciplinary team.</li>
+                    </ul>
+
+
+
+                </div> <!--  end col-sm-6  -->
+
+                <div class="col-sm-6 wow fadeInRight">
+
+                    <figure class="about-img theme-custom-box-shadow">
+
+                        <img src="~/Content/Template/images/appointment.jpg" alt="about" />
+                    </figure> <!-- end .cause-img  -->
+
+
+
+                </div> <!--  end col-sm-6  -->
+
+            </div> <!-- end row  -->
+
+        </div> <!--  end .container -->
+
+    </section> <!-- end .section-content-block  -->
+
+
 
     <section class="section-content-block section-contact-block no-bottom-padding">
 
@@ -291,10 +341,132 @@
 
     </section>
 
+    <!-- SECTION TEAM  -->
+
+    <section class="section-content-block section-secondary-bg section-our-team">
+
+        <div class="container wow fadeInUp">
+
+            <div class="row section-heading-wrapper">
+
+                <div class="col-md-12 col-sm-12 text-center">
+                    <h2 class="section-heading">Naši volonteri</h2>
+                    <p class="section-subheading">Volonteri koji svoje vrijeme posvećuju ispunjavanju naše misije</p>
+                </div> <!-- end .col-sm-10  -->
+
+            </div> <!-- end .row  -->
+
+            <div class="row">
+
+                <div class="col-lg-4 col-md-offset-0 col-md-4 col-md-offset-0 col-sm-8 col-sm-offset-2 col-xs-10 col-xs-offset-1">
+
+                    <div class="team-layout-1">
+
+                        <figure class="team-member">
+                            <a href="#" title="Edo Edić">
+                                <img src="~/Content/Template/images/team_9.jpg" alt="EDO EDIĆ" />
+                            </a>
+
+                        </figure> <!-- end. team-member  -->
+
+                        <article class="team-info">
+                            <h3>Edo Edić</h3>
+                            <h4>Suosnivač</h4>
+                        </article>
+
+                        <div class="team-content">
+
+                            <div class="team-social-share text-center clearfix">
+                                <a class="fa fa-facebook rectangle" href="#" title="Facebook"></a>
+                                <a class="fa fa-twitter rectangle" href="#" title="Twitter"></a>
+                                <a class="fa fa-google-plus rectangle" href="#" title="Google Plus"></a>
+                                <a class="fa fa-linkedin rectangle" href="#" title="Linkedin"></a>
+                            </div> <!-- end .author-social-box  -->
+
+                        </div>
+
+                    </div> <!--  end team-layout-1 -->
+
+                </div> <!--  end .col-md-4 col-sm-12  -->
+
+                <div class="col-lg-4 col-md-offset-0 col-md-4 col-md-offset-0 col-sm-8 col-sm-offset-2 col-xs-10 col-xs-offset-1">
+
+                    <div class="team-layout-1">
+
+                        <figure class="team-member">
+                            <a href="#" title="IVA IVIĆ">
+                                <img src="~/Content/Template/images/team_6.jpg" alt="IVA IVIĆ" />
+                            </a>
+
+                        </figure> <!-- end. team-member  -->
+
+                        <article class="team-info">
+                            <h3>Iva Ivić</h3>
+                            <h4>Osnivačica</h4>
+                        </article>
+
+                        <div class="team-content">
+
+                            <div class="team-social-share text-center clearfix">
+                                <a class="fa fa-facebook rectangle" href="#" title="Facebook"></a>
+                                <a class="fa fa-twitter rectangle" href="#" title="Twitter"></a>
+                                <a class="fa fa-google-plus rectangle" href="#" title="Google Plus"></a>
+                                <a class="fa fa-linkedin rectangle" href="#" title="Linkedin"></a>
+                            </div> <!-- end .author-social-box  -->
+
+                        </div>
+
+                    </div> <!--  end team layout-1 -->
+
+                </div> <!--  end .col-md-4 col-sm-12  -->
+
+                <div class="col-lg-4 col-md-offset-0 col-md-4 col-md-offset-0 col-sm-8 col-sm-offset-2 col-xs-10 col-xs-offset-1">
+
+                    <div class="team-layout-1">
+
+                        <figure class="team-member">
+                            <a href="#" title="EMA EMIĆ">
+                                <img src="~/Content/Template/images/team_7.jpg" alt="EMA EMIĆ" />
+                            </a>
+
+                        </figure> <!-- end. team-member  -->
+
+                        <article class="team-info">
+                            <h3>Ema Emić</h3>
+                            <h4>Menadžerica</h4>
+                        </article>
+                        <div class="team-content">
+
+                            <div class="team-social-share text-center clearfix">
+                                <a class="fa fa-facebook rectangle" href="#" title="Facebook"></a>
+                                <a class="fa fa-twitter rectangle" href="#" title="Twitter"></a>
+                                <a class="fa fa-google-plus rectangle" href="#" title="Google Plus"></a>
+                                <a class="fa fa-linkedin rectangle" href="#" title="Linkedin"></a>
+                            </div> <!-- end .author-social-box  -->
+
+                        </div>
+
+                    </div> <!--  end team-layout-1 -->
+
+                </div> <!--  end .col-md-4 col-sm-12  -->
+
+
+            </div> <!-- end .row  -->
+
+        </div> <!-- end .container  -->
+
+    </section> <!--  end .section-our-team -->
+
+
+
+
     <section class="section-content-block section-contact-block" style="display: flex; align-items: center; justify-content: center; height: 100vh;">
         <div class="container">
             <div class="row">
-                <div class="col-sm-12 text-center">
+
+
+
+                <div class="col-sm-12">
                     <h2 class="contact-title">Our Location</h2>
                     <div class="section-google-map-block wow fadeInUp">
                         <iframe width="100%" height="400" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="https://www.openstreetmap.org/export/embed.html?bbox=15.869758711785755,44.81090608615788,15.869758711785755,44.81090608615788&amp;layer=mapnik&amp;marker=44.81090608615788,15.869758711785755"></iframe>
@@ -303,6 +475,7 @@
             </div>
         </div>
     </section>
+
 
 
 
