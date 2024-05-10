@@ -329,6 +329,7 @@
     <Content Include="Views\Finder\CompleteRequest.cshtml" />
     <Content Include="Views\Home\Contact.cshtml" />
     <Content Include="Views\Home\Faq.cshtml" />
+    <Content Include="Views\User\AllUsers.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

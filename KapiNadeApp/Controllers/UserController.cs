@@ -254,5 +254,38 @@ namespace KapiNadeApp.Controllers
             return View(userprofile);
            
         }
+        public ActionResult AllUsers()
+        {
+            // Check if the user is logged in
+            if (string.IsNullOrEmpty(Convert.ToString(Session["Username"])))
+            {
+                return RedirectToAction("Login", "Home");
+            }
+
+            // Retrieve all users from the database
+            var users = DB.UserTables.ToList();
+
+            // Create a list to hold view model objects
+            var userList = new List<UserMV>();
+
+            // Map user data to view model objects
+            foreach (var user in users)
+            {
+                var userViewModel = new UserMV
+                {
+                    UserID = user.UserID,
+                    Username = user.Username,
+                    UserType = user.UserTypeTable.UserType, // Assuming UserType is a property of the User model
+                    AccountStatus = user.AccountStatusTable.AccountStatus, // Assuming AccountStatus is a property of the User model
+                    UsernameOrEmail = user.Email
+                };
+
+                userList.Add(userViewModel);
+            }
+
+            // Pass the list of view model objects to the view
+            return View(userList);
+        }
+
     }
 }
