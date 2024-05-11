@@ -5,6 +5,8 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using DatabaseLayer;
+using System.Security.Cryptography;
+using System.Text;
 using System.Drawing;
 
 namespace KapiNadeApp.Controllers
@@ -110,7 +112,7 @@ namespace KapiNadeApp.Controllers
                                 transaction.Rollback();
 
 
-                                
+
                             }
                             else
                             {
@@ -152,7 +154,7 @@ namespace KapiNadeApp.Controllers
                             }
                         }
 
-                        else 
+                        else
                         {
                             var user = new UserTable();
                             // Generiranje random broja
@@ -164,7 +166,8 @@ namespace KapiNadeApp.Controllers
                             string lastName = collectBloodMV.DonorDetails.Surname.Trim();
                             string username = firstName.ToLower() + "." + lastName.ToLower() + randomNumber;
                             user.Username = username;
-                            user.Password = "abcabc";
+                            string hashedPassword = EncryptPassword("abcabc"); // Enkriptujte lozinku "abcabc"
+                            user.Password = hashedPassword;
                             user.Email = collectBloodMV.DonorDetails.Email;
                             user.AccountStatusID = 2;
                             user.UserTypeID = 2;
@@ -190,53 +193,53 @@ namespace KapiNadeApp.Controllers
                             DB.SaveChanges();
                             checkdonor = DB.DonorTables.Where(d => d.CardNumber.Trim().Replace("-", "") == collectBloodMV.DonorDetails.CardNumber.Trim().Replace("-", "")).FirstOrDefault();
 
-                                var checkbloodgroupstock = DB.BloodStockTables.Where(s => s.BloodBankID == bloodbankID && s.BloodGroupID == collectBloodMV.BloodGroupID).FirstOrDefault();
-                                if (checkbloodgroupstock == null)
-                                {
-                                    var bloodstock = new BloodStockTable();
+                            var checkbloodgroupstock = DB.BloodStockTables.Where(s => s.BloodBankID == bloodbankID && s.BloodGroupID == collectBloodMV.BloodGroupID).FirstOrDefault();
+                            if (checkbloodgroupstock == null)
+                            {
+                                var bloodstock = new BloodStockTable();
 
 
-                                    bloodstock.BloodGroupID = collectBloodMV.BloodGroupID;
-                                    bloodstock.BloodBankID = bloodbankID;
-                                    bloodstock.Status = true;
-                                    bloodstock.Quantity = 0;
-                                    DB.BloodStockTables.Add(bloodstock);
-                                    DB.SaveChanges();
-
-                                    checkbloodgroupstock = DB.BloodStockTables.Where(s => s.BloodBankID == bloodbankID && s.BloodGroupID == collectBloodMV.BloodGroupID).FirstOrDefault();
-
-                                }
-                                checkbloodgroupstock.Quantity += collectBloodMV.Quantity;
-                                DB.Entry(checkbloodgroupstock).State = System.Data.Entity.EntityState.Modified;
+                                bloodstock.BloodGroupID = collectBloodMV.BloodGroupID;
+                                bloodstock.BloodBankID = bloodbankID;
+                                bloodstock.Status = true;
+                                bloodstock.Quantity = 0;
+                                DB.BloodStockTables.Add(bloodstock);
                                 DB.SaveChanges();
 
-                                var collectblooddetails = new BloodStockDetailsTable();
-                                collectblooddetails.BloodStockID = checkbloodgroupstock.BloodStockID;
-                                collectblooddetails.BloodGroupID = collectBloodMV.BloodGroupID;
-                                if (currentcampaign != null)
-                                {
-                                    // Postavi CampaignID na ID postojeće kampanje
-                                    collectblooddetails.CampaignID = currentcampaign.CampaignID;
-                                }
-                                else
-                                {
-                                    // Ako ne postoji kampanja, postavi CampaignID na null
-                                    collectblooddetails.CampaignID = null;
-                                }
-                                collectblooddetails.Quantity = collectBloodMV.Quantity;
-                                collectblooddetails.DonorID = checkdonor.DonorID;
-                                collectblooddetails.DonationDateTime = DateTime.Now;
-                                DB.BloodStockDetailsTables.Add(collectblooddetails);
-                                DB.SaveChanges();
+                                checkbloodgroupstock = DB.BloodStockTables.Where(s => s.BloodBankID == bloodbankID && s.BloodGroupID == collectBloodMV.BloodGroupID).FirstOrDefault();
 
-                                checkdonor.LastDonationDate = DateTime.Now;
-                                DB.Entry(checkdonor).State = System.Data.Entity.EntityState.Modified;
-                                DB.SaveChanges();
-                                transaction.Commit();
-                                return RedirectToAction("BloodStock", "BloodBank");
                             }
+                            checkbloodgroupstock.Quantity += collectBloodMV.Quantity;
+                            DB.Entry(checkbloodgroupstock).State = System.Data.Entity.EntityState.Modified;
+                            DB.SaveChanges();
+
+                            var collectblooddetails = new BloodStockDetailsTable();
+                            collectblooddetails.BloodStockID = checkbloodgroupstock.BloodStockID;
+                            collectblooddetails.BloodGroupID = collectBloodMV.BloodGroupID;
+                            if (currentcampaign != null)
+                            {
+                                // Postavi CampaignID na ID postojeće kampanje
+                                collectblooddetails.CampaignID = currentcampaign.CampaignID;
+                            }
+                            else
+                            {
+                                // Ako ne postoji kampanja, postavi CampaignID na null
+                                collectblooddetails.CampaignID = null;
+                            }
+                            collectblooddetails.Quantity = collectBloodMV.Quantity;
+                            collectblooddetails.DonorID = checkdonor.DonorID;
+                            collectblooddetails.DonationDateTime = DateTime.Now;
+                            DB.BloodStockDetailsTables.Add(collectblooddetails);
+                            DB.SaveChanges();
+
+                            checkdonor.LastDonationDate = DateTime.Now;
+                            DB.Entry(checkdonor).State = System.Data.Entity.EntityState.Modified;
+                            DB.SaveChanges();
+                            transaction.Commit();
+                            return RedirectToAction("BloodStock", "BloodBank");
                         }
-                    
+                    }
+
                     catch
                     {
                         ModelState.AddModelError(string.Empty, "Please provide correct information!");
@@ -258,6 +261,16 @@ namespace KapiNadeApp.Controllers
             ViewBag.GenderID = new SelectList(DB.GenderTables.ToList(), "GenderID", "Gender", collectBloodMV.GenderID);
             return View(collectBloodMV);
 
+        }
+
+        private string EncryptPassword(string password)
+        {
+            using (SHA256 sha256 = SHA256.Create())
+            {
+                byte[] inputBytes = Encoding.UTF8.GetBytes(password);
+                byte[] hashBytes = sha256.ComputeHash(inputBytes);
+                return Convert.ToBase64String(hashBytes);
+            }
         }
     }
 }

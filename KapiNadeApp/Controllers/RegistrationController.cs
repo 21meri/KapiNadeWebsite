@@ -3,6 +3,8 @@ using KapiNadeApp.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Cryptography;
+using System.Text;
 using System.Web;
 using System.Web.Mvc;
 
@@ -59,6 +61,15 @@ namespace KapiNadeApp.Controllers
                     ModelState.AddModelError(string.Empty, "Username already exists. Please choose a different username.");
 
                 }
+
+                string hashedPassword;
+                using (SHA256 sha256 = SHA256.Create())
+                {
+                    byte[] inputBytes = Encoding.UTF8.GetBytes(registrationMV.User.Password);
+                    byte[] hashBytes = sha256.ComputeHash(inputBytes);
+                    hashedPassword = Convert.ToBase64String(hashBytes);
+                }
+
                 var checktitle = DB.HospitalTables.Where(h => h.Name == registrationMV.Hospital.Name.Trim()).FirstOrDefault();
                 if (checktitle == null)
                 {
@@ -68,7 +79,7 @@ namespace KapiNadeApp.Controllers
                         {
                             var user = new UserTable();
                             user.Username = registrationMV.User.Username;
-                            user.Password = registrationMV.User.Password;
+                            user.Password = hashedPassword;
                             user.Email = registrationMV.User.Email;
                             user.AccountStatusID = 1;
                             user.UserTypeID = registrationMV.UserTypeID;
@@ -129,6 +140,13 @@ namespace KapiNadeApp.Controllers
                     ModelState.AddModelError(string.Empty, "Username already exists. Please choose a different username.");
 
                 }
+                string hashedPassword;
+                using (SHA256 sha256 = SHA256.Create())
+                {
+                    byte[] inputBytes = Encoding.UTF8.GetBytes(registrationMV.User.Password);
+                    byte[] hashBytes = sha256.ComputeHash(inputBytes);
+                    hashedPassword = Convert.ToBase64String(hashBytes);
+                }
                 var checktitle = DB.DonorTables.Where(h => h.Name == registrationMV.Donor.Name.Trim() && h.CardNumber==registrationMV.Donor.CardNumber).FirstOrDefault();
                 if (checktitle == null)
                 {
@@ -138,7 +156,7 @@ namespace KapiNadeApp.Controllers
                         {
                             var user = new UserTable();
                             user.Username = registrationMV.User.Username;
-                            user.Password = registrationMV.User.Password;
+                            user.Password = hashedPassword;
                             user.Email = registrationMV.User.Email;
                             user.AccountStatusID = 1;
                             user.UserTypeID = registrationMV.UserTypeID;
@@ -204,6 +222,15 @@ namespace KapiNadeApp.Controllers
                 {
                     ModelState.AddModelError(string.Empty, "Username already exists. Please choose a different username.");
                 }
+
+                string hashedPassword;
+                using (SHA256 sha256 = SHA256.Create())
+                {
+                    byte[] inputBytes = Encoding.UTF8.GetBytes(registrationMV.User.Password);
+                    byte[] hashBytes = sha256.ComputeHash(inputBytes);
+                    hashedPassword = Convert.ToBase64String(hashBytes);
+                }
+
                 var checktitle = DB.BloodBankTables.Where(h => h.Name == registrationMV.BloodBank.Name.Trim() && h.ContactNumber == registrationMV.BloodBank.ContactNumber).FirstOrDefault();
                 if (checktitle == null)
                 {
@@ -213,7 +240,7 @@ namespace KapiNadeApp.Controllers
                         {
                             var user = new UserTable();
                             user.Username = registrationMV.User.Username;
-                            user.Password = registrationMV.User.Password;
+                            user.Password = hashedPassword;
                             user.Email = registrationMV.User.Email;
                             user.AccountStatusID = 1;
                             user.UserTypeID = registrationMV.UserTypeID;
@@ -272,6 +299,15 @@ namespace KapiNadeApp.Controllers
                     ModelState.AddModelError(string.Empty, "Username already exists. Please choose a different username.");
                    
                 }
+
+                string hashedPassword;
+                using (SHA256 sha256 = SHA256.Create())
+                {
+                    byte[] inputBytes = Encoding.UTF8.GetBytes(registrationMV.User.Password);
+                    byte[] hashBytes = sha256.ComputeHash(inputBytes);
+                    hashedPassword = Convert.ToBase64String(hashBytes);
+                }
+
                 var checktitle = DB.SeekerTables.Where(h => h.Name == registrationMV.Seeker.Name.Trim() && h.CardNumber == registrationMV.Seeker.CardNumber).FirstOrDefault();
                 if (checktitle == null)
                 {
@@ -281,7 +317,7 @@ namespace KapiNadeApp.Controllers
                         {
                             var user = new UserTable();
                             user.Username = registrationMV.User.Username;
-                            user.Password = registrationMV.User.Password;
+                            user.Password = hashedPassword;
                             user.Email = registrationMV.User.Email;
                             user.AccountStatusID = 1;
                             user.UserTypeID = registrationMV.UserTypeID;

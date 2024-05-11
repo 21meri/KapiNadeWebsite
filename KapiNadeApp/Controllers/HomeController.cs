@@ -5,6 +5,10 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using DatabaseLayer;
+using System.Web.Helpers;
+using System.Security.Cryptography;
+using System.Text;
+
 
 
 namespace KapiNadeApp.Controllers
@@ -48,7 +52,17 @@ namespace KapiNadeApp.Controllers
         {
             if(ModelState.IsValid)
             {
-                var user = DB.UserTables.Where(u => u.Password == userMV.Password && (u.Email == userMV.UsernameOrEmail || u.Username == userMV.UsernameOrEmail)).FirstOrDefault();
+                string decryptedPassword;
+                    using (SHA256 sha256 = SHA256.Create())
+                    {
+                        byte[] inputBytes = Encoding.UTF8.GetBytes(userMV.Password);
+                        byte[] hashBytes = sha256.ComputeHash(inputBytes);
+                        decryptedPassword = Convert.ToBase64String(hashBytes);
+                    }
+                
+
+
+                var user = DB.UserTables.Where(u => u.Password == decryptedPassword && (u.Email == userMV.UsernameOrEmail || u.Username == userMV.UsernameOrEmail)).FirstOrDefault();
                 if(user != null)
                 {
                     if(user.AccountStatusID == 1)
