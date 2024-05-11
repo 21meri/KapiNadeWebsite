@@ -155,7 +155,15 @@ namespace KapiNadeApp.Controllers
                         else 
                         {
                             var user = new UserTable();
-                            user.Username = collectBloodMV.DonorDetails.Name.Trim();
+                            // Generiranje random broja
+                            Random random = new Random();
+                            int randomNumber = random.Next(0, 9999); // Promijenite raspon prema vašim potrebama
+
+                            // Kreiranje korisničkog imena
+                            string firstName = collectBloodMV.DonorDetails.Name.Trim();
+                            string lastName = collectBloodMV.DonorDetails.Surname.Trim();
+                            string username = firstName.ToLower() + "." + lastName.ToLower() + randomNumber;
+                            user.Username = username;
                             user.Password = "abcabc";
                             user.Email = collectBloodMV.DonorDetails.Email;
                             user.AccountStatusID = 2;
@@ -205,7 +213,16 @@ namespace KapiNadeApp.Controllers
                                 var collectblooddetails = new BloodStockDetailsTable();
                                 collectblooddetails.BloodStockID = checkbloodgroupstock.BloodStockID;
                                 collectblooddetails.BloodGroupID = collectBloodMV.BloodGroupID;
-                                collectblooddetails.CampaignID = currentcampaign.CampaignID;
+                                if (currentcampaign != null)
+                                {
+                                    // Postavi CampaignID na ID postojeće kampanje
+                                    collectblooddetails.CampaignID = currentcampaign.CampaignID;
+                                }
+                                else
+                                {
+                                    // Ako ne postoji kampanja, postavi CampaignID na null
+                                    collectblooddetails.CampaignID = null;
+                                }
                                 collectblooddetails.Quantity = collectBloodMV.Quantity;
                                 collectblooddetails.DonorID = checkdonor.DonorID;
                                 collectblooddetails.DonationDateTime = DateTime.Now;
