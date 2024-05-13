@@ -258,7 +258,7 @@
                             <div class="row">
 
                                 <div class="col-lg-5 col-md-5 hidden-sm hidden-xs">
-                                    <div class="event-latest-thumbnail">
+                                    <div class="event-latest-thumbnail" style="width: 200px; height: 200px; overflow: hidden;">
                                         <a href="#">
                                             <img src="@Url.Content(item.CampaignPhoto)" alt="">
                                         </a>
@@ -280,7 +280,7 @@
                                         </div>
                                         @if (usertypeid == 5 && item.CampaignDate == date)
                                         {
-                                            <a href="@Url.Content("~/BloodBank/BloodStock")" class="btn btn-theme">Collect blood</a>
+                                            <a href="@Url.Content("~/BloodBank/BloodStock")" class="btn btn-theme1">Collect blood</a>
                                         }
                                     </div>
                                 </div> <!--  col-sm-7  -->

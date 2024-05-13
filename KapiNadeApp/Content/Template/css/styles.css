@@ -686,6 +686,37 @@ span.label {
         background-color: #4E4E4E;
     }
 
+.btn-theme1 {
+    border: 0px;
+    background: #EF3D32;
+    color: #FFFFFF;
+    display: inline-block;
+    line-height: 25px;
+    font-size: 15px;
+    font-weight: 450;
+    padding: 10px 26px;
+    position: relative;
+    text-transform: uppercase;
+    -webkit-transition: 'all' '0.5s' ease-out;
+    -moz-transition: 'all' '0.5s' ease-out;
+    -o-transition: 'all' '0.5s' ease-out;
+    transition: 'all' '0.5s' ease-out;
+    margin-bottom: 0;
+    letter-spacing: 0em;
+    overflow: hidden;
+    -webkit-border-radius: 0px;
+    -moz-border-radius: 0px;
+    border-radius: 0px;
+    -webkit-background-clip: padding-box;
+    -moz-background-clip: padding;
+    background-clip: padding-box;
+}
+
+    .btn-theme1:hover {
+        color: #FFFFFF;
+        background-color: #4E4E4E;
+    }
+
 /*End BTN Style*/
 .btn-theme-invert {
     color: #FFFFFF;

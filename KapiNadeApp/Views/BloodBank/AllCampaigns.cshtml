@@ -64,11 +64,16 @@
                         @Html.DisplayFor(modelItem => item.CampaignDetails)
                     </td>
                     <td>
-                        @if (!string.IsNullOrEmpty(item.CampaignPhoto))
-                        {
-                            <img src="@Url.Content(item.CampaignPhoto)" alt="image"
-                                 style="width:100px; height:150px;max-width:100%;height:auto;" />
-                        }
+                      
+                            @if (!string.IsNullOrEmpty(item.CampaignPhoto))
+                            {
+                                <img src="@Url.Content(item.CampaignPhoto)" alt="image"
+                                     style="width:100px; max-height:150px; max-width:100%;" />
+                            }
+                            else
+                            {
+                                <img style="width:100px; max-height:150px; max-width:100%; " />
+                            }
                     </td>
 
                     <td>
