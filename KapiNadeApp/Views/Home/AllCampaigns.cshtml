@@ -162,7 +162,7 @@
                                                         <li>
                                                             <a href="#">Setting</a>
                                                             <ul class="drop-down">
-                                                                <li><a href="@Url.Content("~/User/UserProfile/"+userid+"")">User Profile</a></li>
+                                                                <li><a href="@Url.Content("~/User/UserProfile/" + userid + "")">User Profile</a></li>
                                                                 <li><a href="@Url.Content("~/AccountStatus/AllAccountStatus")">All account status</a></li>
                                                                 <li><a href="@Url.Content("~/BloodGroup/AllBloodGroups")">Blood groups</a></li>
                                                                 <li><a href="@Url.Content("~/CityTables/Index")">Cities</a></li>
@@ -179,7 +179,7 @@
                                                         <li>
                                                             <a href="#">Setting</a>
                                                             <ul class="drop-down">
-                                                                <li><a href="@Url.Content("~/User/UserProfile/"+userid+"")">User Profile</a></li>
+                                                                <li><a href="@Url.Content("~/User/UserProfile/" + userid + "")">User Profile</a></li>
                                                                 <li><a href="@Url.Content("~/Home/Logout")">Sign out</a></li>
 
                                                             </ul>
@@ -245,55 +245,59 @@
                 //int usertypeid = 0;
                 var date = DateTime.Now.Date;
                 //string sessionusertype = Convert.ToString(Session["UserTypeID"]);
-              
+
 
                 int.TryParse(sessionusertype, out usertypeid);
-          
 
-            <div class="row">
-                @foreach (var item in Model)
-                {
-                    <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
-                        <div class="event-latest">
-                            <div class="row">
 
-                                <div class="col-lg-5 col-md-5 hidden-sm hidden-xs">
-                                    <div class="event-latest-thumbnail" style="width: 200px; height: 200px; overflow: hidden;">
-                                        <a href="#">
-                                            <img src="@Url.Content(item.CampaignPhoto)" alt="">
-                                        </a>
-                                    </div>
-                                </div> <!--  col-sm-5  -->
+                        <div class="row">
+                            @{
+                                // Sort the campaigns by their CampaignDate in ascending order
+                                var sortedCampaigns = Model.OrderBy(c => c.CampaignDate);
 
-                                <div class="col-lg-7 col-md-7 col-sm-12 col-xs-12">
-                                    <div class="event-details">
-                                        <a class="latest-date" href="#"> @item.CampaignDate.ToString("dd MMMM, yyyy ")</a>
-                                        <h4 class="event-latest-title">
-                                            <a href="#">@item.CampaignTitle</a>
-                                        </h4>
-                                        @if (usertypeid != 5)
-                                        {
-                                            <p>@item.CampaignDetails</p>}
-                                        <div class="event-latest-details">
-                                            <a class="author" href="#"><i class="fa fa-clock-o" aria-hidden="true"></i> @item.StartTime - @item.EndTime</a>
-                                            <a class="comments" href="#"> <i class="fa fa-map-marker" aria-hidden="true"></i> @(item.Location ==null ? "No location" : item.Location)</a>
+                                foreach (var item in sortedCampaigns)
+                                {
+                                    <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                                        <div class="event-latest">
+                                            <div class="row">
+
+                                                <div class="col-lg-5 col-md-5 hidden-sm hidden-xs">
+                                                    <div class="event-latest-thumbnail" style="width: 200px; height: 200px; overflow: hidden;">
+                                                        <a href="#">
+                                                            <img src="@Url.Content(item.CampaignPhoto)" alt="">
+                                                        </a>
+                                                    </div>
+                                                </div> <!--  col-sm-5  -->
+
+                                                <div class="col-lg-7 col-md-7 col-sm-12 col-xs-12">
+                                                    <div class="event-details">
+                                                        <a class="latest-date" href="#"> @item.CampaignDate.ToString("dd MMMM, yyyy ")</a>
+                                                        <h4 class="event-latest-title">
+                                                            <a href="#">@item.CampaignTitle</a>
+                                                        </h4>
+                                                        @if (usertypeid != 5)
+                                                        {
+                                                            <p>@item.CampaignDetails</p>}
+                                                        <div class="event-latest-details">
+                                                            <a class="author" href="#"><i class="fa fa-clock-o" aria-hidden="true"></i> @item.StartTime - @item.EndTime</a>
+                                                            <a class="comments" href="#"> <i class="fa fa-map-marker" aria-hidden="true"></i> @(item.Location == null ? "No location" : item.Location)</a>
+                                                        </div>
+                                                        @if (usertypeid == 5 && item.CampaignDate == date)
+                                                        {
+                                                            <a href="@Url.Content("~/BloodBank/BloodStock")" class="btn btn-theme1">Collect blood</a>
+                                                        }
+                                                    </div>
+                                                </div> <!--  col-sm-7  -->
+
+                                            </div>
+
                                         </div>
-                                        @if (usertypeid == 5 && item.CampaignDate == date)
-                                        {
-                                            <a href="@Url.Content("~/BloodBank/BloodStock")" class="btn btn-theme1">Collect blood</a>
-                                        }
-                                    </div>
-                                </div> <!--  col-sm-7  -->
+                                    </div> <!--  col-sm-6  -->
+                                }
 
+
+                                }
                             </div>
-
-                        </div>
-                    </div> <!--  col-sm-6  -->
-                }
-
-
-
-            </div>
                 }
         </div>
 
