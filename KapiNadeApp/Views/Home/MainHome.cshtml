@@ -115,7 +115,10 @@
 
 
 
-
+                                                    @if (string.IsNullOrEmpty(Convert.ToString(Session["Username"])))
+                                                    {
+                                                        <li><a href="@Url.Content("~/Home/Contact")">O nama</a></li>
+                                                    }
 
 
 
@@ -187,14 +190,11 @@
                                                         </li>
                                                     }
 
-                                                    @if (string.IsNullOrEmpty(Convert.ToString(Session["Username"])))
-                                                    {
-                                                        <li><a href="@Url.Content("~/Home/Contact")">O nama</a></li>
-                                                    }
+
 
                                                     @if (string.IsNullOrEmpty(Convert.ToString(Session["Username"])))
                                                     {
-                                                        <li><a href="@Url.Content("~/Home/Faq")">Česta pitanja</a></li>
+                                                        <li><a href="@Url.Content("~/Home/Faq")">FAQ</a></li>
                                                     }
 
                                                 </ul>
