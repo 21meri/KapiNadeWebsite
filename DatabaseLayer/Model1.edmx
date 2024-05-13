@@ -171,7 +171,7 @@
           </Key>
           <Property Name="UserID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Username" Type="nvarchar" MaxLength="50" Nullable="false" />
-          <Property Name="Password" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Password" Type="nvarchar" MaxLength="150" Nullable="false" />
           <Property Name="Email" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="AccountStatusID" Type="int" Nullable="false" />
           <Property Name="UserTypeID" Type="int" Nullable="false" />
@@ -605,7 +605,6 @@
           <NavigationProperty Name="UserTable" Relationship="KapiNadeDBModel.FK_BloodBankTable_UserTable" FromRole="BloodBankTable" ToRole="UserTable" />
           <NavigationProperty Name="CampaignTables" Relationship="KapiNadeDBModel.FK_CampaignTable_BloodBankTable" FromRole="BloodBankTable" ToRole="CampaignTable" />
           <NavigationProperty Name="BloodStockTables" Relationship="KapiNadeDBModel.FK_BloodStockTable_BloodBankTable" FromRole="BloodBankTable" ToRole="BloodStockTable" />
-          <NavigationProperty Name="RequestTables" Relationship="KapiNadeDBModel.FK_RequestTable_BloodBankTable" FromRole="BloodBankTable" ToRole="RequestTable" />
         </EntityType>
         <EntityType Name="BloodGroupsTable">
           <Key>
@@ -649,7 +648,6 @@
           <Property Name="GenderID" Type="Int32" Nullable="false" />
           <NavigationProperty Name="GenderTable" Relationship="KapiNadeDBModel.FK_DonorTable_GenderTable" FromRole="DonorTable" ToRole="GenderTable" />
           <NavigationProperty Name="BloodStockDetailsTables" Relationship="KapiNadeDBModel.FK_BloodStockDetailsTable_DonorTable" FromRole="DonorTable" ToRole="BloodStockDetailsTable" />
-          <NavigationProperty Name="RequestTables" Relationship="KapiNadeDBModel.FK_RequestTable_DonorTable" FromRole="DonorTable" ToRole="RequestTable" />
           <Property Name="Email" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="DateOfBirth" Type="DateTime" Nullable="false" Precision="0" />
         </EntityType>
@@ -896,14 +894,6 @@
             <End Role="AcceptedTypeTable" EntitySet="AcceptedTypeTables" />
             <End Role="RequestTable" EntitySet="RequestTables" />
           </AssociationSet>
-          <AssociationSet Name="FK_RequestTable_BloodBankTable" Association="KapiNadeDBModel.FK_RequestTable_BloodBankTable">
-            <End Role="BloodBankTable" EntitySet="BloodBankTables" />
-            <End Role="RequestTable" EntitySet="RequestTables" />
-          </AssociationSet>
-          <AssociationSet Name="FK_RequestTable_DonorTable" Association="KapiNadeDBModel.FK_RequestTable_DonorTable">
-            <End Role="DonorTable" EntitySet="DonorTables" />
-            <End Role="RequestTable" EntitySet="RequestTables" />
-          </AssociationSet>
           <AssociationSet Name="FK_RequestTable_RequestStatusTable" Association="KapiNadeDBModel.FK_RequestTable_RequestStatusTable">
             <End Role="RequestStatusTable" EntitySet="RequestStatusTables" />
             <End Role="RequestTable" EntitySet="RequestTables" />
@@ -927,7 +917,7 @@
           </Key>
           <Property Name="UserID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Username" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="Password" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Password" Type="String" Nullable="false" MaxLength="150" FixedLength="false" Unicode="true" />
           <Property Name="Email" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="AccountStatusID" Type="Int32" Nullable="false" />
           <Property Name="UserTypeID" Type="Int32" Nullable="false" />
@@ -1190,8 +1180,6 @@
           <Property Name="ExpectedDate" Type="DateTime" Nullable="false" Precision="0" />
           <Property Name="RequestDetails" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="AcceptedTypeTable" Relationship="KapiNadeDBModel.FK_RequestTable_AcceptedTypeTable" FromRole="RequestTable" ToRole="AcceptedTypeTable" />
-          <NavigationProperty Name="BloodBankTable" Relationship="KapiNadeDBModel.FK_RequestTable_BloodBankTable" FromRole="RequestTable" ToRole="BloodBankTable" />
-          <NavigationProperty Name="DonorTable" Relationship="KapiNadeDBModel.FK_RequestTable_DonorTable" FromRole="RequestTable" ToRole="DonorTable" />
           <NavigationProperty Name="RequestStatusTable" Relationship="KapiNadeDBModel.FK_RequestTable_RequestStatusTable" FromRole="RequestTable" ToRole="RequestStatusTable" />
           <NavigationProperty Name="RequestTypeTable" Relationship="KapiNadeDBModel.FK_RequestTable_RequestTypeTable" FromRole="RequestTable" ToRole="RequestTypeTable" />
         </EntityType>
@@ -1204,30 +1192,6 @@
             </Principal>
             <Dependent Role="RequestTable">
               <PropertyRef Name="AcceptedTypeID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_RequestTable_BloodBankTable">
-          <End Type="KapiNadeDBModel.BloodBankTable" Role="BloodBankTable" Multiplicity="1" />
-          <End Type="KapiNadeDBModel.RequestTable" Role="RequestTable" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="BloodBankTable">
-              <PropertyRef Name="BloodBankID" />
-            </Principal>
-            <Dependent Role="RequestTable">
-              <PropertyRef Name="RequestByID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_RequestTable_DonorTable">
-          <End Type="KapiNadeDBModel.DonorTable" Role="DonorTable" Multiplicity="1" />
-          <End Type="KapiNadeDBModel.RequestTable" Role="RequestTable" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="DonorTable">
-              <PropertyRef Name="DonorID" />
-            </Principal>
-            <Dependent Role="RequestTable">
-              <PropertyRef Name="AcceptedID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>

@@ -17,7 +17,7 @@ namespace DatabaseLayer
         public int BloodStockDetailsID { get; set; }
         public int BloodStockID { get; set; }
         public int BloodGroupID { get; set; }
-        public int? CampaignID { get; set; }
+        public int CampaignID { get; set; }
         public double Quantity { get; set; }
         public int DonorID { get; set; }
         public System.DateTime DonationDateTime { get; set; }

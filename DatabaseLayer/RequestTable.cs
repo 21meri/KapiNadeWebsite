@@ -26,8 +26,6 @@ namespace DatabaseLayer
         public string RequestDetails { get; set; }
     
         public virtual AcceptedTypeTable AcceptedTypeTable { get; set; }
-        public virtual BloodBankTable BloodBankTable { get; set; }
-        public virtual DonorTable DonorTable { get; set; }
         public virtual RequestStatusTable RequestStatusTable { get; set; }
         public virtual RequestTypeTable RequestTypeTable { get; set; }
     }

@@ -92,30 +92,108 @@ namespace KapiNadeApp.Controllers
             var currentdate = DateTime.Now.Date;
 
             var currentcampaign = DB.CampaignTables.Where(c => c.CampaignDate == currentdate && c.BloodBankID == bloodbankID).FirstOrDefault();
-
-
-
-            if (ModelState.IsValid)
+            if (currentcampaign != null)
             {
-                using (var transaction = DB.Database.BeginTransaction())
+
+                if (ModelState.IsValid)
                 {
-                    try
+                    using (var transaction = DB.Database.BeginTransaction())
                     {
-
-                        var checkdonor = DB.DonorTables.Where(d => d.CardNumber.Trim().Replace("-", "") == collectBloodMV.DonorDetails.CardNumber.Trim().Replace("-", "")).FirstOrDefault();
-                        if (checkdonor != null)
+                        try
                         {
-                            int donationThresholdDays = checkdonor.GenderID == 1 ? 90 : 120;
-                            if ((DateTime.Now - checkdonor.LastDonationDate).TotalDays < donationThresholdDays)
+
+                            var checkdonor = DB.DonorTables.Where(d => d.CardNumber.Trim().Replace("-", "") == collectBloodMV.DonorDetails.CardNumber.Trim().Replace("-", "")).FirstOrDefault();
+                            if (checkdonor != null)
                             {
-                                ModelState.AddModelError(string.Empty, "Donor already donated blood recently");
-                                transaction.Rollback();
+                                int donationThresholdDays = checkdonor.GenderID == 1 ? 90 : 120;
+                                if ((DateTime.Now - checkdonor.LastDonationDate).TotalDays < donationThresholdDays)
+                                {
+                                    ModelState.AddModelError(string.Empty, "Donor already donated blood recently");
+                                    transaction.Rollback();
 
 
 
+                                }
+                                else
+                                {
+                                    var checkbloodgroupstock = DB.BloodStockTables.Where(s => s.BloodBankID == bloodbankID && s.BloodGroupID == collectBloodMV.BloodGroupID).FirstOrDefault();
+                                    if (checkbloodgroupstock == null)
+                                    {
+                                        var bloodstock = new BloodStockTable();
+
+
+                                        bloodstock.BloodGroupID = collectBloodMV.BloodGroupID;
+                                        bloodstock.BloodBankID = bloodbankID;
+                                        bloodstock.Status = true;
+                                        bloodstock.Quantity = 0;
+                                        DB.BloodStockTables.Add(bloodstock);
+                                        DB.SaveChanges();
+
+                                        checkbloodgroupstock = DB.BloodStockTables.Where(s => s.BloodBankID == bloodbankID && s.BloodGroupID == collectBloodMV.BloodGroupID).FirstOrDefault();
+
+                                    }
+                                    checkbloodgroupstock.Quantity += collectBloodMV.Quantity;
+                                    DB.Entry(checkbloodgroupstock).State = System.Data.Entity.EntityState.Modified;
+                                    DB.SaveChanges();
+
+                                    var collectblooddetails = new BloodStockDetailsTable();
+                                    collectblooddetails.BloodStockID = checkbloodgroupstock.BloodStockID;
+                                    collectblooddetails.BloodGroupID = collectBloodMV.BloodGroupID;
+                                    collectblooddetails.CampaignID = currentcampaign.CampaignID;
+
+                                    collectblooddetails.Quantity = collectBloodMV.Quantity;
+                                    collectblooddetails.DonorID = checkdonor.DonorID;
+                                    collectblooddetails.DonationDateTime = DateTime.Now;
+                                    DB.BloodStockDetailsTables.Add(collectblooddetails);
+                                    DB.SaveChanges();
+
+                                    checkdonor.LastDonationDate = DateTime.Now;
+                                    DB.Entry(checkdonor).State = System.Data.Entity.EntityState.Modified;
+                                    DB.SaveChanges();
+                                    transaction.Commit();
+                                    return RedirectToAction("BloodStock", "BloodBank");
+                                }
                             }
+
                             else
                             {
+                                var user = new UserTable();
+                                // Generiranje random broja
+                                Random random = new Random();
+                                int randomNumber = random.Next(0, 9999); // Promijenite raspon prema vašim potrebama
+
+                                // Kreiranje korisničkog imena
+                                string firstName = collectBloodMV.DonorDetails.Name.Trim();
+                                string lastName = collectBloodMV.DonorDetails.Surname.Trim();
+                                string username = firstName.ToLower() + "." + lastName.ToLower() + randomNumber;
+                                user.Username = username;
+                                string hashedPassword = EncryptPassword("abcabc"); // Enkriptujte lozinku "abcabc"
+                                user.Password = hashedPassword;
+                                user.Email = collectBloodMV.DonorDetails.Email;
+                                user.AccountStatusID = 2;
+                                user.UserTypeID = 2;
+                                DB.UserTables.Add(user);
+                                DB.SaveChanges();
+
+                                var donor = new DonorTable();
+                                donor.Name = collectBloodMV.DonorDetails.Name;
+                                donor.Surname = collectBloodMV.DonorDetails.Surname;
+                                donor.BloodGroupID = collectBloodMV.BloodGroupID;
+                                donor.Address = collectBloodMV.DonorDetails.Address;
+                                donor.CardNumber = collectBloodMV.DonorDetails.CardNumber;
+                                donor.GenderID = collectBloodMV.GenderID;
+                                donor.LastDonationDate = DateTime.Now;
+
+                                donor.Email = collectBloodMV.DonorDetails.Email;
+                                donor.DateOfBirth = collectBloodMV.DonorDetails.DateOfBirth;
+
+                                donor.ContactNumber = collectBloodMV.DonorDetails.ContactNumber;
+                                donor.CityID = collectBloodMV.CityID;
+                                donor.UserID = user.UserID;
+                                DB.DonorTables.Add(donor);
+                                DB.SaveChanges();
+                                checkdonor = DB.DonorTables.Where(d => d.CardNumber.Trim().Replace("-", "") == collectBloodMV.DonorDetails.CardNumber.Trim().Replace("-", "")).FirstOrDefault();
+
                                 var checkbloodgroupstock = DB.BloodStockTables.Where(s => s.BloodBankID == bloodbankID && s.BloodGroupID == collectBloodMV.BloodGroupID).FirstOrDefault();
                                 if (checkbloodgroupstock == null)
                                 {
@@ -154,109 +232,29 @@ namespace KapiNadeApp.Controllers
                             }
                         }
 
-                        else
+                        catch
                         {
-                            var user = new UserTable();
-                            // Generiranje random broja
-                            Random random = new Random();
-                            int randomNumber = random.Next(0, 9999); // Promijenite raspon prema vašim potrebama
-
-                            // Kreiranje korisničkog imena
-                            string firstName = collectBloodMV.DonorDetails.Name.Trim();
-                            string lastName = collectBloodMV.DonorDetails.Surname.Trim();
-                            string username = firstName.ToLower() + "." + lastName.ToLower() + randomNumber;
-                            user.Username = username;
-                            string hashedPassword = EncryptPassword("abcabc"); // Enkriptujte lozinku "abcabc"
-                            user.Password = hashedPassword;
-                            user.Email = collectBloodMV.DonorDetails.Email;
-                            user.AccountStatusID = 2;
-                            user.UserTypeID = 2;
-                            DB.UserTables.Add(user);
-                            DB.SaveChanges();
-
-                            var donor = new DonorTable();
-                            donor.Name = collectBloodMV.DonorDetails.Name;
-                            donor.Surname = collectBloodMV.DonorDetails.Surname;
-                            donor.BloodGroupID = collectBloodMV.BloodGroupID;
-                            donor.Address = collectBloodMV.DonorDetails.Address;
-                            donor.CardNumber = collectBloodMV.DonorDetails.CardNumber;
-                            donor.GenderID = collectBloodMV.GenderID;
-                            donor.LastDonationDate = DateTime.Now;
-
-                            donor.Email = collectBloodMV.DonorDetails.Email;
-                            donor.DateOfBirth = collectBloodMV.DonorDetails.DateOfBirth;
-
-                            donor.ContactNumber = collectBloodMV.DonorDetails.ContactNumber;
-                            donor.CityID = collectBloodMV.CityID;
-                            donor.UserID = user.UserID;
-                            DB.DonorTables.Add(donor);
-                            DB.SaveChanges();
-                            checkdonor = DB.DonorTables.Where(d => d.CardNumber.Trim().Replace("-", "") == collectBloodMV.DonorDetails.CardNumber.Trim().Replace("-", "")).FirstOrDefault();
-
-                            var checkbloodgroupstock = DB.BloodStockTables.Where(s => s.BloodBankID == bloodbankID && s.BloodGroupID == collectBloodMV.BloodGroupID).FirstOrDefault();
-                            if (checkbloodgroupstock == null)
-                            {
-                                var bloodstock = new BloodStockTable();
-
-
-                                bloodstock.BloodGroupID = collectBloodMV.BloodGroupID;
-                                bloodstock.BloodBankID = bloodbankID;
-                                bloodstock.Status = true;
-                                bloodstock.Quantity = 0;
-                                DB.BloodStockTables.Add(bloodstock);
-                                DB.SaveChanges();
-
-                                checkbloodgroupstock = DB.BloodStockTables.Where(s => s.BloodBankID == bloodbankID && s.BloodGroupID == collectBloodMV.BloodGroupID).FirstOrDefault();
-
-                            }
-                            checkbloodgroupstock.Quantity += collectBloodMV.Quantity;
-                            DB.Entry(checkbloodgroupstock).State = System.Data.Entity.EntityState.Modified;
-                            DB.SaveChanges();
-
-                            var collectblooddetails = new BloodStockDetailsTable();
-                            collectblooddetails.BloodStockID = checkbloodgroupstock.BloodStockID;
-                            collectblooddetails.BloodGroupID = collectBloodMV.BloodGroupID;
-                            if (currentcampaign != null)
-                            {
-                                // Postavi CampaignID na ID postojeće kampanje
-                                collectblooddetails.CampaignID = currentcampaign.CampaignID;
-                            }
-                            else
-                            {
-                                // Ako ne postoji kampanja, postavi CampaignID na null
-                                collectblooddetails.CampaignID = null;
-                            }
-                            collectblooddetails.Quantity = collectBloodMV.Quantity;
-                            collectblooddetails.DonorID = checkdonor.DonorID;
-                            collectblooddetails.DonationDateTime = DateTime.Now;
-                            DB.BloodStockDetailsTables.Add(collectblooddetails);
-                            DB.SaveChanges();
-
-                            checkdonor.LastDonationDate = DateTime.Now;
-                            DB.Entry(checkdonor).State = System.Data.Entity.EntityState.Modified;
-                            DB.SaveChanges();
-                            transaction.Commit();
-                            return RedirectToAction("BloodStock", "BloodBank");
+                            ModelState.AddModelError(string.Empty, "Please provide correct information!");
+                            transaction.Rollback();
                         }
-                    }
 
-                    catch
-                    {
-                        ModelState.AddModelError(string.Empty, "Please provide correct information!");
-                        transaction.Rollback();
-                    }
 
+                    }
 
                 }
+                else
+                {
+                    ModelState.AddModelError(string.Empty, "Please provide donor full details!");
 
+                }
             }
             else
             {
-                ModelState.AddModelError(string.Empty, "Please provide donor full details!");
+                ModelState.AddModelError(string.Empty, "Trenutno nema organizovane kampanje za prikupljanje krvi!");
 
             }
 
-            ViewBag.BloodGroupID = new SelectList(DB.BloodGroupsTables.ToList(), "BloodGroupID", "BloodGroup", collectBloodMV.BloodGroupID);
+                ViewBag.BloodGroupID = new SelectList(DB.BloodGroupsTables.ToList(), "BloodGroupID", "BloodGroup", collectBloodMV.BloodGroupID);
             ViewBag.CityID = new SelectList(DB.CityTables.ToList(), "CityID", "City", collectBloodMV.CityID);
             ViewBag.GenderID = new SelectList(DB.GenderTables.ToList(), "GenderID", "Gender", collectBloodMV.GenderID);
             return View(collectBloodMV);

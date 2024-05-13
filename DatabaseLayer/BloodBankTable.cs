@@ -19,7 +19,6 @@ namespace DatabaseLayer
         {
             this.CampaignTables = new HashSet<CampaignTable>();
             this.BloodStockTables = new HashSet<BloodStockTable>();
-            this.RequestTables = new HashSet<RequestTable>();
         }
     
         public int BloodBankID { get; set; }
@@ -36,7 +35,5 @@ namespace DatabaseLayer
         public virtual ICollection<CampaignTable> CampaignTables { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<BloodStockTable> BloodStockTables { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<RequestTable> RequestTables { get; set; }
     }
 }

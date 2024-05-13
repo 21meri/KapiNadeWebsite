@@ -53,64 +53,65 @@ namespace KapiNadeApp.Controllers
 
         public ActionResult HospitalUser(RegistrationMV registrationMV)
         {
-            if(ModelState.IsValid)
+            if (ModelState.IsValid)
             {
-                var existingUser = DB.UserTables.FirstOrDefault(u => u.Username == registrationMV.User.Username);
-                if (existingUser != null)
+                var usernameExists = DB.UserTables.Any(u => u.Username == registrationMV.User.Username);
+                if (usernameExists)
                 {
                     ModelState.AddModelError(string.Empty, "Username already exists. Please choose a different username.");
-
-                }
-
-                string hashedPassword;
-                using (SHA256 sha256 = SHA256.Create())
-                {
-                    byte[] inputBytes = Encoding.UTF8.GetBytes(registrationMV.User.Password);
-                    byte[] hashBytes = sha256.ComputeHash(inputBytes);
-                    hashedPassword = Convert.ToBase64String(hashBytes);
-                }
-
-                var checktitle = DB.HospitalTables.Where(h => h.Name == registrationMV.Hospital.Name.Trim()).FirstOrDefault();
-                if (checktitle == null)
-                {
-                    using (var transaction = DB.Database.BeginTransaction())
-                    {
-                        try
-                        {
-                            var user = new UserTable();
-                            user.Username = registrationMV.User.Username;
-                            user.Password = hashedPassword;
-                            user.Email = registrationMV.User.Email;
-                            user.AccountStatusID = 1;
-                            user.UserTypeID = registrationMV.UserTypeID;
-                            DB.UserTables.Add(user);
-                            DB.SaveChanges();
-
-                            var hospital = new HospitalTable();
-                            hospital.Name = registrationMV.Hospital.Name;
-                            hospital.Address = registrationMV.Hospital.Address;
-                            hospital.ContactNumber = registrationMV.Hospital.ContactNumber;
-                            hospital.Email = registrationMV.Hospital.Email;
-                            hospital.CityID = registrationMV.CityID;
-                            hospital.UserID = user.UserID;
-                            DB.HospitalTables.Add(hospital);
-                            DB.SaveChanges();
-                            transaction.Commit();
-                            ViewData["Message"] = "Thanks for registration, your query will be reviewed shortly!";
-                            return RedirectToAction("MainHome", "Home");
-                        }
-                        catch
-                        {
-                            ModelState.AddModelError(string.Empty, "Please provide correct information!");
-                            transaction.Rollback();
-                        }
-                    }
                 }
                 else
                 {
-                    ModelState.AddModelError(string.Empty, "Hospital already registered!");
+                    string hashedPassword;
+                    using (SHA256 sha256 = SHA256.Create())
+                    {
+                        byte[] inputBytes = Encoding.UTF8.GetBytes(registrationMV.User.Password);
+                        byte[] hashBytes = sha256.ComputeHash(inputBytes);
+                        hashedPassword = Convert.ToBase64String(hashBytes);
+                    }
+
+                    var checktitle = DB.HospitalTables.Where(h => h.Name == registrationMV.Hospital.Name.Trim()).FirstOrDefault();
+                    if (checktitle == null)
+                    {
+                        using (var transaction = DB.Database.BeginTransaction())
+                        {
+                            try
+                            {
+                                var user = new UserTable();
+                                user.Username = registrationMV.User.Username;
+                                user.Password = hashedPassword;
+                                user.Email = registrationMV.User.Email;
+                                user.AccountStatusID = 1;
+                                user.UserTypeID = registrationMV.UserTypeID;
+                                DB.UserTables.Add(user);
+                                DB.SaveChanges();
+
+                                var hospital = new HospitalTable();
+                                hospital.Name = registrationMV.Hospital.Name;
+                                hospital.Address = registrationMV.Hospital.Address;
+                                hospital.ContactNumber = registrationMV.Hospital.ContactNumber;
+                                hospital.Email = registrationMV.Hospital.Email;
+                                hospital.CityID = registrationMV.CityID;
+                                hospital.UserID = user.UserID;
+                                DB.HospitalTables.Add(hospital);
+                                DB.SaveChanges();
+                                transaction.Commit();
+                                ViewData["Message"] = "Thanks for registration, your query will be reviewed shortly!";
+                                return RedirectToAction("MainHome", "Home");
+                            }
+                            catch
+                            {
+                                ModelState.AddModelError(string.Empty, "Please provide correct information!");
+                                transaction.Rollback();
+                            }
+                        }
+                    }
+                    else
+                    {
+                        ModelState.AddModelError(string.Empty, "Hospital already registered!");
+                    }
                 }
-    }
+            }
             ViewBag.CityID = new SelectList(DB.CityTables.ToList(), "CityID", "City", registrationMV.CityID);
             return View(registrationMV);
         }
@@ -134,66 +135,68 @@ namespace KapiNadeApp.Controllers
         {
             if (ModelState.IsValid)
             {
-                var existingUser = DB.UserTables.FirstOrDefault(u => u.Username == registrationMV.User.Username);
-                if (existingUser != null)
+                var usernameExists = DB.UserTables.Any(u => u.Username == registrationMV.User.Username);
+                if (usernameExists)
                 {
                     ModelState.AddModelError(string.Empty, "Username already exists. Please choose a different username.");
-
-                }
-                string hashedPassword;
-                using (SHA256 sha256 = SHA256.Create())
-                {
-                    byte[] inputBytes = Encoding.UTF8.GetBytes(registrationMV.User.Password);
-                    byte[] hashBytes = sha256.ComputeHash(inputBytes);
-                    hashedPassword = Convert.ToBase64String(hashBytes);
-                }
-                var checktitle = DB.DonorTables.Where(h => h.Name == registrationMV.Donor.Name.Trim() && h.CardNumber==registrationMV.Donor.CardNumber).FirstOrDefault();
-                if (checktitle == null)
-                {
-                    using (var transaction = DB.Database.BeginTransaction())
-                    {
-                        try
-                        {
-                            var user = new UserTable();
-                            user.Username = registrationMV.User.Username;
-                            user.Password = hashedPassword;
-                            user.Email = registrationMV.User.Email;
-                            user.AccountStatusID = 1;
-                            user.UserTypeID = registrationMV.UserTypeID;
-                            DB.UserTables.Add(user);
-                            DB.SaveChanges();
-
-                            var donor = new DonorTable();
-                            donor.Name = registrationMV.Donor.Name;
-                            donor.Surname = registrationMV.Donor.Surname;
-
-                            donor.Email = registrationMV.Donor.Email;
-                            donor.DateOfBirth = registrationMV.Donor.DateOfBirth;
-
-                            donor.BloodGroupID = registrationMV.BloodGroupID;
-                            donor.Address = registrationMV.Donor.Address;
-                            donor.CardNumber = registrationMV.Donor.CardNumber;
-                            donor.GenderID = registrationMV.GenderID;
-                            donor.LastDonationDate = registrationMV.Donor.LastDonationDate;
-                            donor.ContactNumber = registrationMV.Donor.ContactNumber;
-                            donor.CityID = registrationMV.CityID;
-                            donor.UserID = user.UserID;
-                            DB.DonorTables.Add(donor);
-                            DB.SaveChanges();
-                            transaction.Commit();
-                            ViewData["Message"] = "Thanks for registration, your query will be reviewed shortly!";
-                            return RedirectToAction("MainHome", "Home");
-                        }
-                        catch
-                        {
-                            ModelState.AddModelError(string.Empty, "Please provide correct information!");
-                            transaction.Rollback();
-                        }
-                    }
                 }
                 else
                 {
-                    ModelState.AddModelError(string.Empty, "Donor already registered!");
+                    string hashedPassword;
+                    using (SHA256 sha256 = SHA256.Create())
+                    {
+                        byte[] inputBytes = Encoding.UTF8.GetBytes(registrationMV.User.Password);
+                        byte[] hashBytes = sha256.ComputeHash(inputBytes);
+                        hashedPassword = Convert.ToBase64String(hashBytes);
+                    }
+                    var checktitle = DB.DonorTables.Where(h => h.Name == registrationMV.Donor.Name.Trim() && h.CardNumber == registrationMV.Donor.CardNumber).FirstOrDefault();
+                    if (checktitle == null)
+                    {
+                        using (var transaction = DB.Database.BeginTransaction())
+                        {
+                            try
+                            {
+                                var user = new UserTable();
+                                user.Username = registrationMV.User.Username;
+                                user.Password = hashedPassword;
+                                user.Email = registrationMV.User.Email;
+                                user.AccountStatusID = 1;
+                                user.UserTypeID = registrationMV.UserTypeID;
+                                DB.UserTables.Add(user);
+                                DB.SaveChanges();
+
+                                var donor = new DonorTable();
+                                donor.Name = registrationMV.Donor.Name;
+                                donor.Surname = registrationMV.Donor.Surname;
+
+                                donor.Email = registrationMV.Donor.Email;
+                                donor.DateOfBirth = registrationMV.Donor.DateOfBirth;
+
+                                donor.BloodGroupID = registrationMV.BloodGroupID;
+                                donor.Address = registrationMV.Donor.Address;
+                                donor.CardNumber = registrationMV.Donor.CardNumber;
+                                donor.GenderID = registrationMV.GenderID;
+                                donor.LastDonationDate = registrationMV.Donor.LastDonationDate;
+                                donor.ContactNumber = registrationMV.Donor.ContactNumber;
+                                donor.CityID = registrationMV.CityID;
+                                donor.UserID = user.UserID;
+                                DB.DonorTables.Add(donor);
+                                DB.SaveChanges();
+                                transaction.Commit();
+                                ViewData["Message"] = "Thanks for registration, your query will be reviewed shortly!";
+                                return RedirectToAction("MainHome", "Home");
+                            }
+                            catch
+                            {
+                                ModelState.AddModelError(string.Empty, "Please provide correct information!");
+                                transaction.Rollback();
+                            }
+                        }
+                    }
+                    else
+                    {
+                        ModelState.AddModelError(string.Empty, "Donor already registered!");
+                    }
                 }
             }
             ViewBag.GenderID = new SelectList(DB.GenderTables.ToList(), "GenderID", "Gender", registrationMV.GenderID);
@@ -222,54 +225,56 @@ namespace KapiNadeApp.Controllers
                 {
                     ModelState.AddModelError(string.Empty, "Username already exists. Please choose a different username.");
                 }
-
-                string hashedPassword;
-                using (SHA256 sha256 = SHA256.Create())
-                {
-                    byte[] inputBytes = Encoding.UTF8.GetBytes(registrationMV.User.Password);
-                    byte[] hashBytes = sha256.ComputeHash(inputBytes);
-                    hashedPassword = Convert.ToBase64String(hashBytes);
-                }
-
-                var checktitle = DB.BloodBankTables.Where(h => h.Name == registrationMV.BloodBank.Name.Trim() && h.ContactNumber == registrationMV.BloodBank.ContactNumber).FirstOrDefault();
-                if (checktitle == null)
-                {
-                    using (var transaction = DB.Database.BeginTransaction())
-                    {
-                        try
-                        {
-                            var user = new UserTable();
-                            user.Username = registrationMV.User.Username;
-                            user.Password = hashedPassword;
-                            user.Email = registrationMV.User.Email;
-                            user.AccountStatusID = 1;
-                            user.UserTypeID = registrationMV.UserTypeID;
-                            DB.UserTables.Add(user);
-                            DB.SaveChanges();
-
-                            var bloodBank = new BloodBankTable();
-                            bloodBank.Name = registrationMV.BloodBank.Name;
-                            bloodBank.Address = registrationMV.BloodBank.Address;
-                            bloodBank.ContactNumber = registrationMV.BloodBank.ContactNumber;
-                            bloodBank.Email = registrationMV.BloodBank.Email;
-                            bloodBank.CityID = registrationMV.CityID;
-                            bloodBank.UserID = user.UserID;
-                            DB.BloodBankTables.Add(bloodBank);
-                            DB.SaveChanges();
-                            transaction.Commit();
-                            ViewData["Message"] = "Thanks for registration, your query will be reviewed shortly!";
-                            return RedirectToAction("MainHome", "Home");
-                        }
-                        catch
-                        {
-                            ModelState.AddModelError(string.Empty, "Please provide correct information!");
-                            transaction.Rollback();
-                        }
-                    }
-                }
                 else
                 {
-                    ModelState.AddModelError(string.Empty, "Blood Bank already registered!");
+                    string hashedPassword;
+                    using (SHA256 sha256 = SHA256.Create())
+                    {
+                        byte[] inputBytes = Encoding.UTF8.GetBytes(registrationMV.User.Password);
+                        byte[] hashBytes = sha256.ComputeHash(inputBytes);
+                        hashedPassword = Convert.ToBase64String(hashBytes);
+                    }
+
+                    var checktitle = DB.BloodBankTables.Where(h => h.Name == registrationMV.BloodBank.Name.Trim() && h.ContactNumber == registrationMV.BloodBank.ContactNumber).FirstOrDefault();
+                    if (checktitle == null)
+                    {
+                        using (var transaction = DB.Database.BeginTransaction())
+                        {
+                            try
+                            {
+                                var user = new UserTable();
+                                user.Username = registrationMV.User.Username;
+                                user.Password = hashedPassword;
+                                user.Email = registrationMV.User.Email;
+                                user.AccountStatusID = 1;
+                                user.UserTypeID = registrationMV.UserTypeID;
+                                DB.UserTables.Add(user);
+                                DB.SaveChanges();
+
+                                var bloodBank = new BloodBankTable();
+                                bloodBank.Name = registrationMV.BloodBank.Name;
+                                bloodBank.Address = registrationMV.BloodBank.Address;
+                                bloodBank.ContactNumber = registrationMV.BloodBank.ContactNumber;
+                                bloodBank.Email = registrationMV.BloodBank.Email;
+                                bloodBank.CityID = registrationMV.CityID;
+                                bloodBank.UserID = user.UserID;
+                                DB.BloodBankTables.Add(bloodBank);
+                                DB.SaveChanges();
+                                transaction.Commit();
+                                ViewData["Message"] = "Thanks for registration, your query will be reviewed shortly!";
+                                return RedirectToAction("MainHome", "Home");
+                            }
+                            catch
+                            {
+                                ModelState.AddModelError(string.Empty, "Please provide correct information!");
+                                transaction.Rollback();
+                            }
+                        }
+                    }
+                    else
+                    {
+                        ModelState.AddModelError(string.Empty, "Blood Bank already registered!");
+                    }
                 }
             }
             ViewBag.CityID = new SelectList(DB.CityTables.ToList(), "CityID", "City", registrationMV.CityID);
@@ -293,66 +298,67 @@ namespace KapiNadeApp.Controllers
         {
             if (ModelState.IsValid)
             {
-                   var existingUser = DB.UserTables.FirstOrDefault(u => u.Username == registrationMV.User.Username);
-                if (existingUser != null)
+                var usernameExists = DB.UserTables.Any(u => u.Username == registrationMV.User.Username);
+                if (usernameExists)
                 {
                     ModelState.AddModelError(string.Empty, "Username already exists. Please choose a different username.");
-                   
-                }
-
-                string hashedPassword;
-                using (SHA256 sha256 = SHA256.Create())
-                {
-                    byte[] inputBytes = Encoding.UTF8.GetBytes(registrationMV.User.Password);
-                    byte[] hashBytes = sha256.ComputeHash(inputBytes);
-                    hashedPassword = Convert.ToBase64String(hashBytes);
-                }
-
-                var checktitle = DB.SeekerTables.Where(h => h.Name == registrationMV.Seeker.Name.Trim() && h.CardNumber == registrationMV.Seeker.CardNumber).FirstOrDefault();
-                if (checktitle == null)
-                {
-                    using (var transaction = DB.Database.BeginTransaction())
-                    {
-                        try
-                        {
-                            var user = new UserTable();
-                            user.Username = registrationMV.User.Username;
-                            user.Password = hashedPassword;
-                            user.Email = registrationMV.User.Email;
-                            user.AccountStatusID = 1;
-                            user.UserTypeID = registrationMV.UserTypeID;
-                            DB.UserTables.Add(user);
-                            DB.SaveChanges();
-
-                            var seeker = new SeekerTable();
-                            seeker.Name = registrationMV.Seeker.Name;
-                            seeker.Surname = registrationMV.Seeker.Surname;
-                            seeker.BloodGroupID = registrationMV.BloodGroupID;
-                            seeker.Address = registrationMV.Seeker.Address;
-                            seeker.Email = registrationMV.Seeker.Email;
-                            seeker.CardNumber = registrationMV.Seeker.CardNumber;
-                            seeker.GenderID = registrationMV.GenderID;
-                            seeker.RegistrationDate = DateTime.Now;
-                            seeker.DateOfBirth = registrationMV.Seeker.DateOfBirth;
-                            seeker.ContactNumber = registrationMV.Seeker.ContactNumber;
-                            seeker.CityID = registrationMV.CityID;
-                            seeker.UserID = user.UserID;
-                            DB.SeekerTables.Add(seeker);
-                            DB.SaveChanges();
-                            transaction.Commit();
-                            ViewData["Message"] = "Thanks for registration, your query will be reviewed shortly!";
-                            return RedirectToAction("MainHome", "Home");
-                        }
-                        catch
-                        {
-                            ModelState.AddModelError(string.Empty, "Please provide correct information!");
-                            transaction.Rollback();
-                        }
-                    }
                 }
                 else
                 {
-                    ModelState.AddModelError(string.Empty, "Seeker already registered!");
+                    string hashedPassword;
+                    using (SHA256 sha256 = SHA256.Create())
+                    {
+                        byte[] inputBytes = Encoding.UTF8.GetBytes(registrationMV.User.Password);
+                        byte[] hashBytes = sha256.ComputeHash(inputBytes);
+                        hashedPassword = Convert.ToBase64String(hashBytes);
+                    }
+
+                    var checktitle = DB.SeekerTables.Where(h => h.Name == registrationMV.Seeker.Name.Trim() && h.CardNumber == registrationMV.Seeker.CardNumber).FirstOrDefault();
+                    if (checktitle == null)
+                    {
+                        using (var transaction = DB.Database.BeginTransaction())
+                        {
+                            try
+                            {
+                                var user = new UserTable();
+                                user.Username = registrationMV.User.Username;
+                                user.Password = hashedPassword;
+                                user.Email = registrationMV.User.Email;
+                                user.AccountStatusID = 1;
+                                user.UserTypeID = registrationMV.UserTypeID;
+                                DB.UserTables.Add(user);
+                                DB.SaveChanges();
+
+                                var seeker = new SeekerTable();
+                                seeker.Name = registrationMV.Seeker.Name;
+                                seeker.Surname = registrationMV.Seeker.Surname;
+                                seeker.BloodGroupID = registrationMV.BloodGroupID;
+                                seeker.Address = registrationMV.Seeker.Address;
+                                seeker.Email = registrationMV.Seeker.Email;
+                                seeker.CardNumber = registrationMV.Seeker.CardNumber;
+                                seeker.GenderID = registrationMV.GenderID;
+                                seeker.RegistrationDate = DateTime.Now;
+                                seeker.DateOfBirth = registrationMV.Seeker.DateOfBirth;
+                                seeker.ContactNumber = registrationMV.Seeker.ContactNumber;
+                                seeker.CityID = registrationMV.CityID;
+                                seeker.UserID = user.UserID;
+                                DB.SeekerTables.Add(seeker);
+                                DB.SaveChanges();
+                                transaction.Commit();
+                                ViewData["Message"] = "Thanks for registration, your query will be reviewed shortly!";
+                                return RedirectToAction("MainHome", "Home");
+                            }
+                            catch
+                            {
+                                ModelState.AddModelError(string.Empty, "Please provide correct information!");
+                                transaction.Rollback();
+                            }
+                        }
+                    }
+                    else
+                    {
+                        ModelState.AddModelError(string.Empty, "Seeker already registered!");
+                    }
                 }
             }
             ViewBag.BloodGroupID = new SelectList(DB.BloodGroupsTables.ToList(), "BloodGroupID", "BloodGroup", registrationMV.BloodGroupID);
