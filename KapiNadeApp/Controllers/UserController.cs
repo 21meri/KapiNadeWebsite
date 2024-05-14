@@ -155,9 +155,9 @@ namespace KapiNadeApp.Controllers
                 return RedirectToAction("Login", "Home");
             }
 
-            if(ModelState.IsValid)
+            if (ModelState.IsValid)
             {
-                var checkuseremail = DB.UserTables.Where(u=>u.Email == userprofile.User.Email && u.UserID != userprofile.User.UserID).FirstOrDefault();
+                var checkuseremail = DB.UserTables.Where(u => u.Email == userprofile.User.Email && u.UserID != userprofile.User.UserID).FirstOrDefault();
                 if (checkuseremail == null)
                 {
                     try
@@ -252,7 +252,7 @@ namespace KapiNadeApp.Controllers
             ViewBag.GenderID = new SelectList(DB.GenderTables.ToList(), "GenderID", "Gender", userprofile.GenderID);
 
             return View(userprofile);
-           
+
         }
         public ActionResult AllUsers()
         {
@@ -287,5 +287,22 @@ namespace KapiNadeApp.Controllers
             return View(userList);
         }
 
+        [HttpPost]
+
+        public ActionResult DeactivateProfile(int? id)
+        {
+
+            if (string.IsNullOrEmpty(Convert.ToString(Session["Username"])))
+            {
+                return RedirectToAction("Login", "Home");
+            }
+            var user = DB.UserTables.Find(id);
+            user.AccountStatusID = 4;
+            DB.Entry(user).State = System.Data.Entity.EntityState.Modified;
+            DB.SaveChanges();
+            return RedirectToAction("MainHome");
+
+
+        }
     }
 }

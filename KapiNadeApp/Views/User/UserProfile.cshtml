@@ -11,12 +11,13 @@
         <h2 class="contact-title">User Profile</h2>
 
         <div>
-            
-           <div class="row"><h4 class="col-md-4">User details</h4>
-            <div class="col-md-8" align="right">
-            @Html.ActionLink("Edit Profile", "EditUserProfile", new { id = Model.UserID }, new { @class = "btn btn-theme" })
+
+            <div class="row">
+                <h4 class="col-md-4">User details</h4>
+                <div class="col-md-8" align="right">
+                    @Html.ActionLink("Edit Profile", "EditUserProfile", new { id = Model.UserID }, new { @class = "btn btn-theme" })
+                </div>
             </div>
-                 </div>
             <hr />
             <dl class="dl-horizontal">
                 <dt>
@@ -371,9 +372,15 @@
                     }
                 }
             }
+            <hr />
+            <div class="row">
+                <div class="col-md-12" align="right">
+                    @Html.ActionLink("Deactivate Profile", "DeactivateProfile", new { id = Model.UserID }, new { @class = "btn btn-theme" })
+                </div>
+            </div>
 
         </div>
-        <p>
-        </p>
-    </div>
+            <p>
+            </p>
+        </div>
 </div>

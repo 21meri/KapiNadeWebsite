@@ -73,9 +73,9 @@ namespace KapiNadeApp.Controllers
                     {
                         ModelState.AddModelError(string.Empty, "Your account is rejected! For more details, comtact us.");
                     }
-                    else if (user.AccountStatusID == 5)
+                    else if (user.AccountStatusID == 4)
                     {
-                        ModelState.AddModelError(string.Empty, "Your account is suspended! For more details, comtact us.");
+                        ModelState.AddModelError(string.Empty, "Your account is deactivated!");
                     }
                     else if(user.AccountStatusID == 2)
                     {
