@@ -28,7 +28,7 @@ namespace KapiNadeApp.Controllers
 
         public ActionResult MainHome()
         {
-            var message = ViewData["Message"] == null ? "Welcome to Kapi Nade website!" : ViewData["Message"];
+            var message = ViewData["Message"] == null ? "Dobro došli na web stranicu Kapi Nade!" : ViewData["Message"];
             ViewData["Message"] = message;
 
             var date = DateTime.Now.Date;
@@ -67,15 +67,15 @@ namespace KapiNadeApp.Controllers
                 {
                     if(user.AccountStatusID == 1)
                     {
-                        ModelState.AddModelError(string.Empty, "Please wait, your account is under review!");
+                        ModelState.AddModelError(string.Empty, "Vaš račun još nije odobren! Molimo Vas da pričekate.");
                     }
                     else if(user.AccountStatusID == 3)
                     {
-                        ModelState.AddModelError(string.Empty, "Your account is rejected! For more details, comtact us.");
+                        ModelState.AddModelError(string.Empty, "Vaš račun je odbijen! Za više informacija, kontaktirajte nas.");
                     }
                     else if (user.AccountStatusID == 4)
                     {
-                        ModelState.AddModelError(string.Empty, "Your account is deactivated!");
+                        ModelState.AddModelError(string.Empty, "Vaš račun je deaktiviran!");
                     }
                     else if(user.AccountStatusID == 2)
                     {
@@ -121,7 +121,7 @@ namespace KapiNadeApp.Controllers
                             {
                                 
 
-                                ModelState.AddModelError(string.Empty, "Username and password is incorrect");
+                                ModelState.AddModelError(string.Empty, "Podaci nisu ispravni!");
                             }
                           }
                         else if (user.UserTypeID == 3) // Seeker
@@ -148,7 +148,7 @@ namespace KapiNadeApp.Controllers
                             }
                             else
                             {
-                                ModelState.AddModelError(string.Empty, "Username and password is incorrect");
+                                ModelState.AddModelError(string.Empty, "Podaci nisu ispravni!");
                             }
                         }
 
@@ -168,7 +168,7 @@ namespace KapiNadeApp.Controllers
                             }
                             else
                             {
-                                ModelState.AddModelError(string.Empty, "Username and password is incorrect");
+                                ModelState.AddModelError(string.Empty, "Podaci nisu ispravni!");
                             }
                         }
 
@@ -189,29 +189,29 @@ namespace KapiNadeApp.Controllers
                             }
                             else
                             {
-                                ModelState.AddModelError(string.Empty, "Username and password is incorrect");
+                                ModelState.AddModelError(string.Empty, "Podaci nisu ispravni!");
                             }
                         }
                         else
                         {
-                            ModelState.AddModelError(string.Empty, "Username and password is incorrect");
+                            ModelState.AddModelError(string.Empty, "Podaci nisu ispravni!");
                         }
 
 
                     }
                     else
                     {
-                        ModelState.AddModelError(string.Empty, "Username and password is incorrect");
+                        ModelState.AddModelError(string.Empty, "Podaci nisu ispravni!");
                     }
                 }
                 else
                 {
-                    ModelState.AddModelError(string.Empty, "Username and password is incorrect");
+                    ModelState.AddModelError(string.Empty, "Podaci nisu ispravni!");
                 }
             }
             else
             {
-                ModelState.AddModelError(string.Empty, "Please provide username/email and password");
+                ModelState.AddModelError(string.Empty, "Molimo vas da unesete korisničko ime/e-mail i šifru.");
             }
             ClearSession();
             return View(userMV);

@@ -13,21 +13,21 @@ namespace KapiNadeApp.Models
         [Display(Name = "Campaign Photo")]
         public string CampaignPhoto { get; set; }
         [Display(Name = "Campaign Title")]
-        [Required(ErrorMessage = "Required")]
+        [Required(ErrorMessage = "*Obavezno")]
         public string CampaignTitle { get; set; }
         [Display(Name="Blood Bank")]
-        [Required(ErrorMessage = "Required")]
+        [Required(ErrorMessage = "*Obavezno")]
         public int BloodBankID { get; set; }
         [Display(Name = "Campaign Date")]
-        [Required(ErrorMessage = "Required")]
+        [Required(ErrorMessage = "*Obavezno")]
         [DataType(DataType.Date)]
         public System.DateTime CampaignDate { get; set; }
         [Display(Name = "Start Time")]
-        [Required(ErrorMessage = "Required")]
+        [Required(ErrorMessage = "*Obavezno")]
        
         public System.TimeSpan StartTime { get; set; }
         [Display(Name = "End Time")]
-        [Required(ErrorMessage = "Required")]
+        [Required(ErrorMessage = "*Obavezno")]
       
 
         public System.TimeSpan EndTime { get; set; }

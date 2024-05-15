@@ -58,7 +58,7 @@ namespace KapiNadeApp.Controllers
                 var usernameExists = DB.UserTables.Any(u => u.Username == registrationMV.User.Username);
                 if (usernameExists)
                 {
-                    ModelState.AddModelError(string.Empty, "Username already exists. Please choose a different username.");
+                    ModelState.AddModelError(string.Empty, "Korisničko ime je već u upotrebi. Molimo Vas da unesete drugo korisničko ime.");
                 }
                 else
                 {
@@ -96,19 +96,19 @@ namespace KapiNadeApp.Controllers
                                 DB.HospitalTables.Add(hospital);
                                 DB.SaveChanges();
                                 transaction.Commit();
-                                ViewData["Message"] = "Thanks for registration, your query will be reviewed shortly!";
+                                ViewData["Message"] = "Hvala na registraciji! Vaš upit će biti uskoro pregledan.";
                                 return RedirectToAction("MainHome", "Home");
                             }
                             catch
                             {
-                                ModelState.AddModelError(string.Empty, "Please provide correct information!");
+                                ModelState.AddModelError(string.Empty, "Molimo Vas da unesete ispravne podatke!");
                                 transaction.Rollback();
                             }
                         }
                     }
                     else
                     {
-                        ModelState.AddModelError(string.Empty, "Hospital already registered!");
+                        ModelState.AddModelError(string.Empty, "Bolnica već registrovana!");
                     }
                 }
             }
@@ -138,7 +138,7 @@ namespace KapiNadeApp.Controllers
                 var usernameExists = DB.UserTables.Any(u => u.Username == registrationMV.User.Username);
                 if (usernameExists)
                 {
-                    ModelState.AddModelError(string.Empty, "Username already exists. Please choose a different username.");
+                    ModelState.AddModelError(string.Empty, "Korisničko ime je već u upotrebi. Molimo Vas da unesete drugo korisničko ime.");
                 }
                 else
                 {
@@ -183,19 +183,19 @@ namespace KapiNadeApp.Controllers
                                 DB.DonorTables.Add(donor);
                                 DB.SaveChanges();
                                 transaction.Commit();
-                                ViewData["Message"] = "Thanks for registration, your query will be reviewed shortly!";
+                                ViewData["Message"] = "Hvala na registraciji! Vaš upit će biti uskoro pregledan.";
                                 return RedirectToAction("MainHome", "Home");
                             }
                             catch
                             {
-                                ModelState.AddModelError(string.Empty, "Please provide correct information!");
+                                ModelState.AddModelError(string.Empty, "Molimo Vas da unesete ispravne podatke!");
                                 transaction.Rollback();
                             }
                         }
                     }
                     else
                     {
-                        ModelState.AddModelError(string.Empty, "Donor already registered!");
+                        ModelState.AddModelError(string.Empty, "Davalac već registrovan!");
                     }
                 }
             }
@@ -223,7 +223,7 @@ namespace KapiNadeApp.Controllers
                 var usernameExists = DB.UserTables.Any(u => u.Username == registrationMV.User.Username);
                 if (usernameExists)
                 {
-                    ModelState.AddModelError(string.Empty, "Username already exists. Please choose a different username.");
+                    ModelState.AddModelError(string.Empty, "Korisničko ime je već u upotrebi. Molimo Vas da unesete drugo korisničko ime.");
                 }
                 else
                 {
@@ -261,19 +261,19 @@ namespace KapiNadeApp.Controllers
                                 DB.BloodBankTables.Add(bloodBank);
                                 DB.SaveChanges();
                                 transaction.Commit();
-                                ViewData["Message"] = "Thanks for registration, your query will be reviewed shortly!";
+                                ViewData["Message"] = "Hvala na registraciji! Vaš upit će biti uskoro pregledan.";
                                 return RedirectToAction("MainHome", "Home");
                             }
                             catch
                             {
-                                ModelState.AddModelError(string.Empty, "Please provide correct information!");
+                                ModelState.AddModelError(string.Empty, "Molimo Vas da unesete ispravne podatke!");
                                 transaction.Rollback();
                             }
                         }
                     }
                     else
                     {
-                        ModelState.AddModelError(string.Empty, "Blood Bank already registered!");
+                        ModelState.AddModelError(string.Empty, "Krvna banka već registrovana!");
                     }
                 }
             }
@@ -301,7 +301,7 @@ namespace KapiNadeApp.Controllers
                 var usernameExists = DB.UserTables.Any(u => u.Username == registrationMV.User.Username);
                 if (usernameExists)
                 {
-                    ModelState.AddModelError(string.Empty, "Username already exists. Please choose a different username.");
+                    ModelState.AddModelError(string.Empty, "Korisničko ime je već u upotrebi. Molimo Vas da unesete drugo korisničko ime.");
                 }
                 else
                 {
@@ -345,19 +345,19 @@ namespace KapiNadeApp.Controllers
                                 DB.SeekerTables.Add(seeker);
                                 DB.SaveChanges();
                                 transaction.Commit();
-                                ViewData["Message"] = "Thanks for registration, your query will be reviewed shortly!";
+                                ViewData["Message"] = "Hvala na registraciji! Vaš upit će biti uskoro pregledan.";
                                 return RedirectToAction("MainHome", "Home");
                             }
                             catch
                             {
-                                ModelState.AddModelError(string.Empty, "Please provide correct information!");
+                                ModelState.AddModelError(string.Empty, "Molimo Vas da unesete ispravne podatke!");
                                 transaction.Rollback();
                             }
                         }
                     }
                     else
                     {
-                        ModelState.AddModelError(string.Empty, "Seeker already registered!");
+                        ModelState.AddModelError(string.Empty, "Primalac već registrovan");
                     }
                 }
             }

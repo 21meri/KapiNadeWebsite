@@ -65,7 +65,7 @@ namespace KapiNadeApp.Controllers
                 }
                 else
                 {
-                    ModelState.AddModelError("BloodGroup", "Already Exist!");
+                    ModelState.AddModelError("BloodGroup", "Već postoji!");
                 }
             }
             return View(bloodGroupsMV);
@@ -111,7 +111,7 @@ namespace KapiNadeApp.Controllers
                     }
                     else
                     {
-                        ModelState.AddModelError("BloodGroup", "Already Exist!");
+                        ModelState.AddModelError("BloodGroup", "Već postoji!");
                 }
                 }
             return View(bloodGroupsMV);

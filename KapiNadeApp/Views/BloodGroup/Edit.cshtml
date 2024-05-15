@@ -8,7 +8,7 @@
 
     <div class="contact-form-block">
 
-        <h2 class="contact-title">New blood group</h2>
+        <h2 class="contact-title">Uredi krvnu grupu</h2>
 
         @using (Html.BeginForm())
         {
@@ -19,7 +19,7 @@
             @Html.HiddenFor(model => model.BloodGroupID)
             <div class="form-group">
 
-                Enter Blood Group
+                Krvna grupa:
                 @Html.EditorFor(model => model.BloodGroup, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.BloodGroup, "", new { @class = "text-danger" })
 
@@ -27,8 +27,8 @@
 
             <div class="form-group">
 
-                <input type="submit" style="float:right;" value="Update" class="btn btn-custom" />
-                @Html.ActionLink("Back", "AllBloodGroups", null, new { @class = "btn btn-theme-invert" })
+                <input type="submit" style="float:right;" value="Ažuriraj" class="btn btn-custom" />
+                @Html.ActionLink("Nazad", "AllBloodGroups", null, new { @class = "btn btn-theme-invert" })
             </div>
 
 

@@ -8,14 +8,14 @@
 
     <div class="contact-form-block">
 
-        <h2 class="contact-title">Request user details</h2>
+        <h2 class="contact-title">Detalji o korisniku</h2>
         <div>
             <hr/>
-            <h4>User info</h4>
+            <h4>Korisnički podaci</h4>
             <hr />
             <dl class="dl-horizontal">
                 <dt>
-                    Username
+                    Korisničko ime:
                 </dt>
 
                 <dd>
@@ -23,7 +23,7 @@
                 </dd>
 
                 <dt>
-                    Email address
+                    E-mail za prijavu:
                 </dt>
 
                 <dd>
@@ -31,7 +31,7 @@
                 </dd>
 
                 <dt>
-                    Account status
+                    Status:
                 </dt>
 
                 <dd>
@@ -39,7 +39,7 @@
                 </dd>
 
                 <dt>
-                    Relationship
+                    Tip:
                 </dt>
 
                 <dd>
@@ -55,11 +55,11 @@
                     {
 
 
-                        <h4>Hospital Details</h4>
+                        <h4>Podaci o bolnici</h4>
                         <hr />
                         <dl class="dl-horizontal">
                             <dt>
-                                Hospital name
+                                Naziv:
                             </dt>
 
                             <dd>
@@ -67,7 +67,7 @@
                             </dd>
 
                             <dt>
-                                Hospital address
+                                Adresa:
                             </dt>
 
                             <dd>
@@ -75,7 +75,15 @@
                             </dd>
 
                             <dt>
-                                Hospital contact number
+                                Grad:
+                            </dt>
+
+                            <dd>
+                                @Html.DisplayFor(model => hospital.CityTable.City)
+                            </dd>
+
+                            <dt>
+                                Kontakt broj:
                             </dt>
 
                             <dd>
@@ -83,20 +91,13 @@
                             </dd>
 
                             <dt>
-                                Hospital email address
+                                Kontakt E-mail:
                             </dt>
 
                             <dd>
                                 @Html.DisplayFor(model => hospital.Email)
                             </dd>
 
-                            <dt>
-                                Hospital city
-                            </dt>
-
-                            <dd>
-                                @Html.DisplayFor(model => hospital.CityTable.City)
-                            </dd>
 
 
                         </dl>
@@ -108,11 +109,11 @@
                     {
 
 
-                        <h4>Donor Details</h4>
+                        <h4>Podaci o davaocu</h4>
                         <hr />
                         <dl class="dl-horizontal">
                             <dt>
-                                Donor name
+                                Ime:
                             </dt>
 
                             <dd>
@@ -120,7 +121,7 @@
                             </dd>
 
                             <dt>
-                                Donor surname
+                                Prezime:
                             </dt>
 
                             <dd>
@@ -128,50 +129,7 @@
                             </dd>
 
                             <dt>
-                                Donor date of birth
-                            </dt>
-
-                            <dd>
-                                @Html.DisplayFor(model => donor.DateOfBirth)
-                            </dd>
-
-
-
-                            <dt>
-                                Donor email
-                            </dt>
-
-                            <dd>
-                                @Html.DisplayFor(model => donor.Email)
-                            </dd>
-
-
-                            <dt>
-                                Donor blood group
-                            </dt>
-
-                            <dd>
-                                @Html.DisplayFor(model => donor.BloodGroupsTable.BloodGroup)
-                            </dd>
-
-                            <dt>
-                                Donor last donation date
-                            </dt>
-
-                            <dd>
-                                @Html.DisplayFor(model => donor.LastDonationDate)
-                            </dd>
-
-                            <dt>
-                                Donor contact number
-                            </dt>
-
-                            <dd>
-                                @Html.DisplayFor(model => donor.ContactNumber)
-                            </dd>
-
-                            <dt>
-                                Donor card number
+                                Broj kartice:
                             </dt>
 
                             <dd>
@@ -179,7 +137,48 @@
                             </dd>
 
                             <dt>
-                                Donor address
+                                Spol:
+                            </dt>
+
+                            <dd>
+                                @Html.DisplayFor(model => donor.GenderTable.Gender)
+                            </dd>
+
+                            <dt>
+                                Datum rođenja:
+                            </dt>
+
+                            <dd>
+                                @Html.DisplayFor(model => donor.DateOfBirth)
+                            </dd>
+
+                            <dt>
+                                Krvna grupa:
+                            </dt>
+
+                            <dd>
+                                @Html.DisplayFor(model => donor.BloodGroupsTable.BloodGroup)
+                            </dd>
+
+                            <dt>
+                                Datum zadnje donacije:
+                            </dt>
+
+                            <dd>
+                                @Html.DisplayFor(model => donor.LastDonationDate)
+                            </dd>
+
+                            <dt>
+                                Kontakt broj:
+                            </dt>
+
+                            <dd>
+                                @Html.DisplayFor(model => donor.ContactNumber)
+                            </dd>
+
+
+                            <dt>
+                                Adresa:
                             </dt>
 
                             <dd>
@@ -187,7 +186,7 @@
                             </dd>
 
                             <dt>
-                                Donor city
+                                Grad:
                             </dt>
 
                             <dd>
@@ -195,12 +194,13 @@
                             </dd>
 
                             <dt>
-                                Donor gender
+                                Kontakt E-mail:
                             </dt>
 
                             <dd>
-                                @Html.DisplayFor(model => donor.GenderTable.Gender)
+                                @Html.DisplayFor(model => donor.Email)
                             </dd>
+
 
 
 
@@ -214,28 +214,21 @@
                     {
 
 
-                        <h4>Blood Bank Details</h4>
+                        <h4>Podaci o krvnoj banci</h4>
                         <hr />
                         <dl class="dl-horizontal">
                             <dt>
-                                Blood bank name
+                                Naziv:
                             </dt>
 
                             <dd>
                                 @Html.DisplayFor(model => bloodbank.Name)
                             </dd>
 
-                            <dt>
-                                Blood bank number
-                            </dt>
-
-                            <dd>
-                                @Html.DisplayFor(model => bloodbank.ContactNumber)
-                            </dd>
 
 
                             <dt>
-                                Blood bank address
+                                Adresa:
                             </dt>
 
                             <dd>
@@ -243,7 +236,7 @@
                             </dd>
 
                             <dt>
-                                Blood bank city
+                                Grad:
                             </dt>
 
                             <dd>
@@ -251,7 +244,15 @@
                             </dd>
 
                             <dt>
-                                Blood bank email
+                                Kontakt broj:
+                            </dt>
+
+                            <dd>
+                                @Html.DisplayFor(model => bloodbank.ContactNumber)
+                            </dd>
+
+                            <dt>
+                                Kontakt E-mail:
                             </dt>
 
                             <dd>
@@ -270,11 +271,11 @@
                     {
 
 
-                        <h4>Seeker Details</h4>
+                        <h4>Podaci o primaocu</h4>
                         <hr />
                         <dl class="dl-horizontal">
                             <dt>
-                                Seeker name
+                                Ime:
                             </dt>
 
                             <dd>
@@ -282,7 +283,7 @@
                             </dd>
 
                             <dt>
-                                Seeeker surname
+                                Prezime:
                             </dt>
 
                             <dd>
@@ -290,47 +291,7 @@
                             </dd>
 
                             <dt>
-                                Seeeker date of birth
-                            </dt>
-
-                            <dd>
-                                @Html.DisplayFor(model => seeker.DateOfBirth)
-                            </dd>
-
-                            <dt>
-                                Seeeker blood group
-                            </dt>
-
-                            <dd>
-                                @Html.DisplayFor(model => seeker.BloodGroupsTable.BloodGroup)
-                            </dd>
-
-                            <dt>
-                                Seeeker email
-                            </dt>
-
-                            <dd>
-                                @Html.DisplayFor(model => seeker.Email)
-                            </dd>
-
-                            <dt>
-                                Seeeker registration date
-                            </dt>
-
-                            <dd>
-                                @Html.DisplayFor(model => seeker.RegistrationDate)
-                            </dd>
-
-                            <dt>
-                                Seeeker contact number
-                            </dt>
-
-                            <dd>
-                                @Html.DisplayFor(model => seeker.ContactNumber)
-                            </dd>
-
-                            <dt>
-                                Seeeker card number
+                                Broj kartice:
                             </dt>
 
                             <dd>
@@ -338,7 +299,32 @@
                             </dd>
 
                             <dt>
-                                Seeeker address
+                                Spol:
+                            </dt>
+
+                            <dd>
+                                @Html.DisplayFor(model => seeker.GenderTable.Gender)
+                            </dd>
+
+
+                            <dt>
+                                Datum rođenja:
+                            </dt>
+
+                            <dd>
+                                @Html.DisplayFor(model => seeker.DateOfBirth)
+                            </dd>
+
+                            <dt>
+                                Krvna grupa:
+                            </dt>
+
+                            <dd>
+                                @Html.DisplayFor(model => seeker.BloodGroupsTable.BloodGroup)
+                            </dd>
+
+                            <dt>
+                                Adresa:
                             </dt>
 
                             <dd>
@@ -346,7 +332,7 @@
                             </dd>
 
                             <dt>
-                                Seeeker city
+                                Grad:
                             </dt>
 
                             <dd>
@@ -354,12 +340,30 @@
                             </dd>
 
                             <dt>
-                                Seeeker gender
+                                Kontakt broj:
                             </dt>
 
                             <dd>
-                                @Html.DisplayFor(model => seeker.GenderTable.Gender)
+                                @Html.DisplayFor(model => seeker.ContactNumber)
                             </dd>
+
+                            <dt>
+                                Kontakt E-mail:
+                            </dt>
+
+                            <dd>
+                                @Html.DisplayFor(model => seeker.Email)
+                            </dd>
+
+
+                            <dt>
+                                Datum registracije:
+                            </dt>
+
+                            <dd>
+                                @Html.DisplayFor(model => seeker.RegistrationDate)
+                            </dd>
+
 
 
 
@@ -371,8 +375,8 @@
 
         </div>
         <p>
-            @Html.ActionLink("Approve", "UserApproved", new { id = Model.UserID }, new { @class = "btn btn-primary" })
-            @Html.ActionLink("Reject", "UserRejected", new { id = Model.UserID }, new { @class = "btn btn-danger" })
+            @Html.ActionLink("Odobri", "UserApproved", new { id = Model.UserID }, new { @class = "btn btn-primary" })
+            @Html.ActionLink("Odbij", "UserRejected", new { id = Model.UserID }, new { @class = "btn btn-danger" })
         </p>
         </div>
 </div>

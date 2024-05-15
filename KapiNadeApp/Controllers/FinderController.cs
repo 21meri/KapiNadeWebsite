@@ -55,7 +55,7 @@ namespace KapiNadeApp.Controllers
                         adddonor.Email = donor.Email;
                         adddonor.DateOfBirth = donor.DateOfBirth;
 
-                        adddonor.UserType = "Person";
+                        adddonor.UserType = "Osoba";
                         adddonor.UserTypeID = user.UserTypeID;
                         finderMV.SearchResult.Add(adddonor);
                     }
@@ -80,7 +80,7 @@ namespace KapiNadeApp.Controllers
                         adddonor.Email = bloodbank.BloodBankTable.Email;
                         adddonor.DonorID = bloodbank.BloodBankID;
                         adddonor.Name = bloodbank.BloodBankTable.Name;
-                        adddonor.UserType = "Blood Bank";
+                        adddonor.UserType = "Krvna banka";
                         adddonor.UserTypeID = user.UserTypeID;
                         finderMV.SearchResult.Add(adddonor);
                     }
@@ -145,7 +145,7 @@ namespace KapiNadeApp.Controllers
                 int.TryParse(Convert.ToString(Session["HospitalID"]), out RequestByID);
             }
 
-            else if (UserTypeID == 5) // Blood Bamk
+            else if (UserTypeID == 5) // Blood Bank
             {
                 RequestTypeID = 3;
                 int.TryParse(Convert.ToString(Session["BloodBankID"]), out RequestByID);
@@ -431,7 +431,7 @@ namespace KapiNadeApp.Controllers
                 var bloodstock = DB.BloodStockTables.Where(b => b.BloodBankID == bloodStockMV.BloodBankID && b.BloodGroupID == bloodStockMV.BloodGroupID).FirstOrDefault();
                 if(bloodstock.Quantity < bloodStockMV.Quantity)
                 {
-                    ModelState.AddModelError(string.Empty, "Available quantity is "+bloodstock.Quantity+"!");
+                    ModelState.AddModelError(string.Empty, "Dostupna količina: "+bloodstock.Quantity+"L");
                     return View(bloodStockMV);
 
                 }
@@ -448,7 +448,7 @@ namespace KapiNadeApp.Controllers
             }
             catch (Exception)
             {
-                ModelState.AddModelError(string.Empty, "Please provide quantity!");
+                ModelState.AddModelError(string.Empty, "Molimo Vas da unesete količinu!");
                 return View(bloodStockMV);
             }
 

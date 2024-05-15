@@ -8,10 +8,10 @@
 
     <div class="contact-form-block">
 
-        <h2 class="contact-title">All request types</h2>
+        <h2 class="contact-title">Svi tipovi zahtjeva</h2>
 
         <p>
-            @Html.ActionLink("New Request Type", "Create", null, new { @class = "btn btn-custom" })
+            @Html.ActionLink("Novi tip zahtjeva", "Create", null, new { @class = "btn btn-custom" })
         </p>
         <table class="table table-hover">
 
@@ -29,8 +29,8 @@
                         @Html.DisplayFor(modelItem => item.RequestType)
                     </td>
                     <td>
-                        @Html.ActionLink("Edit", "Edit", new { id = item.RequestTypeID }, new { @class="btn btn-primary"}) 
-                        @Html.ActionLink("Delete", "Delete", new { id = item.RequestTypeID } , new { @class = "btn btn-danger" })
+                        @Html.ActionLink("Uredi", "Edit", new { id = item.RequestTypeID }, new { @class="btn btn-primary"}) 
+                        @Html.ActionLink("Obriši", "Delete", new { id = item.RequestTypeID } , new { @class = "btn btn-danger" })
                     </td>
                 </tr>
             }

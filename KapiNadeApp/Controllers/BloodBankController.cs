@@ -44,7 +44,7 @@ namespace KapiNadeApp.Controllers
                 bloodStockmv.BloodGroup = bloodgroup;
                 bloodStockmv.BloodBankID = stock.BloodBankID;
                 bloodStockmv.BloodBank = bloodbank;
-                bloodStockmv.Status = stock.Status == true ? "Ready for use" : "Not ready for use";
+                bloodStockmv.Status = stock.Status == true ? "Spremno za korištenje" : "Nije spremno za korištenje";
                 bloodStockmv.Quantity = stock.Quantity;
                 list.Add(bloodStockmv);
 
@@ -119,7 +119,7 @@ namespace KapiNadeApp.Controllers
                     {
                         var pic = string.Format("{0}/{1}", folder, file);
                         campaign.CampaignPhoto = pic;
-                        DB.Entry(campaign).Property(x => x.CampaignPhoto).IsModified = true; // Mark CampaignPhoto as modified
+                        DB.Entry(campaign).Property(x => x.CampaignPhoto).IsModified = true;
                         DB.SaveChanges();
                     }
                 }

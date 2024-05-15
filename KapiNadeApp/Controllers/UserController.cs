@@ -231,19 +231,19 @@ namespace KapiNadeApp.Controllers
                     }
                     catch
                     {
-                        ModelState.AddModelError(string.Empty, "Some Data is incorrect! Please provide correct details.");
+                        ModelState.AddModelError(string.Empty, "Neki podaci su netačni! Molimo Vas da unesete ispravne podatke.");
                     }
 
 
                 }
                 else
                 {
-                    ModelState.AddModelError(string.Empty, "User Email already exists!");
+                    ModelState.AddModelError(string.Empty, "Korisnički e-mail već postoji!");
                 }
             }
             else
             {
-                ModelState.AddModelError(string.Empty, "Some Data is incorrect! Please provide correct details.");
+                ModelState.AddModelError(string.Empty, "Neki podaci su netačni! Molimo Vas da unesete ispravne podatke.");
             }
             //var userprofile = new RegistrationMV();
             //var user = DB.UserTables.Find(id);
@@ -256,34 +256,29 @@ namespace KapiNadeApp.Controllers
         }
         public ActionResult AllUsers()
         {
-            // Check if the user is logged in
+
             if (string.IsNullOrEmpty(Convert.ToString(Session["Username"])))
             {
                 return RedirectToAction("Login", "Home");
             }
 
-            // Retrieve all users from the database
             var users = DB.UserTables.ToList();
-
-            // Create a list to hold view model objects
             var userList = new List<UserMV>();
 
-            // Map user data to view model objects
             foreach (var user in users)
             {
                 var userViewModel = new UserMV
                 {
                     UserID = user.UserID,
                     Username = user.Username,
-                    UserType = user.UserTypeTable.UserType, // Assuming UserType is a property of the User model
-                    AccountStatus = user.AccountStatusTable.AccountStatus, // Assuming AccountStatus is a property of the User model
+                    UserType = user.UserTypeTable.UserType, 
+                    AccountStatus = user.AccountStatusTable.AccountStatus, 
                     UsernameOrEmail = user.Email
                 };
 
                 userList.Add(userViewModel);
             }
 
-            // Pass the list of view model objects to the view
             return View(userList);
         }
 

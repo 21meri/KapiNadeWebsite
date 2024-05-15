@@ -12,7 +12,7 @@
 
     <div class="contact-form-block">
 
-        <h2 class="contact-title">Edit city</h2>
+        <h2 class="contact-title">Uredi grad</h2>
 
         @using (Html.BeginForm())
         {
@@ -25,7 +25,7 @@
             <div class="form-group">
 
 
-                Update city name
+                Uredi ime grada:
                 @Html.EditorFor(model => model.City, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.City, "", new { @class = "text-danger" })
 
@@ -33,8 +33,8 @@
 
             <div class="form-group">
 
-                <input type="submit" style="float:right;" value="Update" class="btn btn-custom" />
-                @Html.ActionLink("Back", "Index", null, new { @class = "btn btn-theme-invert" })
+                <input type="submit" style="float:right;" value="Ažuriraj" class="btn btn-custom" />
+                @Html.ActionLink("Nazad", "Index", null, new { @class = "btn btn-theme-invert" })
             </div>
 
 

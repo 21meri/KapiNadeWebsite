@@ -11,7 +11,7 @@ namespace KapiNadeApp.Models
         public int RequestID { get; set; }
         public System.DateTime RequestDate { get; set; }
         public int RequestByID { get; set; }
-        [Required(ErrorMessage = "Required")]
+        [Required(ErrorMessage = "*Obavezno")]
 
         public int AcceptedID { get; set; }
         public string AcceptedName { get; set; }
@@ -27,11 +27,11 @@ namespace KapiNadeApp.Models
         public string RequestStatus { get; set; }
         public int RequestStatusID { get; set; }
         [DataType(DataType.Date)]
-        [Required(ErrorMessage = "Required")]
+        [Required(ErrorMessage = "*Obavezno")]
 
         public System.DateTime ExpectedDate { get; set; }
         [DataType(DataType.MultilineText)]
-        [Required(ErrorMessage = "Required")]
+        [Required(ErrorMessage = "*Obavezno")]
 
         public string RequestDetails { get; set; }
     }

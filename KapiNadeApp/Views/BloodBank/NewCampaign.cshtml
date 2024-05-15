@@ -8,7 +8,7 @@
 
     <div class="contact-form-block">
 
-        <h2 class="contact-title">Add new Campaign</h2>
+        <h2 class="contact-title">Dodaj novu kampanju</h2>
 
 
         @using (Html.BeginForm("NewCampaign", "BloodBank", FormMethod.Post, new {enctype="multipart/form-data"}))
@@ -19,7 +19,7 @@
 
 
             <div class="form-group">
-                Enter Campaign Title:
+                Naslov:
                 @Html.EditorFor(model => model.CampaignTitle, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.CampaignTitle, "", new { @class = "text-danger" })
             </div>
@@ -27,25 +27,25 @@
 
 
             <div class="form-group">
-                Enter Campaign Date:
+                Datum:
                 @Html.EditorFor(model => model.CampaignDate, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.CampaignDate, "", new { @class = "text-danger" })
             </div>
 
             <div class="form-group">
-                Start Time
+                Počinje u:
                 @Html.EditorFor(model => model.StartTime, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.StartTime, "", new { @class = "text-danger" })
             </div>
 
             <div class="form-group">
-                End Time
+                Završava u:
                 @Html.EditorFor(model => model.EndTime, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.EndTime, "", new { @class = "text-danger" })
             </div>
 
             <div class="form-group">
-                Campaign Banner
+                Baner:
                     <span class="btn btn-theme-invert btn-file">
                         @Html.TextBoxFor(model => model.CampaignPhotoFile, new {type="file"})
                     </span> 
@@ -54,13 +54,13 @@
 
 
             <div class="form-group">
-                Enter Location
+                Lokacija:
                 @Html.EditorFor(model => model.Location, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.Location, "", new { @class = "text-danger" })
             </div>
 
             <div class="form-group">
-                Campaign Details
+                Detalji:
                 @Html.EditorFor(model => model.CampaignDetails, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.CampaignDetails, "", new { @class = "text-danger" })
             </div>
@@ -69,7 +69,7 @@
 
             <div class="form-group">
                 <input type="submit" style="float:right;" value="Create" class="btn btn-custom" />
-                @Html.ActionLink("Back", "AllCampaigns", null, new { @class = "btn btn-theme-invert" })
+                @Html.ActionLink("Nazad", "AllCampaigns", null, new { @class = "btn btn-theme-invert" })
             </div>
 
 

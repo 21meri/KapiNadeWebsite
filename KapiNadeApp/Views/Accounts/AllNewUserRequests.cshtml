@@ -8,22 +8,22 @@
 
     <div class="contact-form-block">
 
-        <h2 class="contact-title">All new user requests</h2>
+        <h2 class="contact-title">Novi korisnički zahtjevi</h2>
 
         <table class="table table-hover">
             <tr>
                 <th>
-                    Relationship
+                    Tip
                 </th>
                 <th>
-                    Username
+                    Korisničko ime
                 </th>
                 <th>
-                    Email Address
+                    E-mail za prijavu
                 </th>
 
                 <th>
-                    Account status
+                    Status
                 </th>
 
                 <th>Action</th>
@@ -47,8 +47,8 @@
                     </td>
 
                     <td>
-                        @Html.ActionLink("Approve", "UserApproved", new { id = item.UserID }, new { @class = "btn btn-primary" })
-                        @Html.ActionLink("Reject", "UserRejected", new { id = item.UserID }, new { @class = "btn btn-danger" })
+                        @Html.ActionLink("Odobri", "UserApproved", new { id = item.UserID }, new { @class = "btn btn-primary" })
+                        @Html.ActionLink("Odbij", "UserRejected", new { id = item.UserID }, new { @class = "btn btn-danger" })
                     </td>
                 </tr>
             }

@@ -10,7 +10,7 @@ namespace KapiNadeApp.Models
     {
 
         public int AccountStatusID { get; set; }
-        [Required(ErrorMessage="Required")]
+        [Required(ErrorMessage="*Obavezno ispuniti")]
         [Display(Name ="Account Status")]
         public string AccountStatus { get; set; }
     }

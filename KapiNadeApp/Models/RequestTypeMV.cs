@@ -10,7 +10,7 @@ namespace KapiNadeApp.Models
     {
         
         public int RequestTypeID { get; set; }
-        [Required(ErrorMessage="Obavezno ispuniti*")]
+        [Required(ErrorMessage="*Obavezno ispuniti")]
         [Display(Name = "Request Type")]
         public string RequestType { get; set; }
     }

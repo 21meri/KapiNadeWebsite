@@ -108,7 +108,7 @@ namespace KapiNadeApp.Controllers
                                 int donationThresholdDays = checkdonor.GenderID == 1 ? 90 : 120;
                                 if ((DateTime.Now - checkdonor.LastDonationDate).TotalDays < donationThresholdDays)
                                 {
-                                    ModelState.AddModelError(string.Empty, "Donor already donated blood recently");
+                                    ModelState.AddModelError(string.Empty, "Davalac je već nedavno donirao krv.");
                                     transaction.Rollback();
 
 
@@ -158,16 +158,15 @@ namespace KapiNadeApp.Controllers
                             else
                             {
                                 var user = new UserTable();
-                                // Generiranje random broja
-                                Random random = new Random();
-                                int randomNumber = random.Next(0, 9999); // Promijenite raspon prema vašim potrebama
 
-                                // Kreiranje korisničkog imena
+                                Random random = new Random();
+                                int randomNumber = random.Next(0, 9999);
+
                                 string firstName = collectBloodMV.DonorDetails.Name.Trim();
                                 string lastName = collectBloodMV.DonorDetails.Surname.Trim();
                                 string username = firstName.ToLower() + "." + lastName.ToLower() + randomNumber;
                                 user.Username = username;
-                                string hashedPassword = EncryptPassword("abcabc"); // Enkriptujte lozinku "abcabc"
+                                string hashedPassword = EncryptPassword("kapinade2024");
                                 user.Password = hashedPassword;
                                 user.Email = collectBloodMV.DonorDetails.Email;
                                 user.AccountStatusID = 2;
@@ -234,7 +233,7 @@ namespace KapiNadeApp.Controllers
 
                         catch
                         {
-                            ModelState.AddModelError(string.Empty, "Please provide correct information!");
+                            ModelState.AddModelError(string.Empty, "Molimo Vas da unesete ispravne podatke!");
                             transaction.Rollback();
                         }
 
@@ -244,7 +243,7 @@ namespace KapiNadeApp.Controllers
                 }
                 else
                 {
-                    ModelState.AddModelError(string.Empty, "Please provide donor full details!");
+                    ModelState.AddModelError(string.Empty, "Molimo Vas da unesete sve potrebne podatke!");
 
                 }
             }

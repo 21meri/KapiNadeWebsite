@@ -47,7 +47,7 @@
     
     <div class="container"  align="center">
         <div class="appointment-form-wrapper theme-custom-box-shadow text-center clearfix wow zoomIn" style="width:40%;">
-            <h3 class="join-heading join-heading-alt">Login</h3>
+            <h3 class="join-heading join-heading-alt">Prijava</h3>
 
             @using (Html.BeginForm("Login", "Home", FormMethod.Post, new { @class = "appoinment-form" }))
             {
@@ -67,8 +67,8 @@
                 </div>
 
                 <div class="form-group col-md-12 col-sm-12 col-xs-12">
-                    <button id="btn_submit" class="btn btn-theme" type="submit">Login</button>
-                    @Html.ActionLink("Back to home", "MainHome", "Home", null, new { @id = "btn_submit", @class="btn btn-theme btn-theme-invert" })
+                    <button id="btn_submit" class="btn btn-theme" type="submit">Prijava</button>
+                    @Html.ActionLink("Nazad na naslovnu", "MainHome", "Home", null, new { @id = "btn_submit", @class="btn btn-theme btn-theme-invert" })
 
                 </div>
             }

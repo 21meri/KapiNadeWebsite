@@ -8,7 +8,7 @@
 
     <div class="contact-form-block">
 
-        <h2 class="contact-title">Edit request type</h2>
+        <h2 class="contact-title">Uredite tip zahtjeva</h2>
 
         @using (Html.BeginForm())
         {
@@ -20,7 +20,7 @@
 
             <div class="form-group">
 
-                Enter Request Type
+                Unesite tip zahtjeva:
                 @Html.EditorFor(model => model.RequestType, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.RequestType, "", new { @class = "text-danger" })
 
@@ -28,8 +28,8 @@
 
             <div class="form-group">
 
-                <input type="submit" style="float:right;" value="Update" class="btn btn-custom" />
-                @Html.ActionLink("Back", "AllRequestType", null, new { @class = "btn btn-theme-invert" })
+                <input type="submit" style="float:right;" value="Ažuriraj" class="btn btn-custom" />
+                @Html.ActionLink("Nazad", "AllRequestType", null, new { @class = "btn btn-theme-invert" })
             </div>
 
 

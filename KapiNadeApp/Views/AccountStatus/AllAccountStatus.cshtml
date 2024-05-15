@@ -8,10 +8,10 @@
 
     <div class="contact-form-block">
 
-        <h2 class="contact-title">Account status</h2>
+        <h2 class="contact-title">Status računa</h2>
 
         <p>
-            @Html.ActionLink("New Account Status", "Create", null, new { @class = "btn btn-custom" })
+            @Html.ActionLink("Novi status računa", "Create", null, new { @class = "btn btn-custom" })
         </p>
         <table class="table table-hover">
 
@@ -29,8 +29,8 @@
                         @Html.DisplayFor(modelItem => item.AccountStatus)
                     </td>
                     <td>
-                        @Html.ActionLink("Edit", "Edit", new { id = item.AccountStatusID }, new { @class = "btn btn-primary" })
-                        @Html.ActionLink("Delete", "Delete", new { id = item.AccountStatusID }, new { @class = "btn btn-danger" })
+                        @Html.ActionLink("Uredi", "Edit", new { id = item.AccountStatusID }, new { @class = "btn btn-primary" })
+                        @Html.ActionLink("Obriši", "Delete", new { id = item.AccountStatusID }, new { @class = "btn btn-danger" })
                     </td>
                 </tr>
             }

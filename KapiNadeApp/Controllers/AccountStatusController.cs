@@ -65,7 +65,7 @@ namespace KapiNadeApp.Controllers
                 }
                 else
                 {
-                    ModelState.AddModelError("AccountStatus", "Already Exist!");
+                    ModelState.AddModelError("AccountStatus", "Već postoji!");
                 }
             }
             return View(accountStatusMV);
@@ -111,7 +111,7 @@ namespace KapiNadeApp.Controllers
                 }
                 else
                 {
-                    ModelState.AddModelError("AccountStatus", "Already Exist!");
+                    ModelState.AddModelError("AccountStatus", "Već postoji!");
                 }
             }
             return View(accountStatusMV);

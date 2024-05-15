@@ -12,7 +12,7 @@ namespace KapiNadeApp.Models
 
 
         public int BloodGroupID { get; set; }
-        [Required(ErrorMessage = "Obavezno ispuniti*")]
+        [Required(ErrorMessage = "*Obavezno ispuniti")]
         [Display(Name = "Blood Group")]
         public string BloodGroup { get; set; }
 
