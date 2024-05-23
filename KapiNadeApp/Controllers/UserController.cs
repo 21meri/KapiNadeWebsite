@@ -282,22 +282,8 @@ namespace KapiNadeApp.Controllers
             return View(userList);
         }
 
-        [HttpPost]
+     
 
-        public ActionResult DeactivateProfile(int? id)
-        {
-
-            if (string.IsNullOrEmpty(Convert.ToString(Session["Username"])))
-            {
-                return RedirectToAction("Login", "Home");
-            }
-            var user = DB.UserTables.Find(id);
-            user.AccountStatusID = 4;
-            DB.Entry(user).State = System.Data.Entity.EntityState.Modified;
-            DB.SaveChanges();
-            return RedirectToAction("MainHome");
-
-
-        }
+   
     }
 }

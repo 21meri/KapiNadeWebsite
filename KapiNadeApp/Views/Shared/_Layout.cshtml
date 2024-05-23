@@ -107,9 +107,12 @@
                                                         {
                                                             <li><a href="@Url.Content("~/Home/Contact")">O nama</a></li>
                                                         }
-                                                        <li>
-                                                            <a href="@Url.Content("~/Finder/FinderOfDonors")">Pronađi donora</a>
-                                                        </li>
+                                                        @if (usertypeid == 3 || usertypeid == 4 || usertypeid == 5)
+                                                        { 
+                                                            <li>
+                                                                <a href="@Url.Content("~/Finder/FinderOfDonors")">Pronađi donora</a>
+                                                            </li>
+                                                        }
 
                                                         @if (usertypeid == 1)
                                                         {
