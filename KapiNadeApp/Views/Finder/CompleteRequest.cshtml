@@ -9,7 +9,7 @@
 
     <div class="contact-form-block">
 
-        <h2 class="contact-title">Complete Request for blood</h2>
+        <h2 class="contact-title">Završi zahtjev za krv</h2>
 
 
         @using (Html.BeginForm())
@@ -27,11 +27,11 @@
             @Html.HiddenFor(model => model.BloodStockID)
 
 
-            <h4>Blood Bank Details</h4>
+            <h4>Detalji krvne banke</h4>
             <hr />
             <dl class="dl-horizontal">
                 <dt>
-                    Blood Bank
+                    Krvna banka
                 </dt>
 
                 <dd>
@@ -39,7 +39,7 @@
                 </dd>
 
                 <dt>
-                    Required Blood Group
+                    Potrebna krvna grupa
                 </dt>
 
                 <dd>
@@ -50,7 +50,7 @@
             <div class="form-group">
 
 
-                Enter Blood Quantity (L)
+                Unesi količinu krvi (L)
                 @Html.EditorFor(model => model.Quantity, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.Quantity, "", new { @class = "text-danger" })
 
@@ -60,7 +60,7 @@
 
             <div class="form-group">
 
-                <input type="submit" style="float:right;" value="Complete Request" class="btn btn-theme" />
+                <input type="submit" style="float:right;" value="Završi zahtjev" class="btn btn-theme" />
             </div>
         }
 
