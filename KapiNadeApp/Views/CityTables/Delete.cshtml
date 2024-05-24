@@ -9,9 +9,9 @@
 <div>
     <h4>Grad</h4>
     <hr />
-    <dl class="dl-horizontal">
+    <dl class="custom-dl">
         <dt>
-            @Html.DisplayNameFor(model => model.City)
+            Grad koji brišete:
         </dt>
 
         <dd>
@@ -20,12 +20,16 @@
 
     </dl>
 
-    @using (Html.BeginForm()) {
+    @using (Html.BeginForm())
+    {
         @Html.AntiForgeryToken()
 
+      
+
+
         <div class="form-actions no-color">
-            <input type="submit" value="Obriši" class="btn btn-default" /> |
-            @Html.ActionLink("Nazad na listu", "Index")
+            <input type="submit" value="Obriši" class="btn btn-danger" />
+            @Html.ActionLink("Nazad", "Index", null, new { @class = "btn btn-theme-invert" })
         </div>
     }
 </div>

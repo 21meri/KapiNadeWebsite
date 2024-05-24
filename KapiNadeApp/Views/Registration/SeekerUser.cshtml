@@ -6,7 +6,7 @@
 
 
 <div class="appointment-form-wrapper text-center clearfix">
-    <h3 class="join-heading join-heading-alt">Seeker registration form</h3>
+    <h3 class="join-heading join-heading-alt">Registracijska forma za primaoca</h3>
     @using (Html.BeginForm("SeekerUser", "Registration", FormMethod.Post, new { @class = "appoinment-form" }))
     {
 
@@ -21,39 +21,39 @@
         @Html.HiddenFor(model => model.User.Email)
 
         <div class="form-group col-md-6">
-            <label style="float:left;">Enter your name:</label>
+            <label style="float:left;">Unesite Vaše ime:</label>
             @Html.EditorFor(model => model.Seeker.Name, new { htmlAttributes = new { @class = "form-control", @placeholder = "", @type = "text" } })
             @Html.ValidationMessageFor(model => model.Seeker.Name, "", new { @class = "text-danger" })
         </div>
 
         <div class="form-group col-md-6">
-            <label style="float:left;">Enter your surname:</label>
+            <label style="float:left;">Unesite Vaše prezime:</label>
             @Html.EditorFor(model => model.Seeker.Surname, new { htmlAttributes = new { @class = "form-control", @placeholder = "", @type = "text" } })
             @Html.ValidationMessageFor(model => model.Seeker.Surname, "", new { @class = "text-danger" })
         </div>
 
         <div class="form-group col-md-6">
-            <label style="float:left;">Enter your card number:</label>
+            <label style="float:left;">Unesite broj Vaše kartice:</label>
             @Html.EditorFor(model => model.Seeker.CardNumber, new { htmlAttributes = new { @class = "form-control", @placeholder = "" } })
             @Html.ValidationMessageFor(model => model.Seeker.CardNumber, "", new { @class = "text-danger" })
         </div>
 
         <div class="form-group col-md-6">
             <div class="select-style">
-                <label style="float:left;">Select your gender:</label>
+                <label style="float:left;">Odaberite Vaš spol:</label>
                 @Html.DropDownList("GenderID", null, "", new { @class = "form-control" })
                 @Html.ValidationMessageFor(model => model.GenderID, "", new { @class = "text-danger" })
             </div>
         </div>
 
         <div class="form-group col-md-6">
-            <label style="float:left;">Enter your birthday:</label>
+            <label style="float:left;">Unesite Vaš datum rođenja:</label>
             @Html.EditorFor(model => model.Seeker.DateOfBirth, new { htmlAttributes = new { @class = "form-control" } })
             @Html.ValidationMessageFor(model => model.Seeker.DateOfBirth, "", new { @class = "text-danger" })
         </div>
 
         <div class="form-group col-md-6">
-            <label style="float:left;">Select your blood group:</label>
+            <label style="float:left;">Odaberite Vašu krvnu grupu:</label>
             <div class="select-style">
                 @Html.DropDownList("BloodGroupID", null, "", new { @class = "form-control" })
                 @Html.ValidationMessageFor(model => model.BloodGroupID, "", new { @class = "text-danger" })
@@ -62,13 +62,13 @@
 
 
         <div class="form-group col-md-6">
-            <label style="float:left;">Enter your address:</label>
+            <label style="float:left;">Unesite Vašu adresu:</label>
             @Html.EditorFor(model => model.Seeker.Address, new { htmlAttributes = new { @class = "form-control", @placeholder = "", @type = "text" } })
             @Html.ValidationMessageFor(model => model.Seeker.Address, "", new { @class = "text-danger" })
         </div>
 
         <div class="form-group col-md-6">
-            <label style="float:left;">Select your city:</label>
+            <label style="float:left;">Odaberite Vaš grad:</label>
             <div class="select-style">
                 @Html.DropDownList("CityID", null, "", new { @class = "form-control" })
                 @Html.ValidationMessageFor(model => model.CityID, "", new { @class = "text-danger" })
@@ -77,7 +77,7 @@
 
 
         <div class="form-group col-md-6">
-            <label style="float:left;">Enter your contact number:</label>
+            <label style="float:left;">Unesite Vaš broj telefona:</label>
             @Html.EditorFor(model => model.Seeker.ContactNumber, new { htmlAttributes = new { @class = "form-control", @placeholder = "" } })
             @Html.ValidationMessageFor(model => model.Seeker.ContactNumber, "", new { @class = "text-danger" })
         </div>
@@ -89,7 +89,7 @@
 
 
         <div class="form-group col-md-6">
-            <label style="float:left;">Enter your email:</label>
+            <label style="float:left;">Unesite Vaš kontaktni mail:</label>
             @Html.EditorFor(model => model.Seeker.Email, new { htmlAttributes = new { @class = "form-control", @placeholder = "", @type = "email" } })
             @Html.ValidationMessageFor(model => model.Seeker.Email, "", new { @class = "text-danger" })
         </div>
@@ -102,7 +102,7 @@
 
 
         <div class="form-group col-md-12 col-sm-12 col-xs-12">
-            <button id="btn_submit" class="btn-submit" type="submit">Submit</button>
+            <button id="btn_submit" class="btn-submit" type="submit">Pošalji</button>
         </div>
 
     }

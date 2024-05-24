@@ -8,9 +8,9 @@
 <div>
     <h4>Tip zahtjeva</h4>
     <hr />
-    <dl class="dl-horizontal">
+    <dl class="custom-dl">
         <dt>
-            @Html.DisplayNameFor(model => model.RequestType)
+            Tip zahtjeva koji brišete:
         </dt>
 
         <dd>
@@ -19,12 +19,13 @@
 
     </dl>
 
-    @using (Html.BeginForm()) {
+    @using (Html.BeginForm())
+    {
         @Html.AntiForgeryToken()
 
-<div class="form-actions no-color">
-    <input type="submit" value="Obriši" class="btn btn-danger" />
-    @Html.ActionLink("Nazad", "AllRequestType", null, new { @class = "btn btn-theme-invert" })
-</div>
+        <div class="form-actions no-color">
+            <input type="submit" value="Obriši" class="btn btn-danger" />
+            @Html.ActionLink("Nazad", "AllRequestType", null, new { @class = "btn btn-theme-invert" })
+        </div>
     }
 </div>

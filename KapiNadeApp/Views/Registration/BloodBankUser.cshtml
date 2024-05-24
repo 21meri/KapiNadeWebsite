@@ -4,7 +4,7 @@
 }
 
 <div class="appointment-form-wrapper text-center clearfix">
-    <h3 class="join-heading join-heading-alt">Blood Bank Registration</h3>
+    <h3 class="join-heading join-heading-alt">Registracijska forma krvne banke</h3>
     @using (Html.BeginForm("BloodBankUser", "Registration", FormMethod.Post, new { @class = "appoinment-form" }))
     {
 
@@ -20,7 +20,7 @@
 
 
         <div class="form-group col-md-6">
-            <label style="float:left;">Enter your name:</label>
+            <label style="float:left;">Unesite Vaš naziv:</label>
 
             @Html.EditorFor(model => model.BloodBank.Name, new { htmlAttributes = new { @class = "form-control", @placeholder = "", @type = "text" } })
             @Html.ValidationMessageFor(model => model.BloodBank.Name, "", new { @class = "text-danger" })
@@ -29,13 +29,13 @@
         </div>
 
         <div class="form-group col-md-6">
-            <label style="float:left;">Enter your address:</label>
+            <label style="float:left;">unesite Vašu lokaciju:</label>
             @Html.EditorFor(model => model.BloodBank.Address, new { htmlAttributes = new { @class = "form-control", @placeholder = "", @type = "text" } })
             @Html.ValidationMessageFor(model => model.BloodBank.Address, "", new { @class = "text-danger" })
         </div>
 
         <div class="form-group col-md-6">
-            <label style="float:left;">Select your city:</label>
+            <label style="float:left;">Odaberite Vaš grad:</label>
             <div class="select-style">
                 @Html.DropDownList("CityID", null, "", new { @class = "form-control" })
                 @Html.ValidationMessageFor(model => model.CityID, "", new { @class = "text-danger" })
@@ -43,7 +43,7 @@
         </div>
 
         <div class="form-group col-md-6">
-            <label style="float:left;">Enter your contact number:</label>
+            <label style="float:left;">Unesite Vaš broj telefona:</label>
             @Html.EditorFor(model => model.BloodBank.ContactNumber, new { htmlAttributes = new { @class = "form-control", @placeholder = "" } })
             @Html.ValidationMessageFor(model => model.BloodBank.ContactNumber, "", new { @class = "text-danger" })
 
@@ -51,7 +51,7 @@
 
 
         <div class="form-group col-md-6">
-            <label style="float:left;">Enter your email:</label>
+            <label style="float:left;">Unesite Vaš kontaktni mail:</label>
             @Html.EditorFor(model => model.BloodBank.Email, new { htmlAttributes = new { @class = "form-control", @placeholder = "", @type = "email" } })
             @Html.ValidationMessageFor(model => model.BloodBank.Email, "", new { @class = "text-danger" })
 
@@ -64,7 +64,7 @@
 
 
         <div class="form-group col-md-12 col-sm-12 col-xs-12">
-            <button id="btn_submit" class="btn-submit" type="submit">Submit</button>
+            <button id="btn_submit" class="btn-submit" type="submit">Pošalji</button>
         </div>
 
     }

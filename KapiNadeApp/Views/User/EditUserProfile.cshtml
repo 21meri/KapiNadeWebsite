@@ -23,7 +23,7 @@
 
     <div class="contact-form-block">
 
-        <h2 class="contact-title">Update Profile</h2>
+        <h2 class="contact-title">Uredi profil</h2>
 
         <div>
             @using (Html.BeginForm("EditUserProfile", "User", FormMethod.Post))
@@ -42,16 +42,16 @@
 
 
                 <div class="row">
-                    <h4 class="col-md-4">Edit User details</h4>
+                    <h4 class="col-md-4">Uredi detalje profila</h4>
                     <div class="col-md-8" align="right">
-                        <input type="submit" value="Update Profile" class="btn btn-custom" />
+                        <input type="submit" value="Ažuriraj" class="btn btn-custom" />
                     </div>
                 </div>
 
                 <hr />
                 <dl class="dl-horizontal">
                     <dt>
-                        Username
+                        Korisničko ime:
                     </dt>
 
                     <dd>
@@ -59,7 +59,7 @@
                     </dd>
 
                     <dt>
-                        Email address
+                        Email:
                     </dt>
 
                     <dd>
@@ -74,11 +74,11 @@
 
 
 
-                    <h4>Edit Hospital Details</h4>
+                    <h4>Uredi detalje profila bolnice</h4>
                     <hr />
                     <dl class="dl-horizontal">
                         <dt>
-                            Hospital name
+                            Ime:
                         </dt>
 
                         <dd>
@@ -87,7 +87,7 @@
                         </dd>
 
                         <dt>
-                            Hospital address
+                            Adresa:
                         </dt>
 
                         <dd>
@@ -96,7 +96,7 @@
                         </dd>
 
                         <dt>
-                            Hospital contact number
+                            Broj telefona:
                         </dt>
 
                         <dd>
@@ -105,7 +105,7 @@
                         </dd>
 
                         <dt>
-                            Hospital email address
+                            Email:
                         </dt>
 
                         <dd>
@@ -114,12 +114,12 @@
                         </dd>
 
                         <dt>
-                            Hospital city
+                            Grad:
                         </dt>
 
                         <dd>
                             <div class="select-style">
-                                @Html.DropDownList("CityID", null, "--Select City--", new { @class = "form-control" })
+                                @Html.DropDownList("CityID", null, "--Odaberi grad--", new { @class = "form-control" })
                                 @Html.ValidationMessageFor(model => model.CityID, "", new { @class = "text-danhger" })
                             </div>
                         </dd>
@@ -133,11 +133,11 @@
 
 
 
-                    <h4>Edit Donor Details</h4>
+                    <h4>Uredi detalje profila davaoca</h4>
                     <hr />
                     <dl class="dl-horizontal">
                         <dt>
-                            Donor name
+                            Ime
                         </dt>
 
                         <dd>
@@ -146,7 +146,7 @@
                         </dd>
 
                         <dt>
-                            Donor surname
+                             Prezime:
                         </dt>
 
                         <dd>
@@ -155,18 +155,18 @@
                         </dd>
 
                         <dt>
-                            Donor blood group
+                            Krvna grupa:
                         </dt>
 
                         <dd>
                             <div class="select-style">
-                                @Html.DropDownList("BloodGroupID", null, "--Select BloodGroup--", new { @class = "form-control" })
+                                @Html.DropDownList("BloodGroupID", null, "--Odaberi krvnu grupu--", new { @class = "form-control" })
                                 @Html.ValidationMessageFor(model => model.BloodGroupID, "", new { @class = "text-danger" })
                             </div>
                         </dd>
 
                         <dt>
-                            Donor contact number
+                            Broj telefona:
                         </dt>
 
                         <dd>
@@ -175,7 +175,7 @@
                         </dd>
 
                         <dt>
-                            Donor card number
+                            Broj kartice:
                         </dt>
 
                         <dd>
@@ -184,7 +184,7 @@
                         </dd>
 
                         <dt>
-                            Donor last donation date
+                            Datum zadnje donacije:
                         </dt>
 
                         <dd>
@@ -193,7 +193,7 @@
                         </dd>
 
                         <dt>
-                            Donor date of birth
+                            Datum rođenja:
                         </dt>
 
                         <dd>
@@ -203,7 +203,7 @@
 
 
                         <dt>
-                            Donor email address
+                            Email:
                         </dt>
 
                         <dd>
@@ -212,7 +212,7 @@
                         </dd>
 
                         <dt>
-                            Donor address
+                            Adresa:
                         </dt>
 
                         <dd>
@@ -221,23 +221,23 @@
                         </dd>
 
                         <dt>
-                            Donor city
+                            Grad:
                         </dt>
 
                         <dd>
                             <div class="select-style">
-                                @Html.DropDownList("CityID", null, "--Your City--", new { @class = "form-control" })
+                                @Html.DropDownList("CityID", null, "--Odaberi grad--", new { @class = "form-control" })
                                 @Html.ValidationMessageFor(model => model.CityID, "", new { @class = "text-danger" })
                             </div>
                         </dd>
 
                         <dt>
-                            Donor gender
+                            Spol:
                         </dt>
 
                         <dd>
                             <div class="select-style">
-                                @Html.DropDownList("GenderID", null, "--Select Gender--", new { @class = "form-control" })
+                                @Html.DropDownList("GenderID", null, "--Odaberi spol--", new { @class = "form-control" })
                                 @Html.ValidationMessageFor(model => model.GenderID, "", new { @class = "text-danger" })
                             </div>
                         </dd>
@@ -253,11 +253,11 @@
 
 
 
-                    <h4>Edit Blood Bank Details</h4>
+                    <h4>Uredi detalje profila krvne banke</h4>
                     <hr />
                     <dl class="dl-horizontal">
                         <dt>
-                            Blood bank name
+                            Ime:
                         </dt>
 
                         <dd>
@@ -266,7 +266,7 @@
                         </dd>
 
                         <dt>
-                            Blood bank number
+                            Broj telefona:
                         </dt>
 
                         <dd>
@@ -276,7 +276,7 @@
 
 
                         <dt>
-                            Blood bank address
+                            Adresa:
                         </dt>
 
                         <dd>
@@ -285,18 +285,18 @@
                         </dd>
 
                         <dt>
-                            Blood bank city
+                            Grad:
                         </dt>
 
                         <dd>
                             <div class="select-style">
-                                @Html.DropDownList("CityID", null, "--Your City--", new { @class = "form-control" })
+                                @Html.DropDownList("CityID", null, "--Odaberi grad--", new { @class = "form-control" })
                                 @Html.ValidationMessageFor(model => model.CityID, "", new { @class = "text-danger" })
                             </div>
                         </dd>
 
                         <dt>
-                            Blood bank email
+                            Email:
                         </dt>
 
                         <dd>
@@ -314,11 +314,11 @@
                 {
 
 
-                    <h4>Edit Seeker Details</h4>
+                    <h4>Uredi detalje profila primaoca</h4>
                     <hr />
                     <dl class="dl-horizontal">
                         <dt>
-                            Seeker name
+                            Ime:
                         </dt>
 
                         <dd>
@@ -327,7 +327,7 @@
                         </dd>
 
                         <dt>
-                            Seeeker surname
+                            Prezime:
                         </dt>
 
                         <dd>
@@ -336,7 +336,7 @@
                         </dd>
 
                         <dt>
-                            Seeeker date of birth
+                            Datum rođenja:
                         </dt>
 
                         <dd>
@@ -345,18 +345,18 @@
                         </dd>
 
                         <dt>
-                            Seeeker blood group
+                            Krvna grupa:
                         </dt>
 
                         <dd>
                             <div class="select-style">
-                                @Html.DropDownList("BloodGroupID", null, "--Select BloodGroup--", new { @class = "form-control" })
+                                @Html.DropDownList("BloodGroupID", null, "--Odaberi krvnu grupu--", new { @class = "form-control" })
                                 @Html.ValidationMessageFor(model => model.BloodGroupID, "", new { @class = "text-danger" })
                             </div>
                         </dd>
 
                         <dt>
-                            Seeeker email
+                            Email:
                         </dt>
 
                         <dd>
@@ -365,7 +365,7 @@
                         </dd>
 
                         <dt>
-                            Seeeker contact number
+                            Broj telefona:
                         </dt>
 
                         <dd>
@@ -374,7 +374,7 @@
                         </dd>
 
                         <dt>
-                            Seeeker card number
+                            Broj kartice:
                         </dt>
 
                         <dd>
@@ -383,7 +383,7 @@
                         </dd>
 
                         <dt>
-                            Seeeker address
+                            Adresa:
                         </dt>
 
                         <dd>
@@ -392,23 +392,23 @@
                         </dd>
 
                         <dt>
-                            Seeeker city
+                            Grad:
                         </dt>
 
                         <dd>
                             <div class="select-style">
-                                @Html.DropDownList("CityID", null, "--Your City--", new { @class = "form-control" })
+                                @Html.DropDownList("CityID", null, "--Odaberi grad--", new { @class = "form-control" })
                                 @Html.ValidationMessageFor(model => model.CityID, "", new { @class = "text-danger" })
                             </div>
                         </dd>
 
                         <dt>
-                            Seeeker gender
+                            Spol:
                         </dt>
 
                         <dd>
                             <div class="select-style">
-                                @Html.DropDownList("GenderID", null, "--Select Gender--", new { @class = "form-control" })
+                                @Html.DropDownList("GenderID", null, "--Odaberi spol--", new { @class = "form-control" })
                                 @Html.ValidationMessageFor(model => model.GenderID, "", new { @class = "text-danger" })
                             </div>
                         </dd>

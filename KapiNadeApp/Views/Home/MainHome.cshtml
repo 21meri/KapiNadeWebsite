@@ -471,7 +471,7 @@
                 <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
 
                     <div class="appointment-form-wrapper text-center clearfix">
-                        <h3 class="join-heading">Registration</h3>
+                        <h3 class="join-heading">Registracija</h3>
                         @using (Html.BeginForm("SelectUser", "Registration", FormMethod.Post, new { @class = "appoinment-form" }))
                         {
 
@@ -480,7 +480,7 @@
 
 
                             <div class="form-group col-md-6">
-                                @Html.EditorFor(model => model.User.Username, new { htmlAttributes = new { @class = "form-control", @placeholder = "Username", @type = "text" } })
+                                @Html.EditorFor(model => model.User.Username, new { htmlAttributes = new { @class = "form-control", @placeholder = "Korisničko ime", @type = "text" } })
                                 @Html.ValidationMessageFor(model => model.User.Username, "", new { @class = "text-danger" })
 
 
@@ -492,20 +492,20 @@
 
                             </div>
                             <div class="form-group col-md-6">
-                                @Html.EditorFor(model => model.User.Password, new { htmlAttributes = new { @class = "form-control", @placeholder = "Password", @type = "password" } })
+                                @Html.EditorFor(model => model.User.Password, new { htmlAttributes = new { @class = "form-control", @placeholder = "Šifra", @type = "password" } })
                                 @Html.ValidationMessageFor(model => model.User.Password, "", new { @class = "text-danger" })
 
 
                             </div>
                             <div class="form-group col-md-6">
                                 <div class="select-style">
-                                    @Html.DropDownList("UserTypeID", null, "--Relationship--", new { @class = "form-control" })
+                                    @Html.DropDownList("UserTypeID", null, "--Veza--", new { @class = "form-control" })
                                     @Html.ValidationMessageFor(model => model.UserTypeID, "", new { @class = "text-danhger" })
                                 </div>
                             </div>
                             
                             <div class="form-group col-md-12 col-sm-12 col-xs-12">
-                                <button id="btn_submit" class="btn-submit" type="submit">Submit</button>
+                                <button id="btn_submit" class="btn-submit" type="submit">Pošalji</button>
                             </div>
 
                         }
