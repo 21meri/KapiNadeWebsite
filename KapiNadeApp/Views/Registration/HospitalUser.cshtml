@@ -25,13 +25,13 @@
         </div>
 
         <div class="form-group col-md-6">
-            <label style="float:left;">Unesite lokaciju bolnica:</label>
+            <label style="float:left;">Unesite adresu bolnice:</label>
             @Html.EditorFor(model => model.Hospital.Address, new { htmlAttributes = new { @class = "form-control", @placeholder = "", @type = "text" } })
             @Html.ValidationMessageFor(model => model.Hospital.Address, "", new { @class = "text-danger" })
         </div>
 
         <div class="form-group col-md-6">
-            <label style="float:left;">Odaberite grad bolnice:</label>
+            <label style="float:left;">Odaberite grad u kojem se bolnica nalazi:</label>
             <div class="select-style">
                 @Html.DropDownList("CityID", null, "", new { @class = "form-control" })
                 @Html.ValidationMessageFor(model => model.CityID, "", new { @class = "text-danger" })

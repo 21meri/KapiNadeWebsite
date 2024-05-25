@@ -52,152 +52,160 @@ namespace KapiNadeApp.Controllers
         {
             if(ModelState.IsValid)
             {
-                string decryptedPassword;
+                if (userMV.Password != null && userMV.UsernameOrEmail != null)
+                {
+
+                    string decryptedPassword;
                     using (SHA256 sha256 = SHA256.Create())
                     {
                         byte[] inputBytes = Encoding.UTF8.GetBytes(userMV.Password);
                         byte[] hashBytes = sha256.ComputeHash(inputBytes);
                         decryptedPassword = Convert.ToBase64String(hashBytes);
                     }
-                
 
 
-                var user = DB.UserTables.Where(u => u.Password == decryptedPassword && (u.Email == userMV.UsernameOrEmail || u.Username == userMV.UsernameOrEmail)).FirstOrDefault();
-                if(user != null)
-                {
-                    if(user.AccountStatusID == 1)
-                    {
-                        ModelState.AddModelError(string.Empty, "Vaš račun još nije odobren! Molimo Vas da pričekate.");
-                    }
-                    else if(user.AccountStatusID == 3)
-                    {
-                        ModelState.AddModelError(string.Empty, "Vaš račun je odbijen! Za više informacija, kontaktirajte nas.");
-                    }
-                    else if (user.AccountStatusID == 4)
-                    {
-                        ModelState.AddModelError(string.Empty, "Vaš račun je deaktiviran!");
-                    }
-                    else if(user.AccountStatusID == 2)
-                    {
-                        Session["UserID"] = user.UserID;
-                        Session["Username"] = user.Username;
-                        Session["Password"] = user.Password;
-                        Session["Email"] = user.Email;
-                        Session["AccountStatusID"] = user.AccountStatusID;
-                        Session["AccountStatus"] = user.AccountStatusTable.AccountStatus;
-                        Session["UserTypeID"] = user.UserTypeID;
-                        Session["UserType"] = user.UserTypeTable.UserType;
 
-
-                        
-                        if(user.UserTypeID == 1) // Admin
+                    var user = DB.UserTables.Where(u => u.Password == decryptedPassword && (u.Email == userMV.UsernameOrEmail || u.Username == userMV.UsernameOrEmail)).FirstOrDefault();
+                    if (user != null)
+                    {
+                        if (user.AccountStatusID == 1)
                         {
-                            return RedirectToAction("AllNewUserRequests","Accounts");
+                            ModelState.AddModelError(string.Empty, "Vaš račun još nije odobren! Molimo Vas da pričekate.");
                         }
-                        else if (user.UserTypeID == 2) // Donor
+                        else if (user.AccountStatusID == 3)
                         {
-                            var donor = DB.DonorTables.Where(u => u.UserID == user.UserID).FirstOrDefault();
-                            if (donor != null)
-                            {
-                                Session["DonorID"] = donor.DonorID;
-                                Session["Name"] = donor.Name;
-                                Session["Surname"] = donor.Surname;
-
-                                Session["Email"] = donor.Email;
-                                Session["DateOfBirth"] = donor.DateOfBirth;
-
-                                Session["GenderID"] = donor.GenderID;
-                                Session["BloodGroupID"] = donor.BloodGroupID;
-                                Session["BloodGroup"] = donor.BloodGroupsTable.BloodGroup;
-                                Session["LastDonationDate"] = donor.LastDonationDate;
-                                Session["ContactNumber"] = donor.ContactNumber;
-                                Session["CardNumber"] = donor.CardNumber;
-                                Session["Address"] = donor.Address;
-                                Session["CityID"] = donor.CityID;
-                                Session["City"] = donor.CityTable.City;
-                                return RedirectToAction("Donor","Dashboard");
-                            }
-                            else
-                            {
-                                
-
-                                ModelState.AddModelError(string.Empty, "Podaci nisu ispravni!");
-                            }
-                          }
-                        else if (user.UserTypeID == 3) // Seeker
-                        {
-                            var seeker = DB.SeekerTables.Where(u => u.UserID == user.UserID).FirstOrDefault();
-                            if (seeker != null)
-                            {
-                                Session["SeekerID"] = seeker.SeekerID;
-                                Session["Name"] = seeker.Name;
-                                Session["Surname"] = seeker.Surname;
-                                Session["DateOfBirth"] = seeker.DateOfBirth;
-                                Session["CityID"] = seeker.CityID;
-                                Session["City"] = seeker.CityTable.City;
-                                Session["BloodGroupID"] = seeker.BloodGroupID;
-                                Session["BloodGroup"] = seeker.BloodGroupsTable.BloodGroup;
-                                Session["ContactNumber"] = seeker.ContactNumber;
-                                Session["CardNumber"] = seeker.CardNumber;
-                                Session["GenderID"] = seeker.GenderID;
-                                Session["Gender"] = seeker.GenderTable.Gender;
-                                Session["RegistrationDate"] = seeker.RegistrationDate;
-                                Session["Address"] = seeker.Address;
-                                Session["Email"] = seeker.Email;
-                                return RedirectToAction("Seeker", "Dashboard");
-                            }
-                            else
-                            {
-                                ModelState.AddModelError(string.Empty, "Podaci nisu ispravni!");
-                            }
+                            ModelState.AddModelError(string.Empty, "Vaš račun je odbijen! Za više informacija, kontaktirajte nas.");
                         }
-
-                        else if (user.UserTypeID == 4) // Hospital
+                        else if (user.AccountStatusID == 4)
                         {
-                            var hospital = DB.HospitalTables.Where(u => u.UserID == user.UserID).FirstOrDefault();
-                            if (hospital != null)
-                            {
-                                Session["HospitalID"] = hospital.HospitalID;
-                                Session["Name"] = hospital.Name;
-                                Session["Address"] = hospital.Address;
-                                Session["ContactNumber"] = hospital.ContactNumber;
-                                Session["Email"] = hospital.Email;
-                                Session["CityID"] = hospital.CityID;
-                                Session["City"] = hospital.CityTable.City;
-                                return RedirectToAction("Hospital", "Dashboard");
-                            }
-                            else
-                            {
-                                ModelState.AddModelError(string.Empty, "Podaci nisu ispravni!");
-                            }
+                            ModelState.AddModelError(string.Empty, "Vaš račun je deaktiviran!");
                         }
-
-                        else if (user.UserTypeID == 5) // Blood Bamk
+                        else if (user.AccountStatusID == 2)
                         {
-                            var bloodbank = DB.BloodBankTables.Where(u => u.UserID == user.UserID).FirstOrDefault();
-                            if (bloodbank != null)
-                            {
-                                Session["BloodBankID"] = bloodbank.BloodBankID;
-                                Session["Name"] = bloodbank.Name;
-                                Session["Address"] = bloodbank.Address;
-                                Session["ContactNumber"] = bloodbank.ContactNumber;
-                                Session["Email"] = bloodbank.Email;
-                                Session["CityID"] = bloodbank.CityID;
-                                Session["City"] = bloodbank.CityTable.City;
-                                return RedirectToAction("BloodBank", "Dashboard");
+                            Session["UserID"] = user.UserID;
+                            Session["Username"] = user.Username;
+                            Session["Password"] = user.Password;
+                            Session["Email"] = user.Email;
+                            Session["AccountStatusID"] = user.AccountStatusID;
+                            Session["AccountStatus"] = user.AccountStatusTable.AccountStatus;
+                            Session["UserTypeID"] = user.UserTypeID;
+                            Session["UserType"] = user.UserTypeTable.UserType;
 
+
+
+                            if (user.UserTypeID == 1) // Admin
+                            {
+                                return RedirectToAction("AllNewUserRequests", "Accounts");
+                            }
+                            else if (user.UserTypeID == 2) // Donor
+                            {
+                                var donor = DB.DonorTables.Where(u => u.UserID == user.UserID).FirstOrDefault();
+                                if (donor != null)
+                                {
+                                    Session["DonorID"] = donor.DonorID;
+                                    Session["Name"] = donor.Name;
+                                    Session["Surname"] = donor.Surname;
+
+                                    Session["Email"] = donor.Email;
+                                    Session["DateOfBirth"] = donor.DateOfBirth;
+
+                                    Session["GenderID"] = donor.GenderID;
+                                    Session["BloodGroupID"] = donor.BloodGroupID;
+                                    Session["BloodGroup"] = donor.BloodGroupsTable.BloodGroup;
+                                    Session["LastDonationDate"] = donor.LastDonationDate;
+                                    Session["ContactNumber"] = donor.ContactNumber;
+                                    Session["CardNumber"] = donor.CardNumber;
+                                    Session["Address"] = donor.Address;
+                                    Session["CityID"] = donor.CityID;
+                                    Session["City"] = donor.CityTable.City;
+                                    return RedirectToAction("Donor", "Dashboard");
+                                }
+                                else
+                                {
+
+
+                                    ModelState.AddModelError(string.Empty, "Podaci nisu ispravni!");
+                                }
+                            }
+                            else if (user.UserTypeID == 3) // Seeker
+                            {
+                                var seeker = DB.SeekerTables.Where(u => u.UserID == user.UserID).FirstOrDefault();
+                                if (seeker != null)
+                                {
+                                    Session["SeekerID"] = seeker.SeekerID;
+                                    Session["Name"] = seeker.Name;
+                                    Session["Surname"] = seeker.Surname;
+                                    Session["DateOfBirth"] = seeker.DateOfBirth;
+                                    Session["CityID"] = seeker.CityID;
+                                    Session["City"] = seeker.CityTable.City;
+                                    Session["BloodGroupID"] = seeker.BloodGroupID;
+                                    Session["BloodGroup"] = seeker.BloodGroupsTable.BloodGroup;
+                                    Session["ContactNumber"] = seeker.ContactNumber;
+                                    Session["CardNumber"] = seeker.CardNumber;
+                                    Session["GenderID"] = seeker.GenderID;
+                                    Session["Gender"] = seeker.GenderTable.Gender;
+                                    Session["RegistrationDate"] = seeker.RegistrationDate;
+                                    Session["Address"] = seeker.Address;
+                                    Session["Email"] = seeker.Email;
+                                    return RedirectToAction("Seeker", "Dashboard");
+                                }
+                                else
+                                {
+                                    ModelState.AddModelError(string.Empty, "Podaci nisu ispravni!");
+                                }
+                            }
+
+                            else if (user.UserTypeID == 4) // Hospital
+                            {
+                                var hospital = DB.HospitalTables.Where(u => u.UserID == user.UserID).FirstOrDefault();
+                                if (hospital != null)
+                                {
+                                    Session["HospitalID"] = hospital.HospitalID;
+                                    Session["Name"] = hospital.Name;
+                                    Session["Address"] = hospital.Address;
+                                    Session["ContactNumber"] = hospital.ContactNumber;
+                                    Session["Email"] = hospital.Email;
+                                    Session["CityID"] = hospital.CityID;
+                                    Session["City"] = hospital.CityTable.City;
+                                    return RedirectToAction("Hospital", "Dashboard");
+                                }
+                                else
+                                {
+                                    ModelState.AddModelError(string.Empty, "Podaci nisu ispravni!");
+                                }
+                            }
+
+                            else if (user.UserTypeID == 5) // Blood Bamk
+                            {
+                                var bloodbank = DB.BloodBankTables.Where(u => u.UserID == user.UserID).FirstOrDefault();
+                                if (bloodbank != null)
+                                {
+                                    Session["BloodBankID"] = bloodbank.BloodBankID;
+                                    Session["Name"] = bloodbank.Name;
+                                    Session["Address"] = bloodbank.Address;
+                                    Session["ContactNumber"] = bloodbank.ContactNumber;
+                                    Session["Email"] = bloodbank.Email;
+                                    Session["CityID"] = bloodbank.CityID;
+                                    Session["City"] = bloodbank.CityTable.City;
+                                    return RedirectToAction("BloodBank", "Dashboard");
+
+                                }
+                                else
+                                {
+                                    ModelState.AddModelError(string.Empty, "Podaci nisu ispravni!");
+                                }
                             }
                             else
                             {
                                 ModelState.AddModelError(string.Empty, "Podaci nisu ispravni!");
                             }
+
+
                         }
                         else
                         {
                             ModelState.AddModelError(string.Empty, "Podaci nisu ispravni!");
                         }
-
-
                     }
                     else
                     {
@@ -206,7 +214,7 @@ namespace KapiNadeApp.Controllers
                 }
                 else
                 {
-                    ModelState.AddModelError(string.Empty, "Podaci nisu ispravni!");
+                    ModelState.AddModelError(string.Empty, "Molimo vas da unesete korisničko ime/e-mail i šifru.");
                 }
             }
             else
