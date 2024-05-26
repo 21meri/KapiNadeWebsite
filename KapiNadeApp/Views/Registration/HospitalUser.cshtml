@@ -10,7 +10,7 @@
     {
 
         @Html.AntiForgeryToken()
-        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        @Html.ValidationSummary(true, "*Sva polja obavezno ispuniti", new { @class = "text-danger" })
         @Html.HiddenFor(model => model.UserTypeID)
         @Html.HiddenFor(model => model.User.UserID)
         @Html.HiddenFor(model => model.User.Username)
@@ -21,33 +21,28 @@
         <div class="form-group col-md-6">
             <label style="float:left;">Unesite ime bolnice:</label>
             @Html.EditorFor(model => model.Hospital.Name, new { htmlAttributes = new { @class = "form-control", @placeholder = "", @type = "text" } })
-            @Html.ValidationMessageFor(model => model.Hospital.Name, "", new { @class = "text-danger" })
         </div>
 
         <div class="form-group col-md-6">
             <label style="float:left;">Unesite adresu bolnice:</label>
             @Html.EditorFor(model => model.Hospital.Address, new { htmlAttributes = new { @class = "form-control", @placeholder = "", @type = "text" } })
-            @Html.ValidationMessageFor(model => model.Hospital.Address, "", new { @class = "text-danger" })
         </div>
 
         <div class="form-group col-md-6">
             <label style="float:left;">Odaberite grad u kojem se bolnica nalazi:</label>
             <div class="select-style">
                 @Html.DropDownList("CityID", null, "", new { @class = "form-control" })
-                @Html.ValidationMessageFor(model => model.CityID, "", new { @class = "text-danger" })
             </div>
         </div>
 
         <div class="form-group col-md-6">
             <label style="float:left;">Unesite broj telefona bolnice:</label>
             @Html.EditorFor(model => model.Hospital.ContactNumber, new { htmlAttributes = new { @class = "form-control", @placeholder = "" } })
-            @Html.ValidationMessageFor(model => model.Hospital.ContactNumber, "", new { @class = "text-danger" })
         </div>
 
         <div class="form-group col-md-6">
             <label style="float:left;">Unesite kontaktni mail bolnice:</label>
             @Html.EditorFor(model => model.Hospital.Email, new { htmlAttributes = new { @class = "form-control", @placeholder = "", @type = "email" } })
-            @Html.ValidationMessageFor(model => model.Hospital.Email, "", new { @class = "text-danger" })
         </div>
 
 

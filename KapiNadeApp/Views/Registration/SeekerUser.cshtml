@@ -11,7 +11,7 @@
     {
 
         @Html.AntiForgeryToken()
-        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        @Html.ValidationSummary(true, "*Sva polja obavezno ispuniti", new { @class = "text-danger" })
         @Html.HiddenFor(model => model.UserTypeID)
         @Html.HiddenFor(model => model.User.UserID)
         @Html.HiddenFor(model => model.User.Username)
@@ -23,40 +23,34 @@
         <div class="form-group col-md-6">
             <label style="float:left;">Unesite Vaše ime:</label>
             @Html.EditorFor(model => model.Seeker.Name, new { htmlAttributes = new { @class = "form-control", @placeholder = "", @type = "text" } })
-            @Html.ValidationMessageFor(model => model.Seeker.Name, "", new { @class = "text-danger" })
         </div>
 
         <div class="form-group col-md-6">
             <label style="float:left;">Unesite Vaše prezime:</label>
             @Html.EditorFor(model => model.Seeker.Surname, new { htmlAttributes = new { @class = "form-control", @placeholder = "", @type = "text" } })
-            @Html.ValidationMessageFor(model => model.Seeker.Surname, "", new { @class = "text-danger" })
         </div>
 
         <div class="form-group col-md-6">
             <label style="float:left;">Unesite broj Vaše zdravstvene kartice:</label>
             @Html.EditorFor(model => model.Seeker.CardNumber, new { htmlAttributes = new { @class = "form-control", @placeholder = "" } })
-            @Html.ValidationMessageFor(model => model.Seeker.CardNumber, "", new { @class = "text-danger" })
         </div>
 
         <div class="form-group col-md-6">
             <div class="select-style">
                 <label style="float:left;">Odaberite Vaš spol:</label>
                 @Html.DropDownList("GenderID", null, "", new { @class = "form-control" })
-                @Html.ValidationMessageFor(model => model.GenderID, "", new { @class = "text-danger" })
             </div>
         </div>
 
         <div class="form-group col-md-6">
             <label style="float:left;">Unesite Vaš datum rođenja:</label>
             @Html.EditorFor(model => model.Seeker.DateOfBirth, new { htmlAttributes = new { @class = "form-control" } })
-            @Html.ValidationMessageFor(model => model.Seeker.DateOfBirth, "", new { @class = "text-danger" })
         </div>
 
         <div class="form-group col-md-6">
             <label style="float:left;">Odaberite Vašu krvnu grupu:</label>
             <div class="select-style">
                 @Html.DropDownList("BloodGroupID", null, "", new { @class = "form-control" })
-                @Html.ValidationMessageFor(model => model.BloodGroupID, "", new { @class = "text-danger" })
             </div>
         </div>
 
@@ -64,14 +58,12 @@
         <div class="form-group col-md-6">
             <label style="float:left;">Unesite Vašu adresu:</label>
             @Html.EditorFor(model => model.Seeker.Address, new { htmlAttributes = new { @class = "form-control", @placeholder = "", @type = "text" } })
-            @Html.ValidationMessageFor(model => model.Seeker.Address, "", new { @class = "text-danger" })
         </div>
 
         <div class="form-group col-md-6">
             <label style="float:left;">Odaberite Vaš grad:</label>
             <div class="select-style">
                 @Html.DropDownList("CityID", null, "", new { @class = "form-control" })
-                @Html.ValidationMessageFor(model => model.CityID, "", new { @class = "text-danger" })
             </div>
         </div>
 
@@ -79,7 +71,6 @@
         <div class="form-group col-md-6">
             <label style="float:left;">Unesite Vaš broj telefona:</label>
             @Html.EditorFor(model => model.Seeker.ContactNumber, new { htmlAttributes = new { @class = "form-control", @placeholder = "" } })
-            @Html.ValidationMessageFor(model => model.Seeker.ContactNumber, "", new { @class = "text-danger" })
         </div>
 
 
@@ -91,7 +82,6 @@
         <div class="form-group col-md-6">
             <label style="float:left;">Unesite Vaš kontaktni mail:</label>
             @Html.EditorFor(model => model.Seeker.Email, new { htmlAttributes = new { @class = "form-control", @placeholder = "", @type = "email" } })
-            @Html.ValidationMessageFor(model => model.Seeker.Email, "", new { @class = "text-danger" })
         </div>
 
 

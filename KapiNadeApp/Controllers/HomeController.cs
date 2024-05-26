@@ -76,10 +76,6 @@ namespace KapiNadeApp.Controllers
                         {
                             ModelState.AddModelError(string.Empty, "Vaš račun je odbijen! Za više informacija, kontaktirajte nas.");
                         }
-                        else if (user.AccountStatusID == 4)
-                        {
-                            ModelState.AddModelError(string.Empty, "Vaš račun je deaktiviran!");
-                        }
                         else if (user.AccountStatusID == 2)
                         {
                             Session["UserID"] = user.UserID;
