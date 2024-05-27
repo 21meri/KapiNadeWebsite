@@ -752,7 +752,7 @@
                     if (activeallcampaigns != null)
                     {
 
-
+                        activeallcampaigns = activeallcampaigns.OrderBy(c => c.CampaignDate).ToList();
 
                         foreach (var item in activeallcampaigns)
                         {

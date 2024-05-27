@@ -22,7 +22,7 @@ namespace KapiNadeApp.Controllers
         {
 
             var date = DateTime.Now.Date;
-            var allcampaigns = DB.CampaignTables.Where(c => c.CampaignDate >= date).ToList();
+            var allcampaigns = DB.CampaignTables.Where(c => c.CampaignDate >= date).OrderBy(c => c.CampaignDate).ToList();
             return View(allcampaigns);
         }
 
