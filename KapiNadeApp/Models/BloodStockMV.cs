@@ -16,6 +16,9 @@ namespace KapiNadeApp.Models
         public int BloodGroupID { get; set; }
         [Display(Name = "Blood Group")]
         public string BloodGroup { get; set; }
+        [Required(ErrorMessage = "*Obavezno ispuniti")]
+        [Display(Name = "Quantity")]
+
         public double Quantity { get; set; }
 
         [Display(Name="Is ready")]

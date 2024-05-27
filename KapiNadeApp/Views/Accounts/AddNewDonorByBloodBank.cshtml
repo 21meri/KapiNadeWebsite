@@ -73,7 +73,6 @@
                                 <dd>
                                     <div class="select-style">
                                         @Html.DropDownList("GenderID", null, "--Izaberite spol--", new { @class = "form-control" })
-                                        @Html.ValidationMessageFor(model => model.GenderID, "", new { @class = "text-danger" })
                                     </div>
                                 </dd>
 
@@ -83,7 +82,6 @@
 
                                 <dd>
                                     @Html.EditorFor(model => model.DonorDetails.DateOfBirth, new { htmlAttributes = new { @class = "form-control" } })
-                                    @Html.ValidationMessageFor(model => model.DonorDetails.DateOfBirth, "", new { @class = "text-danger" })
                                 </dd>
 
                                 <dt>
@@ -102,7 +100,6 @@
                                 <dd>
                                     <div class="select-style">
                                         @Html.DropDownList("CityID", null, "--Izaberite grad--", new { @class = "form-control" })
-                                        @Html.ValidationMessageFor(model => model.CityID, "", new { @class = "text-danger" })
                                     </div>
                                 </dd>
 
@@ -116,7 +113,7 @@
                                 </dd>
 
                                 <dt>
-                                    E-mail:
+                                    Kontakt E-mail:
                                 </dt>
 
                                 <dd>
@@ -143,7 +140,6 @@
                                 <dd>
                                     <div class="select-style">
                                         @Html.DropDownList("BloodGroupID", null, "--Izaberite krvnu grupu--", new { @class = "form-control" })
-                                        @Html.ValidationMessageFor(model => model.BloodGroupID, "", new { @class = "text-danger" })
                                     </div>
                                 </dd>
 

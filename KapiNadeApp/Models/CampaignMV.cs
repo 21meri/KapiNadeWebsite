@@ -13,29 +13,29 @@ namespace KapiNadeApp.Models
         [Display(Name = "Campaign Photo")]
         public string CampaignPhoto { get; set; }
         [Display(Name = "Campaign Title")]
-        [Required(ErrorMessage = "*Obavezno")]
+        [Required(ErrorMessage = "*Obavezno ispuniti")]
         public string CampaignTitle { get; set; }
         [Display(Name="Blood Bank")]
-        [Required(ErrorMessage = "*Obavezno")]
+        [Required(ErrorMessage = "*Obavezno ispuniti")]
         public int BloodBankID { get; set; }
         [Display(Name = "Campaign Date")]
-        [Required(ErrorMessage = "*Obavezno")]
+        [Required(ErrorMessage = "*Obavezno ispuniti")]
         [DataType(DataType.Date)]
         public System.DateTime CampaignDate { get; set; }
         [Display(Name = "Start Time")]
-        [Required(ErrorMessage = "*Obavezno")]
-       
+        [Required(ErrorMessage = "*Obavezno ispuniti")]
+
         public System.TimeSpan StartTime { get; set; }
         [Display(Name = "End Time")]
-        [Required(ErrorMessage = "*Obavezno")]
-      
+        [Required(ErrorMessage = "*Obavezno ispuniti")]
+
 
         public System.TimeSpan EndTime { get; set; }
         [Display(Name = "location")]
-        [Required(ErrorMessage = "Required")]
+        [Required(ErrorMessage = "*Obavezno ispuniti")]
         public string Location { get; set; }
         [Display(Name = "Campaign Details")]
-        [Required(ErrorMessage = "Required")]
+        [Required(ErrorMessage = "*Obavezno ispuniti")]
         public string CampaignDetails { get; set; }
 
         [NotMapped]

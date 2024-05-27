@@ -27,11 +27,11 @@ namespace KapiNadeApp.Models
         public string RequestStatus { get; set; }
         public int RequestStatusID { get; set; }
         [DataType(DataType.Date)]
-        [Required(ErrorMessage = "*Obavezno")]
+        [Required(ErrorMessage = "*Obavezno ispuniti")]
 
         public System.DateTime ExpectedDate { get; set; }
         [DataType(DataType.MultilineText)]
-        [Required(ErrorMessage = "*Obavezno")]
+        [Required(ErrorMessage = "*Obavezno ispuniti")]
 
         public string RequestDetails { get; set; }
     }

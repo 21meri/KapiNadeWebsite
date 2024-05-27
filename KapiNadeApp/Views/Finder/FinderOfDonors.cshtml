@@ -23,7 +23,7 @@
 
     <div class="contact-form-block">
 
-        <h2 class="contact-title">Pretraživač davaoca</h2>
+        <h2 class="contact-title">Pretraživač davalaca</h2>
 
         <p>
 
@@ -61,7 +61,7 @@
                     <div class="panel-heading">
 
                         <h4 class="panel-title">
-                            <a class="accordion-toggle collapsed" data-toggle="collapse" data-parent="#accordion" href="#@string.Format("collapse{0}",item.UserID)"><strong>@item.Name (@item.BloodGroup)</strong> </a>
+                            <a class="accordion-toggle collapsed" data-toggle="collapse" data-parent="#accordion" href="#@string.Format("collapse{0}",item.UserID)"><strong>@item.Name @item.Surname (@item.BloodGroup)</strong> </a>
                             @Html.ActionLink("Pošalji zahtjev", "RequestForBlood", new { donorid = item.DonorID, usertypeid = item.UserTypeID, bloodgroupid = item.BloodGroupID }, new { @class = "btn btn-default", @style = "float:right; " })
                             @*background-color:#e6e6e6 ;border:5px; color:black;padding: 10px 22px; text-align:center; display:inline-block; font-size:14px;*@
 
@@ -74,11 +74,11 @@
                         <div id="@string.Format("collapse{0}", item.UserID)" class="panel-collapse collapse">
                             <div class="panel-body">
                                 <strong>
-                                    Broj telefona: @item.ContactNumber
+                                    Kontakt broj: @item.ContactNumber
                                 </strong>
                                 <br />
                                 <strong>
-                                    Kontaktni mail: @item.Email
+                                    Kontakt E-mail: @item.Email
                                 </strong>
                                 <br/>
                                 @if (item.UserTypeID == 5)

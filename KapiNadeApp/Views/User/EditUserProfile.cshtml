@@ -55,17 +55,20 @@
                     </dt>
 
                     <dd>
-                        @Html.DisplayFor(model => model.User.Username)
+                        @Html.EditorFor(model => model.User.Username, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.User.Username, "", new { @class = "text-danger" })
                     </dd>
 
                     <dt>
-                        Email:
+                        E-mail za prijavu:
                     </dt>
 
                     <dd>
                         @Html.EditorFor(model => model.User.Email, new { htmlAttributes = new { @class = "form-control" } })
                         @Html.ValidationMessageFor(model => model.User.Email, "", new { @class = "text-danger" })
                     </dd>
+
+
                 </dl>
                 <hr />
 
@@ -96,24 +99,6 @@
                         </dd>
 
                         <dt>
-                            Broj telefona:
-                        </dt>
-
-                        <dd>
-                            @Html.EditorFor(model => model.Hospital.ContactNumber, new { htmlAttributes = new { @class = "form-control" } })
-                            @Html.ValidationMessageFor(model => model.Hospital.ContactNumber, "", new { @class = "text-danger" })
-                        </dd>
-
-                        <dt>
-                            Email:
-                        </dt>
-
-                        <dd>
-                            @Html.EditorFor(model => model.Hospital.Email, new { htmlAttributes = new { @class = "form-control" } })
-                            @Html.ValidationMessageFor(model => model.Hospital.Email, "", new { @class = "text-danger" })
-                        </dd>
-
-                        <dt>
                             Grad:
                         </dt>
 
@@ -123,6 +108,25 @@
                                 @Html.ValidationMessageFor(model => model.CityID, "", new { @class = "text-danhger" })
                             </div>
                         </dd>
+
+                        <dt>
+                            Kontakt broj:
+                        </dt>
+
+                        <dd>
+                            @Html.EditorFor(model => model.Hospital.ContactNumber, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.Hospital.ContactNumber, "", new { @class = "text-danger" })
+                        </dd>
+
+                        <dt>
+                            Kontakt E-mail:
+                        </dt>
+
+                        <dd>
+                            @Html.EditorFor(model => model.Hospital.Email, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.Hospital.Email, "", new { @class = "text-danger" })
+                        </dd>
+
 
 
                     </dl>
@@ -146,13 +150,43 @@
                         </dd>
 
                         <dt>
-                             Prezime:
+                            Prezime:
                         </dt>
 
                         <dd>
                             @Html.EditorFor(model => model.Donor.Surname, new { htmlAttributes = new { @class = "form-control" } })
                             @Html.ValidationMessageFor(model => model.Donor.Surname, "", new { @class = "text-danger" })
                         </dd>
+
+
+                        <dt>
+                            Broj kartice:
+                        </dt>
+
+                        <dd>
+                            @Html.EditorFor(model => model.Donor.CardNumber, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.Donor.CardNumber, "", new { @class = "text-danger" })
+                        </dd>
+
+                        <dt>
+                            Spol:
+                        </dt>
+
+                        <dd>
+                            <div class="select-style">
+                                @Html.DropDownList("GenderID", null, "--Odaberi spol--", new { @class = "form-control" })
+                                @Html.ValidationMessageFor(model => model.GenderID, "", new { @class = "text-danger" })
+                            </div>
+                        </dd>
+
+                        <dt>
+                            Datum rođenja:
+                        </dt>
+
+                        <dd>
+                            @Html.EditorFor(model => model.Donor.DateOfBirth, new { htmlAttributes = new { @class = "form-control" } })
+                        </dd>
+
 
                         <dt>
                             Krvna grupa:
@@ -166,7 +200,15 @@
                         </dd>
 
                         <dt>
-                            Broj telefona:
+                            Datum zadnje donacije:
+                        </dt>
+
+                        <dd>
+                            @Html.EditorFor(model => model.Donor.LastDonationDate, new { htmlAttributes = new { @class = "form-control" } })
+                        </dd>
+
+                        <dt>
+                            Kontakt broj:
                         </dt>
 
                         <dd>
@@ -174,42 +216,6 @@
                             @Html.ValidationMessageFor(model => model.Donor.ContactNumber, "", new { @class = "text-danger" })
                         </dd>
 
-                        <dt>
-                            Broj kartice:
-                        </dt>
-
-                        <dd>
-                            @Html.EditorFor(model => model.Donor.CardNumber, new { htmlAttributes = new { @class = "form-control" } })
-                            @Html.ValidationMessageFor(model => model.Donor.CardNumber, "", new { @class = "text-danger" })
-                        </dd>
-
-                        <dt>
-                            Datum zadnje donacije:
-                        </dt>
-
-                        <dd>
-                            @Html.EditorFor(model => model.Donor.LastDonationDate, new { htmlAttributes = new { @class = "form-control" } })
-                            @Html.ValidationMessageFor(model => model.Donor.LastDonationDate, "", new { @class = "text-danger" })
-                        </dd>
-
-                        <dt>
-                            Datum rođenja:
-                        </dt>
-
-                        <dd>
-                            @Html.EditorFor(model => model.Donor.DateOfBirth, new { htmlAttributes = new { @class = "form-control" } })
-                            @Html.ValidationMessageFor(model => model.Donor.DateOfBirth, "", new { @class = "text-danger" })
-                        </dd>
-
-
-                        <dt>
-                            Email:
-                        </dt>
-
-                        <dd>
-                            @Html.EditorFor(model => model.Donor.Email, new { htmlAttributes = new { @class = "form-control" } })
-                            @Html.ValidationMessageFor(model => model.Donor.Email, "", new { @class = "text-danger" })
-                        </dd>
 
                         <dt>
                             Adresa:
@@ -231,15 +237,18 @@
                             </div>
                         </dd>
 
+
+
+
+
+
                         <dt>
-                            Spol:
+                            Kontakt E-mail:
                         </dt>
 
                         <dd>
-                            <div class="select-style">
-                                @Html.DropDownList("GenderID", null, "--Odaberi spol--", new { @class = "form-control" })
-                                @Html.ValidationMessageFor(model => model.GenderID, "", new { @class = "text-danger" })
-                            </div>
+                            @Html.EditorFor(model => model.Donor.Email, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.Donor.Email, "", new { @class = "text-danger" })
                         </dd>
 
 
@@ -296,7 +305,7 @@
                         </dd>
 
                         <dt>
-                            Email:
+                            Kontakt E-mail:
                         </dt>
 
                         <dd>
@@ -336,12 +345,32 @@
                         </dd>
 
                         <dt>
+                            Broj kartice:
+                        </dt>
+
+                        <dd>
+                            @Html.EditorFor(model => model.Seeker.CardNumber, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.Seeker.CardNumber, "", new { @class = "text-danger" })
+                        </dd>
+
+                        <dt>
+                            Spol:
+                        </dt>
+
+                        <dd>
+                            <div class="select-style">
+                                @Html.DropDownList("GenderID", null, "--Odaberi spol--", new { @class = "form-control" })
+                                @Html.ValidationMessageFor(model => model.GenderID, "", new { @class = "text-danger" })
+                            </div>
+                        </dd>
+
+
+                        <dt>
                             Datum rođenja:
                         </dt>
 
                         <dd>
                             @Html.EditorFor(model => model.Seeker.DateOfBirth, new { htmlAttributes = new { @class = "form-control" } })
-                            @Html.ValidationMessageFor(model => model.Seeker.DateOfBirth, "", new { @class = "text-danger" })
                         </dd>
 
                         <dt>
@@ -356,16 +385,7 @@
                         </dd>
 
                         <dt>
-                            Email:
-                        </dt>
-
-                        <dd>
-                            @Html.EditorFor(model => model.Seeker.Email, new { htmlAttributes = new { @class = "form-control" } })
-                            @Html.ValidationMessageFor(model => model.Seeker.Email, "", new { @class = "text-danger" })
-                        </dd>
-
-                        <dt>
-                            Broj telefona:
+                            Kontakt broj:
                         </dt>
 
                         <dd>
@@ -373,14 +393,8 @@
                             @Html.ValidationMessageFor(model => model.Seeker.ContactNumber, "", new { @class = "text-danger" })
                         </dd>
 
-                        <dt>
-                            Broj kartice:
-                        </dt>
 
-                        <dd>
-                            @Html.EditorFor(model => model.Seeker.CardNumber, new { htmlAttributes = new { @class = "form-control" } })
-                            @Html.ValidationMessageFor(model => model.Seeker.CardNumber, "", new { @class = "text-danger" })
-                        </dd>
+
 
                         <dt>
                             Adresa:
@@ -403,16 +417,13 @@
                         </dd>
 
                         <dt>
-                            Spol:
+                            Kontakt E-mail:
                         </dt>
 
                         <dd>
-                            <div class="select-style">
-                                @Html.DropDownList("GenderID", null, "--Odaberi spol--", new { @class = "form-control" })
-                                @Html.ValidationMessageFor(model => model.GenderID, "", new { @class = "text-danger" })
-                            </div>
+                            @Html.EditorFor(model => model.Seeker.Email, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.Seeker.Email, "", new { @class = "text-danger" })
                         </dd>
-
 
 
 

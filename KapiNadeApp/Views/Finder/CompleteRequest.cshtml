@@ -27,7 +27,7 @@
             @Html.HiddenFor(model => model.BloodStockID)
 
 
-            <h4>Detalji krvne banke</h4>
+            <h4>Detalji o krvnoj banci</h4>
             <hr />
             <dl class="dl-horizontal">
                 <dt>
@@ -50,7 +50,7 @@
             <div class="form-group">
 
 
-                Unesi količinu krvi (L)
+                Unesi potrebnu količinu krvi (L):
                 @Html.EditorFor(model => model.Quantity, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.Quantity, "", new { @class = "text-danger" })
 

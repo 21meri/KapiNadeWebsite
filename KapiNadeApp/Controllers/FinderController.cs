@@ -221,6 +221,7 @@ namespace KapiNadeApp.Controllers
                 {
                     var getdonor = DB.DonorTables.Find(request.AcceptedID);
                     addrequest.AcceptedName = getdonor.Name;
+                    addrequest.AcceptedSurname = getdonor.Surname;
                     addrequest.ContactNumber = getdonor.ContactNumber;
                     addrequest.Address = getdonor.Address;
                 }
@@ -342,6 +343,7 @@ namespace KapiNadeApp.Controllers
                 {
                     var getseeker = DB.SeekerTables.Find(request.RequestByID);
                     addrequest.RequestBy = getseeker.Name;
+                    addrequest.RequestBySurname = getseeker.Surname;
                     addrequest.ContactNumber = getseeker.ContactNumber;
                     addrequest.Address = getseeker.Address;
                 }

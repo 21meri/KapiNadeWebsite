@@ -157,84 +157,95 @@ namespace KapiNadeApp.Controllers
 
             if (ModelState.IsValid)
             {
-                var checkuseremail = DB.UserTables.Where(u => u.Email == userprofile.User.Email && u.UserID != userprofile.User.UserID).FirstOrDefault();
+                var checkuseremail = DB.UserTables.Where(u => u.Email == userprofile.User.Email  && u.UserID != userprofile.User.UserID).FirstOrDefault();
+                var checkusername = DB.UserTables.Where(u => u.Username == userprofile.User.Username && u.UserID != userprofile.User.UserID).FirstOrDefault();
                 if (checkuseremail == null)
                 {
-                    try
+                    if (checkusername == null)
                     {
-                        var user = DB.UserTables.Find(userprofile.User.UserID);
-                        user.Email = userprofile.User.Email;
-                        DB.Entry(user).State = System.Data.Entity.EntityState.Modified;
-                        DB.SaveChanges();
 
-                        if (userprofile.Donor.DonorID > 0)
+
+                        try
                         {
-                            var donor = DB.DonorTables.Find(userprofile.Donor.DonorID);
-                            donor.Name = userprofile.Donor.Name;
-                            donor.Surname = userprofile.Donor.Surname;
-
-                            donor.Email = userprofile.Donor.Email;
-                            donor.DateOfBirth = userprofile.Donor.DateOfBirth;
-
-
-                            donor.BloodGroupID = userprofile.BloodGroupID;
-                            donor.GenderID = userprofile.GenderID;
-                            donor.ContactNumber = userprofile.Donor.ContactNumber;
-                            donor.CardNumber = userprofile.Donor.CardNumber;
-                            donor.CityID = userprofile.CityID;
-                            donor.Address = userprofile.Donor.Address;
-                            donor.LastDonationDate = userprofile.Donor.LastDonationDate;
-                            DB.Entry(donor).State = System.Data.Entity.EntityState.Modified;
-                            DB.SaveChanges();
-                        }
-                        else if (userprofile.Seeker.SeekerID > 0)
-                        {
-                            var seeker = DB.SeekerTables.Find(userprofile.Seeker.SeekerID);
-                            seeker.Name = userprofile.Seeker.Name;
-                            seeker.Surname = userprofile.Seeker.Surname;
-                            seeker.BloodGroupID = userprofile.BloodGroupID;
-                            seeker.GenderID = userprofile.GenderID;
-                            seeker.ContactNumber = userprofile.Seeker.ContactNumber;
-                            seeker.CardNumber = userprofile.Seeker.CardNumber;
-                            seeker.CityID = userprofile.CityID;
-                            seeker.Address = userprofile.Seeker.Address;
-                            seeker.DateOfBirth = userprofile.Seeker.DateOfBirth;
-                            DB.Entry(seeker).State = System.Data.Entity.EntityState.Modified;
-                            DB.SaveChanges();
-                        }
-                        else if (userprofile.BloodBank.BloodBankID > 0)
-                        {
-                            var bloodbank = DB.BloodBankTables.Find(userprofile.BloodBank.BloodBankID);
-                            bloodbank.Name = userprofile.BloodBank.Name;
-                            bloodbank.ContactNumber = userprofile.BloodBank.ContactNumber;
-                            bloodbank.CityID = userprofile.CityID;
-                            bloodbank.Address = userprofile.BloodBank.Address;
-                            bloodbank.Email = userprofile.BloodBank.Email;
-                            DB.Entry(bloodbank).State = System.Data.Entity.EntityState.Modified;
+                            var user = DB.UserTables.Find(userprofile.User.UserID);
+                            user.Username = userprofile.User.Username;
+                            user.Email = userprofile.User.Email;
+                            DB.Entry(user).State = System.Data.Entity.EntityState.Modified;
                             DB.SaveChanges();
 
-                        }
-                        else if (userprofile.Hospital.HospitalID > 0)
-                        {
-                            var hospital = DB.HospitalTables.Find(userprofile.Hospital.HospitalID);
-                            hospital.Name = userprofile.Hospital.Name;
-                            hospital.ContactNumber = userprofile.Hospital.ContactNumber;
-                            hospital.CityID = userprofile.CityID;
-                            hospital.Address = userprofile.Hospital.Address;
-                            hospital.Email = userprofile.Hospital.Email;
-                            DB.Entry(hospital).State = System.Data.Entity.EntityState.Modified;
-                            DB.SaveChanges();
+                            if (userprofile.Donor.DonorID > 0)
+                            {
+                                var donor = DB.DonorTables.Find(userprofile.Donor.DonorID);
+                                donor.Name = userprofile.Donor.Name;
+                                donor.Surname = userprofile.Donor.Surname;
+
+                                donor.Email = userprofile.Donor.Email;
+                                donor.DateOfBirth = userprofile.Donor.DateOfBirth;
+
+
+                                donor.BloodGroupID = userprofile.BloodGroupID;
+                                donor.GenderID = userprofile.GenderID;
+                                donor.ContactNumber = userprofile.Donor.ContactNumber;
+                                donor.CardNumber = userprofile.Donor.CardNumber;
+                                donor.CityID = userprofile.CityID;
+                                donor.Address = userprofile.Donor.Address;
+                                donor.LastDonationDate = userprofile.Donor.LastDonationDate;
+                                DB.Entry(donor).State = System.Data.Entity.EntityState.Modified;
+                                DB.SaveChanges();
+                            }
+                            else if (userprofile.Seeker.SeekerID > 0)
+                            {
+                                var seeker = DB.SeekerTables.Find(userprofile.Seeker.SeekerID);
+                                seeker.Name = userprofile.Seeker.Name;
+                                seeker.Surname = userprofile.Seeker.Surname;
+                                seeker.BloodGroupID = userprofile.BloodGroupID;
+                                seeker.GenderID = userprofile.GenderID;
+                                seeker.ContactNumber = userprofile.Seeker.ContactNumber;
+                                seeker.CardNumber = userprofile.Seeker.CardNumber;
+                                seeker.CityID = userprofile.CityID;
+                                seeker.Address = userprofile.Seeker.Address;
+                                seeker.DateOfBirth = userprofile.Seeker.DateOfBirth;
+                                DB.Entry(seeker).State = System.Data.Entity.EntityState.Modified;
+                                DB.SaveChanges();
+                            }
+                            else if (userprofile.BloodBank.BloodBankID > 0)
+                            {
+                                var bloodbank = DB.BloodBankTables.Find(userprofile.BloodBank.BloodBankID);
+                                bloodbank.Name = userprofile.BloodBank.Name;
+                                bloodbank.ContactNumber = userprofile.BloodBank.ContactNumber;
+                                bloodbank.CityID = userprofile.CityID;
+                                bloodbank.Address = userprofile.BloodBank.Address;
+                                bloodbank.Email = userprofile.BloodBank.Email;
+                                DB.Entry(bloodbank).State = System.Data.Entity.EntityState.Modified;
+                                DB.SaveChanges();
+
+                            }
+                            else if (userprofile.Hospital.HospitalID > 0)
+                            {
+                                var hospital = DB.HospitalTables.Find(userprofile.Hospital.HospitalID);
+                                hospital.Name = userprofile.Hospital.Name;
+                                hospital.ContactNumber = userprofile.Hospital.ContactNumber;
+                                hospital.CityID = userprofile.CityID;
+                                hospital.Address = userprofile.Hospital.Address;
+                                hospital.Email = userprofile.Hospital.Email;
+                                DB.Entry(hospital).State = System.Data.Entity.EntityState.Modified;
+                                DB.SaveChanges();
+
+                            }
+                            return RedirectToAction("UserProfile", "User", new { id = userprofile.User.UserID });
 
                         }
-                        return RedirectToAction("UserProfile", "User", new { id = userprofile.User.UserID });
+                        catch
+                        {
+                            ModelState.AddModelError(string.Empty, "Neki podaci su netačni! Molimo Vas da unesete ispravne podatke.");
+                        }
 
                     }
-                    catch
+                    else
                     {
-                        ModelState.AddModelError(string.Empty, "Neki podaci su netačni! Molimo Vas da unesete ispravne podatke.");
+                        ModelState.AddModelError(string.Empty, "Korisničko ime već postoji!");
+
                     }
-
-
                 }
                 else
                 {

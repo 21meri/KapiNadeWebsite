@@ -13,6 +13,7 @@ namespace KapiNadeApp.Models
 
         public int AcceptedID { get; set; }
         public string AcceptedName { get; set; }
+        public string AcceptedSurname { get; set; }
         public int AcceptedTypeID { get; set; }
         public string AcceptedType { get; set; }
 
@@ -20,6 +21,7 @@ namespace KapiNadeApp.Models
         public string BloodGroup { get; set; }
         public int RequestByID { get; set; }
         public string RequestBy { get; set; }
+        public string RequestBySurname { get; set; }
 
         public int RequestTypeID { get; set; }
         public string RequestType { get; set; }
